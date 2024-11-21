@@ -6,13 +6,15 @@ using UnityEngine;
 
 namespace CharactersBehaviour
 {
-    public class SequenceNode : IBehaviourNode
+    public class SelectorNode : IBehaviourNode
     {
         private Queue<IBehaviourNode> children;
+        private Queue<IBehaviourNode> backup;
 
-        public SequenceNode(Queue<IBehaviourNode> behaviourNodes)
+        public SelectorNode(Queue<IBehaviourNode> behaviourNodes)
         {
             children = behaviourNodes;
+            backup = new Queue<IBehaviourNode>(behaviourNodes);
         }
 
         public BehaviourState Execute()
@@ -25,16 +27,22 @@ namespace CharactersBehaviour
                 if(state == BehaviourState.Running)
                 {
                     children.Enqueue(node);
-                    return BehaviourState.Running;
                 }
 
-                if(state == BehaviourState.Failure)
+                if(state == BehaviourState.Success)
                 {
-                    return BehaviourState.Failure;
+                    RestartNode();
+                    return BehaviourState.Success;
                 }
             }
 
-            return BehaviourState.Success;
+            RestartNode();
+            return BehaviourState.Failure;
+        }
+
+        public void RestartNode()
+        {
+            children = backup;
         }
     }
 }
