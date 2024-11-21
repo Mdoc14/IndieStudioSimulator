@@ -5,38 +5,37 @@ using UnityEngine;
 
 namespace CharactersBehaviour
 {
-    public class StateMachine
+    public class StateMachine : IBehaviourSystem
     {
-        IAction _actualAction;
-        public IAction Action 
+        IState _currentState;
+        public IState State 
         {  
-            get { return _actualAction; } 
+            get { return _currentState; } 
             set 
             {
-                if (_actualAction != null) 
+                if (_currentState != null) 
                 {
-                    _actualAction.Exit();
+                    _currentState.Exit();
                 }
 
-                _actualAction.Enter();
+                _currentState = value;
 
-                _actualAction = value; 
+                _currentState.Enter();
             } 
         }
 
-        public StateMachine(IAction initialState)
+        public StateMachine()
         {
-            _actualAction = initialState;
         }
 
         public void UpdateBehaviour()
         {
-            _actualAction?.Update();
+            _currentState?.Update();
         }
 
         public void FixedUpdateBehaviour()
         {
-            _actualAction?.FixedUpdate();
+            _currentState?.FixedUpdate();
         }
     }
 }

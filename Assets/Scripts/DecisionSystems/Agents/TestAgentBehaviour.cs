@@ -6,7 +6,7 @@ namespace CharactersBehaviour
 {
     public class TestAgentBehaviour : MonoBehaviour, IAgent
     {
-        BehaviourTree _tree;
+        StateMachine behaviourSystem;
 
         public GameObject GetAgentGameObject()
         {
@@ -16,17 +16,14 @@ namespace CharactersBehaviour
         // Start is called before the first frame update
         void Start()
         {
-            _tree = new BehaviourTree();
-            List<IBehaviourNode> treeNodes = new List<IBehaviourNode>();
-            treeNodes.Add(new ConditionNode(() => { return Input.GetKey(KeyCode.W); }));
-            treeNodes.Add(new ActionNode(new MoveAction(this), _tree));
-            _tree.Root = new SequenceNode(treeNodes);
+            behaviourSystem = new StateMachine();
+            behaviourSystem.State = new MoveState(behaviourSystem, this);
         }
 
         // Update is called once per frame
         void Update()
         {
-            _tree.UpdateBehaviour();
+            behaviourSystem.UpdateBehaviour();
         }
     }
 }

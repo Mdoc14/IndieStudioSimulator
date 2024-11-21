@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CharactersBehaviour
 {
-    public class BehaviourTree
+    public class BehaviourTree : IBehaviourSystem
     {
         IAction _actualAction;
         public IAction Action
