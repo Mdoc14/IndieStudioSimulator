@@ -1,0 +1,24 @@
+Animaciones:
+
+-Walk
+-Take
+-Looking 
+-Eating
+-Petting
+-Drawing
+-Writting
+-Taking photo
+-Drinking
+-Programming
+-Playing PC
+-Playing mobile
+-Smoking
+-Scold
+-Getting scolded
+-Printing
+-Reading
+-Phone talking
+-Sleep
+-Repair
+-Cleaning
+
