@@ -8,41 +8,31 @@ namespace CharactersBehaviour
 {
     public class SequenceNode : IBehaviourNode
     {
-        private Queue<IBehaviourNode> children;
-        private Queue<IBehaviourNode> backup;
+        private List<IBehaviourNode> children;
 
-        public SequenceNode(Queue<IBehaviourNode> behaviourNodes)
+        public SequenceNode(List<IBehaviourNode> behaviourNodes)
         {
             children = behaviourNodes;
-            backup = new Queue<IBehaviourNode>(behaviourNodes);
         }
 
         public BehaviourState Execute()
         {
-            while (children.Count > 0)
+            foreach (IBehaviourNode node in children)
             {
-                IBehaviourNode node = children.Dequeue();
                 BehaviourState state = node.Execute();
 
                 if(state == BehaviourState.Running)
                 {
-                    children.Enqueue(node);
+                    return BehaviourState.Running;
                 }
 
                 if(state == BehaviourState.Failure)
                 {
-                    RestartNode();
                     return BehaviourState.Failure;
                 }
             }
 
-            RestartNode();
             return BehaviourState.Success;
-        }
-
-        public void RestartNode()
-        {
-            children = backup;
         }
     }
 }

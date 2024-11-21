@@ -6,5 +6,6 @@ namespace CharactersBehaviour
 {
     public interface IAgent
     {
+        public GameObject GetAgentGameObject();
     }
 }

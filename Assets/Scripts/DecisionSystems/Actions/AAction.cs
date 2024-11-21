@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CharactersBehaviour
 {
-    public abstract class AAction
+    public abstract class AAction : IAction
     {
         protected IAgent agent;
         protected bool started = false;

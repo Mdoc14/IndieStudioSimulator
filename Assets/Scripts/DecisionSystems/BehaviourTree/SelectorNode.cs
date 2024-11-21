@@ -8,41 +8,31 @@ namespace CharactersBehaviour
 {
     public class SelectorNode : IBehaviourNode
     {
-        private Queue<IBehaviourNode> children;
-        private Queue<IBehaviourNode> backup;
+        private List<IBehaviourNode> children;
 
-        public SelectorNode(Queue<IBehaviourNode> behaviourNodes)
+        public SelectorNode(List<IBehaviourNode> behaviourNodes)
         {
             children = behaviourNodes;
-            backup = new Queue<IBehaviourNode>(behaviourNodes);
         }
 
         public BehaviourState Execute()
         {
-            while (children.Count > 0)
+            foreach (IBehaviourNode node in children)
             {
-                IBehaviourNode node = children.Dequeue();
                 BehaviourState state = node.Execute();
 
                 if(state == BehaviourState.Running)
                 {
-                    children.Enqueue(node);
+                    return BehaviourState.Running;
                 }
 
                 if(state == BehaviourState.Success)
                 {
-                    RestartNode();
                     return BehaviourState.Success;
                 }
             }
 
-            RestartNode();
             return BehaviourState.Failure;
-        }
-
-        public void RestartNode()
-        {
-            children = backup;
         }
     }
 }

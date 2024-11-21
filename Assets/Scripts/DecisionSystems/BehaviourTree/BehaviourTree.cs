@@ -18,26 +18,23 @@ namespace CharactersBehaviour
                     _actualAction.Exit();
                 }
 
-                _actualAction.Enter();
-
                 _actualAction = value;
+
+                _actualAction.Enter();
             }
         }
 
         IBehaviourNode _root;
 
-        public BehaviourTree(IBehaviourNode root)
-        {
-            _root = root;
-        }
+        public IBehaviourNode Root { get { return _root; } set { _root = value; } }
 
-        public void Execute()
+        public BehaviourTree()
         {
-            _root.Execute();
         }
 
         public void UpdateBehaviour()
         {
+            _root.Execute();
             _actualAction?.Update();
         }
 
