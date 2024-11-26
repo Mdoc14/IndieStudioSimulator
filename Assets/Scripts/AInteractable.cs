@@ -1,21 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AInteractable : MonoBehaviour, IInteractable
 {
+    [SerializeField] private TextMeshPro displayText;
+    [SerializeField] private string textInfo;
+    [SerializeField] private float outlineAmount = 1.02f;
+
+    private void Awake()
+    {
+        displayText.text = textInfo;
+        GetComponent<Renderer>().materials[0] = new Material(GetComponent<Renderer>().materials[0]);
+        HoverExit();
+    }
+
     public void Interact()
     {
-        Debug.Log("Soy un interactuable");
+        Debug.Log("Se ha interactuado");
     }
 
     public void HoverEnter()
     {
-        Debug.Log("HoverEntered");
+        displayText.gameObject.SetActive(true);
+        GetComponent<Renderer>().materials[0].SetFloat("_Value", outlineAmount);
     }
 
     public void HoverExit()
     {
-        Debug.Log("HoverExited");
+        displayText.gameObject.SetActive(false);
+        GetComponent<Renderer>().materials[0].SetFloat("_Value", 0);
     }
 }
