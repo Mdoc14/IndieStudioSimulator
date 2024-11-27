@@ -992,6 +992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 2
+  forwardOffset: 0.45
 --- !u!114 &1160230545
 MonoBehaviour:
   m_ObjectHideFlags: 0
