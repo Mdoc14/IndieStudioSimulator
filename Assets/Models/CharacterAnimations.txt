@@ -1,17 +1,17 @@
 Animaciones:
 
--Walk
--Take
--Looking 
--Eating
+-Walk---
+-Take---
+-Looking---
+-Eating---
 -Petting
--Drawing
--Writting
+-Drawing---
+-Writting---
 -Taking photo
--Drinking
--Programming
--Playing PC
--Playing mobile
+-Drinking---
+-Programming---
+-Playing PC---
+-Playing mobile---
 -Smoking
 -Scold
 -Getting scolded
