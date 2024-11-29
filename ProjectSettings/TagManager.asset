@@ -8,6 +8,7 @@ TagManager:
   - Door
   - Key
   - Pizza
+  - Trash
   layers:
   - Default
   - TransparentFX
