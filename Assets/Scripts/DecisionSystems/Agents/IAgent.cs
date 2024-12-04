@@ -7,5 +7,6 @@ namespace CharactersBehaviour
     public interface IAgent
     {
         public GameObject GetAgentGameObject();
+        public float GetAgentVariable(string name);
     }
 }

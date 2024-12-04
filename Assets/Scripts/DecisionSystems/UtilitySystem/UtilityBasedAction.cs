@@ -27,9 +27,10 @@ namespace CharactersBehaviour
             }
         }
 
-        public UtilityBasedAction(IAction action)
+        public UtilityBasedAction(IAction action, IDecisionFactor decisionFactor)
         {
             _action = action;
+            _decisionFactor = decisionFactor;
         }
     }
 }

@@ -4,25 +4,22 @@ using UnityEngine;
 
 namespace CharactersBehaviour
 {
-    public class TestAgentBehaviour : MonoBehaviour, IAgent
+    public class TestAgentBehaviour : AgentBehaviour
     {
-        StateMachine behaviourSystem;
-
-        public GameObject GetAgentGameObject()
-        {
-            return gameObject;
-        }
+        UtilitySystem behaviourSystem;
+        string _timeWithoutMoving = "timeWithoutMoving";
 
         // Start is called before the first frame update
         void Start()
         {
-            behaviourSystem = new StateMachine();
-            behaviourSystem.State = new MoveState(behaviourSystem, this);
+            AgentVariables[_timeWithoutMoving] = 0f;
+            behaviourSystem = new UtilitySystem(new List<UtilityBasedAction>() { new UtilityBasedAction(new MoveAction(this), new LeafFactor(_timeWithoutMoving, 0, 0.5f))}, this);
         }
 
         // Update is called once per frame
         void Update()
         {
+            AgentVariables[_timeWithoutMoving] += Time.deltaTime * 0.1f;
             behaviourSystem.UpdateBehaviour();
         }
     }

@@ -7,32 +7,41 @@ namespace CharactersBehaviour
 {
     public class UtilitySystem : IBehaviourSystem
     {
-        UtilityBasedAction bestAction;
-        List<UtilityBasedAction> posibleActions;
+        UtilityBasedAction _bestAction;
+        List<UtilityBasedAction> _posibleActions;
+        IAgent _agent;
+
+        public UtilitySystem(List<UtilityBasedAction> actions, IAgent agent)
+        {
+            _posibleActions = actions;
+            _agent = agent;
+        }
 
         void SelectBestAction()
         {
             float highestUtility = 0;
-            bestAction = null;
-            foreach (UtilityBasedAction action in posibleActions)
+            _bestAction = null;
+            foreach (UtilityBasedAction action in _posibleActions)
             {
+                action.DecisionFactor.ComputeUtility(_agent);
+
                 if (action.DecisionFactor.HasUtility() && (action.DecisionFactor.Utility > highestUtility))
                 {
                     highestUtility = action.DecisionFactor.Utility;
-                    bestAction = action;
+                    _bestAction = action;
                 }
             }
         }
 
         public void FixedUpdateBehaviour()
         {
-            bestAction?.Action.FixedUpdate();
+            _bestAction?.Action.FixedUpdate();
         }
 
         public void UpdateBehaviour()
         {
             SelectBestAction();
-            bestAction?.Action.Update();
+            _bestAction?.Action.Update();
         }
     }
 }

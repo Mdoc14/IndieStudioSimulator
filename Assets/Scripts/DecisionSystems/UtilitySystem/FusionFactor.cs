@@ -34,11 +34,12 @@ namespace CharactersBehaviour
             return true;
         }
 
-        public void UpdateUtility()
+        public void ComputeUtility(IAgent agent)
         {
             _utility = 0f;
             foreach (LeafFactor leafFactor in decisionFactors)
             {
+                leafFactor.ComputeUtility(agent);
                 _utility += leafFactor.Weight * leafFactor.Utility;
             }
         }
