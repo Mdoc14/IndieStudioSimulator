@@ -8,6 +8,7 @@ namespace CharactersBehaviour
     {
         UtilitySystem behaviourSystem;
         string _timeWithoutMoving = "timeWithoutMoving";
+        float timeCounter = 0f;
 
         // Start is called before the first frame update
         void Start()
@@ -19,6 +20,11 @@ namespace CharactersBehaviour
         // Update is called once per frame
         void Update()
         {
+            timeCounter += Time.deltaTime;
+            if (timeCounter >= 5f)
+            {
+                behaviourSystem.activated = true;
+            }
             AgentVariables[_timeWithoutMoving] += Time.deltaTime * 0.1f;
             behaviourSystem.UpdateBehaviour();
         }
