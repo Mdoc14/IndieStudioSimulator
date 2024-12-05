@@ -7,20 +7,20 @@ namespace CharactersBehaviour
 {
     public class BehaviourTree : IBehaviourSystem
     {
-        IAction _actualAction;
+        IAction _currentAction;
         public IAction Action
         {
-            get { return _actualAction; }
+            get { return _currentAction; }
             set
             {
-                if (_actualAction != null)
+                if (_currentAction != null)
                 {
-                    _actualAction.Exit();
+                    _currentAction.Exit();
                 }
 
-                _actualAction = value;
+                _currentAction = value;
 
-                _actualAction.Enter();
+                _currentAction.Enter();
             }
         }
 
@@ -35,12 +35,12 @@ namespace CharactersBehaviour
         public void UpdateBehaviour()
         {
             _root.Execute();
-            _actualAction?.Update();
+            _currentAction?.Update();
         }
 
         public void FixedUpdateBehaviour()
         {
-            _actualAction?.FixedUpdate();
+            _currentAction?.FixedUpdate();
         }
     }
 }

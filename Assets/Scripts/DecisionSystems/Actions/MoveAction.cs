@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CharactersBehaviour
 {
-    public class MoveAction : AAction
+    public class MoveAction : ASimpleAction
     {
         public MoveAction(IAgent agent) : base(agent)
         {

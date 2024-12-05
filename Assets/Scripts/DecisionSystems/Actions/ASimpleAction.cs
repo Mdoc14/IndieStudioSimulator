@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace CharactersBehaviour
 {
-    public abstract class AAction : IAction
+    public abstract class ASimpleAction : IAction
     {
         protected IAgent agent;
         protected bool started = false;
         protected bool finished = false;
 
-        public AAction(IAgent agent)
+        public ASimpleAction(IAgent agent)
         {
             this.agent = agent;
         }
