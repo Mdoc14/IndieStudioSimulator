@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     private List<GameObject> trash = new List<GameObject>();
+    public event Action<GameObject> OnColliderTriggered;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -12,6 +14,11 @@ public class Room : MonoBehaviour
         {
             trash.Add(other.gameObject);
             Debug.Log("Basura añadida a la habitación " + name);
+        }
+
+        if (other.gameObject.name == "Janitor")
+        {
+            OnColliderTriggered?.Invoke(other.gameObject);
         }
     }
 }
