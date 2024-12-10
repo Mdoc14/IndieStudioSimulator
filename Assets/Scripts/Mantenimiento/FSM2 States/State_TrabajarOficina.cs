@@ -22,6 +22,7 @@ namespace CharactersBehaviour
         public override void Update()
         {
             Debug.Log("Trabajando en la oficina...");
+            context.State = new State_Dormir(context,agent);
 
         }
 
