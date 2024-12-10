@@ -17,6 +17,7 @@ namespace CharactersBehaviour
         public CompositeAction(List<IAction> actions)
         {
             _actions = actions;
+            Enter();
         }
 
         public bool HasStarted { get { return started; } }

@@ -17,7 +17,7 @@ namespace CharactersBehaviour
 
         public bool HasStarted { get { return started; } }
         public bool HasFinished { get { return finished; } }
-        public abstract void Enter();
+        public virtual void Enter() { started = true; }
         public abstract void Exit();
         public abstract void Update();
         public abstract void FixedUpdate();
