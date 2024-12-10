@@ -51,6 +51,8 @@ namespace CharactersBehaviour
 
         public void Update()
         {
+            if (CurrentAction == null) return;
+
             if (CurrentAction.HasFinished)
             {
                 _currentIndex++;
