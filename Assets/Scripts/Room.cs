@@ -21,4 +21,29 @@ public class Room : MonoBehaviour
             OnColliderTriggered?.Invoke(other.gameObject);
         }
     }
+
+    public bool IsDirty()
+    {
+        return trash.Count > 0;
+    }
+
+    public Vector3 GetTrashPosition()
+    {
+        return trash[0].gameObject.transform.position;
+    }
+
+    public bool IsMachineEmpty()
+    {
+        return true; //Habria que preguntarle a la maquina si esta vacia y tal
+    }
+
+    public bool IsCatBoxDirty()
+    {
+        return true; //Habria que preguntarle a la caja si esta sucia
+    }
+
+    public Vector3 GetCatBoxPosition() 
+    {
+        return new Vector3(1.2f, 0.91f, 14.97f); //Habria que devolver la posicion de la caja
+    }
 }

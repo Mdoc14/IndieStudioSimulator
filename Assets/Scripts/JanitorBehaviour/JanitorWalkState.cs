@@ -55,7 +55,7 @@ public class JanitorWalkState : AState
         if (isOnObjectiveRoom) 
         {
             navMeshAgent.isStopped = true;
-            context.State = new JanitorBehaviourTree(context, agent);
+            context.State = new JanitorBehaviourTree(context, agent, destinationRoom.GetComponent<Room>());
         }
     }
 
