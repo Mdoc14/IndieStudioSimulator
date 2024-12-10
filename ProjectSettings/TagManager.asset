@@ -9,6 +9,7 @@ TagManager:
   - Key
   - Pizza
   - Trash
+  - Bath
   layers:
   - Default
   - TransparentFX

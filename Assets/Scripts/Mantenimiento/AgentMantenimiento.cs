@@ -20,12 +20,22 @@ namespace CharactersBehaviour
             throw new System.NotImplementedException();
         }
 
+        public Chair GetBath()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Chair GetChair()
         {
             throw new System.NotImplementedException();
         }
 
         public void SetAgentVariable(string name, float value)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void SetBath(Chair bath)
         {
             throw new System.NotImplementedException();
         }

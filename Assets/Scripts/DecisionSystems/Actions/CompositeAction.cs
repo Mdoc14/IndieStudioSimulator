@@ -35,7 +35,7 @@ namespace CharactersBehaviour
 
                 _currentAction = value;
 
-                _currentAction.Enter();
+                _currentAction?.Enter();
             }
         }
 

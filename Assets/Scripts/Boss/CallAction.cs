@@ -31,7 +31,7 @@ public class CallAction : ASimpleAction
         _workTime -= Time.deltaTime;
         if (_workTime <= 0)
         {
-            Debug.Log("FIN DE LA LLAMADA");
+            Debug.Log("Fin de la llamada");
             finished = true;
         }
     }

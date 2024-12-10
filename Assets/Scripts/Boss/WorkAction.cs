@@ -30,7 +30,7 @@ public class WorkAction : ASimpleAction
         _workTime -= Time.deltaTime;
         if (_workTime <= 0)
         {
-            Debug.Log("FIN DEL TRABAJO");
+            Debug.Log("Fin del trabajo");
             finished = true;
         }
     }

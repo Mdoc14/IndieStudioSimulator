@@ -11,6 +11,7 @@ public class BossWorkState : AState
     public override void Enter()
     {
         Debug.Log("ENTRANDO EN ESTADO DE TRABAJO...");
+        //El jefe va a su silla y después utiliza su ordenador o su teléfono
         List<IAction> actions = new List<IAction>();
         actions.Add(new GoToDeskAction(agent));
         if (Random.Range(0, 2) == 0) actions.Add(new WorkAction(agent));
@@ -20,7 +21,7 @@ public class BossWorkState : AState
 
     public override void Exit()
     {
-        Debug.Log("ESTADO DE TRABAJO ABANDONADO");
+        
     }
 
     public override void FixedUpdate()
@@ -31,5 +32,11 @@ public class BossWorkState : AState
     public override void Update()
     {
         _workAction?.Update();
+        if (_workAction.HasFinished)
+        {
+            agent.GetChair().Leave();
+            Debug.Log("ESTADO DE TRABAJO FINALIZADO");
+            context.State = new BathroomState(context, agent);
+        }
     }
 }

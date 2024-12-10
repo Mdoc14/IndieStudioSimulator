@@ -14,7 +14,6 @@ public class GoToDeskAction : ASimpleAction
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Yendo al despacho...");
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _agentChair = agent.GetChair();
         _navAgent.SetDestination(_agentChair.transform.position);
@@ -22,7 +21,7 @@ public class GoToDeskAction : ASimpleAction
 
     public override void Exit()
     {
-        Debug.Log("Despacho alcanzado");
+
     }
 
     public override void FixedUpdate()
