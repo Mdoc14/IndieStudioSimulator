@@ -8,6 +8,7 @@ namespace CharactersBehaviour
     {
         public GameObject GetAgentGameObject();
         public float GetAgentVariable(string name);
+        public void SetAgentVariable(string name, float value);
         public Chair GetChair();
     }
 }

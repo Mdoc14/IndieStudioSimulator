@@ -19,6 +19,11 @@ namespace CharactersBehaviour
             return agentVariables[name];
         }
 
+        public void SetAgentVariable(string name, float value)
+        {
+            agentVariables[name] = value;
+        }
+
         public Chair GetChair() //La silla del puesto de trabajo del agente
         {
             return _chair;
