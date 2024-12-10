@@ -13,8 +13,10 @@ namespace CharactersBehaviour
         // Start is called before the first frame update
         void Start()
         {
-            AgentVariables[_timeWithoutMoving] = 0f;
-            behaviourSystem = new UtilitySystem(new List<UtilityBasedAction>() { new UtilityBasedAction(new MoveAction(this), new LeafFactor(_timeWithoutMoving, 0, 0.5f))}, this);
+            agentVariables[_timeWithoutMoving] = 0f;
+            List<UtilityBasedAction> actions = new List<UtilityBasedAction>();
+            actions.Add(new UtilityBasedAction(new MoveAction(this), new LeafFactor(_timeWithoutMoving, 0, 0.5f)));
+            behaviourSystem = new UtilitySystem(actions, this);
         }
 
         // Update is called once per frame
@@ -25,7 +27,7 @@ namespace CharactersBehaviour
             {
                 behaviourSystem.activated = true;
             }
-            AgentVariables[_timeWithoutMoving] += Time.deltaTime * 0.1f;
+            agentVariables[_timeWithoutMoving] += Time.deltaTime * 0.1f;
             behaviourSystem.UpdateBehaviour();
         }
     }

@@ -22,9 +22,25 @@ namespace CharactersBehaviour
         public bool HasStarted { get { return started; } }
         public bool HasFinished { get { return finished; } }
 
+        public IAction CurrentAction
+        {
+            get { return _currentAction; }
+            set
+            {
+                if (_currentAction != null)
+                {
+                    _currentAction.Exit();
+                }
+
+                _currentAction = value;
+
+                _currentAction.Enter();
+            }
+        }
+
         public void Enter()
         {
-            _currentAction = _actions[_currentIndex];
+            CurrentAction = _actions[_currentIndex];
         }
 
         public void Exit()
@@ -34,26 +50,26 @@ namespace CharactersBehaviour
 
         public void Update()
         {
-            if (_currentAction.HasFinished)
+            if (CurrentAction.HasFinished)
             {
                 _currentIndex++;
                 if (_currentIndex >= _actions.Count)
                 {
                     finished = true;
-                    _currentAction = null;
+                    CurrentAction = null;
                 }
                 else
                 {
-                    _currentAction = _actions[_currentIndex];
+                    CurrentAction = _actions[_currentIndex];
                 }
             }
 
-            _currentAction?.Update();
+            CurrentAction?.Update();
         }
 
         public void FixedUpdate()
         {
-            _currentAction?.FixedUpdate();
+            CurrentAction?.FixedUpdate();
         }
     }
 }

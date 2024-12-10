@@ -6,9 +6,7 @@ namespace CharactersBehaviour
 {
     public abstract class AgentBehaviour : MonoBehaviour, IAgent
     {
-        private Dictionary<string, float> _agentVariables = new Dictionary<string, float>();
-
-        protected Dictionary<string, float> AgentVariables { get { return _agentVariables; } }
+        protected Dictionary<string, float> agentVariables = new Dictionary<string, float>();
 
         public GameObject GetAgentGameObject()
         {
@@ -17,7 +15,7 @@ namespace CharactersBehaviour
 
         public float GetAgentVariable(string name)
         {
-            return AgentVariables[name];
+            return agentVariables[name];
         }
     }
 }
