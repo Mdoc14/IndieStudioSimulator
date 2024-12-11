@@ -1,4 +1,5 @@
 using CharactersBehaviour;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -11,11 +12,12 @@ public class WorldManager : MonoBehaviour
     public static WorldManager Instance { get; private set; }
     [SerializeField] private float _timeSpeed = 1;
     //Manejo de la basura:
-    [SerializeField] private GameObject trashPrefab;
+    [SerializeField] private GameObject _trashPrefab;
     //Manejo del baño:
     private List<Chair> _baths = new List<Chair>();
     //Reuniones:
     private int _numWorkersReunion = 0;
+    public event Action OnWorkersReady;
 
     void Awake()
     {
@@ -38,13 +40,15 @@ public class WorldManager : MonoBehaviour
     private void Update()
     {
         Time.timeScale = _timeSpeed;
+        DecreaseWorkerInReunion();
+        AddWorkerToReunion();
     }
 
     public void GenerateTrash(Vector3 position) //Instancia basura dada una posición
     {
         NavMeshHit navHit;
         NavMesh.SamplePosition(position, out navHit, 20, 1);
-        GameObject.Instantiate(trashPrefab, position, Quaternion.identity);
+        GameObject.Instantiate(_trashPrefab, navHit.position, Quaternion.identity);
     }
 
     public Chair GetBathroom(IAgent agent) //Devuelve un baño libre que ni está siendo usado ni ha sido seleccionado por un personaje para usarse
@@ -61,20 +65,21 @@ public class WorldManager : MonoBehaviour
         return null;
     }
 
-    public void StartReunion()
+    public void ReunionNotified()
     {
         //Falta aplicar la lógica para que los trabajadores vayan a la reunión
         //Se debería notificar a los trabajadores para que vayan a la sala de reuniones, busquen una silla y se sienten, solamente
     }
 
-    public void EndReunion()
+    public void ReunionEnded()
     {
-        //Lógica similar a StartReunion
+        //Lógica similar a ReunionNotified
     }
 
     public void AddWorkerToReunion()
     {
         _numWorkersReunion++;
+        AreWorkersReady();
     }
 
     public void DecreaseWorkerInReunion()
@@ -82,12 +87,11 @@ public class WorldManager : MonoBehaviour
         _numWorkersReunion--;
     }
 
-    public bool AreWorkersReady()
+    public void AreWorkersReady()
     {
         if(_numWorkersReunion == GameObject.FindObjectsOfType<ProgrammerBehaviour>().Length)
         {
-            return true;
+            OnWorkersReady?.Invoke();
         }
-        return false;
     }
 }

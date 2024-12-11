@@ -21,7 +21,7 @@ public class BossWorkState : AState
 
     public override void Exit()
     {
-        
+        Debug.Log("ESTADO DE TRABAJO FINALIZADO");
     }
 
     public override void FixedUpdate()
@@ -35,10 +35,10 @@ public class BossWorkState : AState
         if (_workAction.HasFinished)
         {
             agent.GetChair().Leave();
-            Debug.Log("ESTADO DE TRABAJO FINALIZADO");
             float rand = Random.Range(0.0f, 1.0f);
-            if(rand < 0.1f) context.State = new BathroomState(context, agent, new BossWorkState(context, agent));
-            else context.State = new BossReunionState(context, agent);
+            if (rand < 0.1f) context.State = new BathroomState(context, agent, new BossWorkState(context, agent));
+            else if (rand < 0.35f) context.State = new BossReunionState(context, agent);
+            else context.State = new PatrolState(context, agent);
         }
     }
 }

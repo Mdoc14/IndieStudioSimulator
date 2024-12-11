@@ -26,6 +26,7 @@ public class Chair : MonoBehaviour
 
     public void Sit(GameObject agent)
     {
+        if (_occupied) return;
         this._agent = agent;
         _agent.GetComponent<NavMeshAgent>().enabled = false;
         _occupied = true;

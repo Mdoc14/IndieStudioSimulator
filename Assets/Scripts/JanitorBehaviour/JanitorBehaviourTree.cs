@@ -15,7 +15,7 @@ public class JanitorBehaviourTree : AState
 
     public override void Enter()
     {
-        WorldManager.Instance.GenerateTrash(new Vector3(-5.84f, 0.61f, 1.16f));
+        WorldManager.Instance.GenerateTrash(new Vector3(7.51f, 0.61f, 6.13f));
 
         Debug.Log("He entrado al behaviour tree....");
         behaviourTree = new BehaviourTree();

@@ -33,7 +33,7 @@ public class PerformReunionAction : ASimpleAction
         if (_time <= 0)
         {
             GameObject.Find("BossReunionChair").GetComponent<Chair>().Leave();
-            WorldManager.Instance.EndReunion();
+            WorldManager.Instance.ReunionEnded();
             finished = true;
         }
     }
