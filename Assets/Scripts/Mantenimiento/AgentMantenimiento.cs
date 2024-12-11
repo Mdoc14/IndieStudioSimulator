@@ -7,38 +7,42 @@ namespace CharactersBehaviour
     public class AgentMantenimiento : AgentBehaviour
     {
 
-        private string lastState;
-        private float cansancio;
-
         // Implementación del método GetAgentGameObject:
+        protected Dictionary<string, float> agentVariables = new Dictionary<string, float>();
+        //[SerializeField] private Chair _chair;
+
+        /*
+        [SerializeField] private int  lastState;
+        [SerializeField] private float cansancio;
+        void Awake()
+        {
+           
+            agentVariables.Add("lastState", 0);
+            agentVariables.Add("cansancio", 0);
+            
+        }
+        */
         public GameObject GetAgentGameObject()
         {
-            return this.gameObject; //Devuelve el GameObject asociado al componente
+            return gameObject;
         }
 
         public float GetAgentVariable(string name)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Chair GetBath()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Chair GetChair()
-        {
-            throw new System.NotImplementedException();
+            return agentVariables[name];
         }
 
         public void SetAgentVariable(string name, float value)
         {
-            throw new System.NotImplementedException();
+            agentVariables[name] = value;
         }
 
-        public void SetBath(Chair bath)
+        /*
+        public Chair GetChair() //La silla del puesto de trabajo del agente
         {
-            throw new System.NotImplementedException();
-        }
+            //return _chair;
+        }*/
+
+        
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace CharactersBehaviour
 {
-    public class Mantenimiento : AgentMantenimiento
+    public class Mantenimiento : AgentBehaviour
     {
         //Maquina de estado FSM1
         private CharactersBehaviour.StateMachine FSM1;
@@ -17,7 +17,14 @@ namespace CharactersBehaviour
         //private CharactersBehaviour.State_ArreglarLuz arreglarLuzState;
         private CharactersBehaviour.State_FSM2 trabajarState;
 
-        //Start is called before the first frame update
+        void Awake()
+        {
+
+            agentVariables.Add("cansancio", 0);
+            agentVariables.Add("lastState", 0);
+            
+        }
+
         void Start()
         {
             
