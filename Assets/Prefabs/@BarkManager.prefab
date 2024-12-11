@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5329465729653836861
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2203993363171813218}
+  - component: {fileID: 2460386030475849490}
+  m_Layer: 0
+  m_Name: '@BarkManager'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2203993363171813218
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5329465729653836861}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.088321, y: -1.9480388, z: 0.49430463}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2460386030475849490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5329465729653836861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74852c36b4fff9c40a70c943826233ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _barks:
+  - name: Bathroom
+    sprite: {fileID: 21300000, guid: e80dea82cbcf5094dbdb56acbcee835f, type: 3}
+  - name: CleanBathroom
+    sprite: {fileID: 21300000, guid: 61884da067313a54083535f63024c43b, type: 3}
+  - name: Draw
+    sprite: {fileID: 21300000, guid: 684aaa154938a8a4e95d7dd847704a10, type: 3}
+  - name: Drink
+    sprite: {fileID: 21300000, guid: aada5d613d94d924a9375d8054dc6101, type: 3}
+  - name: Eat
+    sprite: {fileID: 21300000, guid: 32290142bf23d714bbf13c1cf77a90c5, type: 3}
+  - name: Look
+    sprite: {fileID: 21300000, guid: 6887016ebdeeb3146b5466f2a0297641, type: 3}
+  - name: PlayMobile
+    sprite: {fileID: 21300000, guid: 7af7bc5fcbfe9ee4c931c735800a7a9e, type: 3}
+  - name: PlayPC
+    sprite: {fileID: 21300000, guid: 1886f6248e589334eb118851561355d6, type: 3}
+  - name: PetCat
+    sprite: {fileID: 21300000, guid: faad814cdd55be843872cb107afd91d8, type: 3}
+  - name: PhoneCall
+    sprite: {fileID: 21300000, guid: f7be1c1bfc3d4344db665398f2c7f444, type: 3}
+  - name: Photo
+    sprite: {fileID: 21300000, guid: 788a49b8f9190894f9d9592db9ff7c0e, type: 3}
+  - name: Print
+    sprite: {fileID: 21300000, guid: 32ad446f5e7912640a21f4f6afc65842, type: 3}
+  - name: Program
+    sprite: {fileID: 21300000, guid: 06ee7f5d86bc0ab4aa91529ca275bec3, type: 3}
+  - name: Read
+    sprite: {fileID: 21300000, guid: df5db6d46dfba2a428dbafd78a8dc197, type: 3}
+  - name: Repair
+    sprite: {fileID: 21300000, guid: 3327fc490c4a90e45ac6fe742114e4b6, type: 3}
+  - name: Scold
+    sprite: {fileID: 21300000, guid: b07f3fa7112a793439d2ac8513e269e7, type: 3}
+  - name: Scolded
+    sprite: {fileID: 21300000, guid: 0d5e60e065ef8a048ab4553d90247b58, type: 3}
+  - name: Sleep
+    sprite: {fileID: 21300000, guid: 4494c61196eeaf24d868bc022874716d, type: 3}
+  - name: Smoke
+    sprite: {fileID: 21300000, guid: 70ee59b3cd1ca234c84ab245918ff2f6, type: 3}
+  - name: Supply
+    sprite: {fileID: 21300000, guid: 7bd6257f23f544846b583512461c544c, type: 3}
+  - name: Take
+    sprite: {fileID: 21300000, guid: 49fc5af95cee7f14ba7bc9b10531f74b, type: 3}
+  - name: Walk
+    sprite: {fileID: 21300000, guid: b0df87b5463d0eb40ad27d01a3626850, type: 3}
+  - name: Write
+    sprite: {fileID: 21300000, guid: 95e33339e3ddf6743851869e5b963604, type: 3}

@@ -16,6 +16,7 @@ public class GoToPositionAction : ASimpleAction
         base.Enter();
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _navAgent.SetDestination(_destination);
+        agent.SetBark("Walk");
     }
 
     public override void Exit()
