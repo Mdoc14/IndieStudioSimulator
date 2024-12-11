@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class BathroomState : AState
 {
-    public BathroomState(StateMachine sm, IAgent agent) : base(sm, agent) { }
+    public BathroomState(StateMachine sm, IAgent agent, AState nextState) : base(sm, agent) 
+    {
+        this.nextState = nextState;
+    }
+    AState nextState;
     CompositeAction _bathroomAction;
 
     public override void Enter()
@@ -31,5 +35,9 @@ public class BathroomState : AState
     public override void Update()
     {
         _bathroomAction?.Update();
+        if (_bathroomAction.HasFinished)
+        {
+            context.State = nextState;
+        }
     }
 }

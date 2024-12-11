@@ -36,7 +36,7 @@ public class BossWorkState : AState
         {
             agent.GetChair().Leave();
             Debug.Log("ESTADO DE TRABAJO FINALIZADO");
-            context.State = new BathroomState(context, agent);
+            context.State = new BathroomState(context, agent, null);
         }
     }
 }
