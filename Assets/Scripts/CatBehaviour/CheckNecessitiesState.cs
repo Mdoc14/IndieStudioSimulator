@@ -1,22 +1,21 @@
-using CharactersBehaviour;
+﻿using CharactersBehaviour;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : AState
+public class CheckNecessitiesState : AState
 {
-    float currentTime;
-    float timeResting;
     CatBehaviour catBehaviour;
 
-    public IdleState(StateMachine sm, IAgent agent) : base(sm, agent)
+    public CheckNecessitiesState(StateMachine sm, IAgent agent) : base(sm, agent)
     {
     }
 
     public override void Enter()
     {
-        timeResting = Random.Range(30f, 120f);
+        Debug.Log("GATO: COMPROBANDO NECESIDADES");
         catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
+        catBehaviour.US.activated = true;
     }
 
     public override void Exit()
@@ -29,11 +28,7 @@ public class IdleState : AState
 
     public override void Update()
     {
-        agent.SetAgentVariable(catBehaviour.Boredom, agent.GetAgentVariable(catBehaviour.Boredom) + Time.deltaTime);
-
-        currentTime += Time.deltaTime;
-
-        if (currentTime > timeResting)
+        if (catBehaviour.US.CurrentAction == null)
         {
             context.State = new WanderingState(context, agent);
         }

@@ -36,7 +36,7 @@ public class PickUpTrashAction : ASimpleAction
         if (timer >= pickUpTotalTime)
         {
             currentRoom.DeleteTrash();
-            //finished = true;
+            finished = true;
         }
     }
 }

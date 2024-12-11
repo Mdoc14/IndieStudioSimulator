@@ -10,8 +10,12 @@ public class UseBathroomAction : ASimpleAction
     private bool _reached = false;
     private NavMeshAgent _navAgent;
     Chair _bath;
+    bool keepBathroom;
 
-    public UseBathroomAction(IAgent agent) : base(agent) { }
+    public UseBathroomAction(IAgent agent, bool keepBathroom = false) : base(agent) 
+    { 
+        this.keepBathroom = keepBathroom;
+    }
 
     public override void Enter()
     {
@@ -51,7 +55,7 @@ public class UseBathroomAction : ASimpleAction
             if (_time <= 0)
             {
                 _bath.Leave();
-                agent.SetBath(null);
+                if (!keepBathroom) agent.SetBath(null);
                 finished = true;
             }
         }

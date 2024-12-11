@@ -14,6 +14,7 @@ public class WanderingState : AState
 
     public override void Enter()
     {
+        Debug.Log("GATO: HE COMENZADO A DEAMBULAR");
         catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
         wanderAction = new WanderAction(agent);
         wanderAction.Enter();
@@ -29,7 +30,17 @@ public class WanderingState : AState
 
     public override void Update()
     {
+        agent.SetAgentVariable(catBehaviour.Boredom, agent.GetAgentVariable(catBehaviour.Boredom) + Time.deltaTime);
         agent.SetAgentVariable(catBehaviour.Tiredness, agent.GetAgentVariable(catBehaviour.Tiredness) + Time.deltaTime);
-        wanderAction.Update();
+
+        if (!wanderAction.HasFinished)
+        {
+            wanderAction.Update();
+        }
+        else
+        {
+            Debug.Log("GATO: HE TERMINADO DE DEAMBULAR");
+            context.State = new CheckNecessitiesState(context, agent);
+        }
     }
 }

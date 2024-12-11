@@ -7,13 +7,15 @@ namespace CharactersBehaviour
 {
     public class WanderAction : ASimpleAction
     {
-        float wanderDistance = 10f;
+        float wanderDistance = 15f;
 
         NavMeshAgent _agentNavMesh;
 
+        int currentWander = 0;
         int numberWanders;
-        float timer = 2f;
-        float timeBetweenWanders = 2f;
+
+        float timer;
+        float timeBetweenWanders;
 
         public WanderAction(IAgent agent) : base(agent)
         {
@@ -22,7 +24,9 @@ namespace CharactersBehaviour
         public override void Enter()
         {
             base.Enter();
-            numberWanders = Random.Range(3, 5);
+            numberWanders = 1;//Random.Range(5, 8);
+            timer = 0f;
+            timeBetweenWanders = 2f;//Random.Range(2f, 10f);
             _agentNavMesh = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         }
 
@@ -34,14 +38,15 @@ namespace CharactersBehaviour
         {
             if (HasReachDestination())
             {
-                timer += Time.deltaTime;
+                if (currentWander >= numberWanders) { finished = true; } else { timer -= Time.deltaTime; }
             }
 
-            if (timer >= timeBetweenWanders)
+            if (timer <= 0f)
             {
-                timer = 0f;
+                timer = timeBetweenWanders;
                 Vector3 newDestination = Wander(agent.GetAgentGameObject().transform.position, wanderDistance);
                 _agentNavMesh.SetDestination(newDestination);
+                currentWander++;
             }
         }
 
