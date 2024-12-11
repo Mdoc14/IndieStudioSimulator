@@ -39,9 +39,17 @@ public class WorldManager : MonoBehaviour
 
     private void Update()
     {
-        Time.timeScale = _timeSpeed;
+        //Time.timeScale = _timeSpeed;
+        //Lo siguiente sólo está aquí para probar el jefe; hay que eliminarlo más adelante
         DecreaseWorkerInReunion();
         AddWorkerToReunion();
+    }
+
+    public void AddSpeed(float speed)
+    {
+        if (Time.timeScale + speed <= 0) return;
+        Time.timeScale += speed;
+        MainMenuManager.Instance.SetSpeedText(Time.timeScale.ToString());
     }
 
     public void GenerateTrash(Vector3 position) //Instancia basura dada una posición

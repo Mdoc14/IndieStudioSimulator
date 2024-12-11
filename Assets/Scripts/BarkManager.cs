@@ -9,7 +9,9 @@ public class BarkManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(this.gameObject);
+        DontDestroyOnLoad(this);
     }
 
     public Sprite GetBark(string name)

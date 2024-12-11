@@ -6,19 +6,23 @@ public class CameraRotation : MonoBehaviour
 {
     [SerializeField] private float sensitivityX;
     [SerializeField] private float sensitivityY;
+    public static float sensMultiplier = 1;
     private Transform player;
     private float yRotation = 0; 
+    PlayerMovement playerMovement;
 
     void Awake()
     {
         Cursor.lockState = CursorLockMode.Locked;
         player = transform.parent;
+        playerMovement = GameObject.FindObjectOfType<PlayerMovement>();
     }
 
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * sensitivityX * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * sensitivityY * Time.deltaTime;
+        if (!playerMovement.canMove) return;
+        float mouseX = Input.GetAxis("Mouse X") * sensitivityX * sensMultiplier * Time.deltaTime/Time.timeScale;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivityY * sensMultiplier * Time.deltaTime/Time.timeScale;
 
         player.Rotate(Vector3.up, mouseX); 
         yRotation -= mouseY; 

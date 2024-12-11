@@ -29,7 +29,7 @@ public class InteractionController : MonoBehaviour
 
     public void Interact(InputAction.CallbackContext context)
     {
-        if (context.performed) interactableOnSight?.Interact();
+        if (context.performed && GameObject.FindObjectOfType<PlayerMovement>().canMove) interactableOnSight?.Interact();
     }
 
     public void ResetInteractable()

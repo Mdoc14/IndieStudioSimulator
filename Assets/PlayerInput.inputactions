@@ -22,6 +22,24 @@
                     "processors": "",
                     "interactions": "Press(pressPoint=1)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ChangeSimulationSpeed",
+                    "type": "Button",
+                    "id": "9d72f01f-634e-4584-a81a-32d1ebd8c29c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "7225ca36-6867-4622-b257-dd3945d5d7e8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -180,13 +198,46 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "dbcf4eca-b7c7-48df-8dc7-028cd87faf5e",
+                    "name": "1D Axis",
+                    "id": "a053ae92-6480-4081-8f3e-c87fabcc5840",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeSimulationSpeed",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "459a55a6-4bd7-454f-b77e-f1c4f556c599",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interact",
+                    "action": "ChangeSimulationSpeed",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "44ed370b-d4be-4c78-83fe-2391d45e8142",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeSimulationSpeed",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "7492cc6f-6514-4bbd-b5fc-427774cddbbe",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
