@@ -31,15 +31,16 @@ public class JanitorBehaviourTree : AState
 
         //Ir a la basura
         sequenceNodeList.Add(new ActionNode(
-            new GoToPositionAction(agent, currentRoom.GetTrashPosition()), behaviourTree));
-
+            //new GoToPositionAction(agent, currentRoom.GetTrashPosition()), behaviourTree));
+            new GoToAction(agent, currentRoom.GetTrashPosition), behaviourTree));
         //Recoger basura
         sequenceNodeList.Add(new ActionNode(
             new PickUpTrashAction(agent), behaviourTree));
 
         //Ir a la papelera (de momento las tira en el mismo sitio donde las recoge)
         sequenceNodeList.Add(new ActionNode(
-            new GoToPositionAction(agent, currentRoom.GetTrashPosition()), behaviourTree));
+            //new GoToPositionAction(agent, currentRoom.GetTrashPosition()), behaviourTree));
+            new GoToAction(agent, currentRoom.GetTrashPosition), behaviourTree));
 
         //Tirar basura
         sequenceNodeList.Add(new ActionNode(
@@ -67,7 +68,8 @@ public class JanitorBehaviourTree : AState
 
         //Ir la caja
         sequenceNodeList.Add(new ActionNode(
-            new GoToPositionAction(agent, currentRoom.GetCatBoxPosition()), behaviourTree));
+            //new GoToPositionAction(agent, currentRoom.GetCatBoxPosition()), behaviourTree));
+            new GoToAction(agent, currentRoom.GetCatBoxPosition), behaviourTree));
 
         //Limpiar caja
         sequenceNodeList.Add(new ActionNode(
