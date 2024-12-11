@@ -11,7 +11,8 @@ public class WaitingBathroomAction : ASimpleAction
     public override void Enter()
     {
         base.Enter();
-        agent.SetBark("Bathroom");
+        agent.SetBark("Wait");
+        agent.SetAnimation("Idle");
     }
 
     public override void Exit()

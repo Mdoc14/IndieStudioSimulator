@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PatrolState : AState
 {
@@ -23,6 +24,7 @@ public class PatrolState : AState
     public override void Exit()
     {
         Debug.Log("ESTADO DE PATRULLA FINALIZADO");
+        agent.GetAgentGameObject().GetComponent<NavMeshAgent>().speed = agent.GetAgentVariable("Speed");
     }
 
     public override void FixedUpdate()

@@ -46,5 +46,10 @@ namespace CharactersBehaviour
             if(BarkManager.Instance != null) bark = BarkManager.Instance.GetBark(name);
             if (bark != null) transform.GetComponentInChildren<SpriteRenderer>().sprite = bark;
         }
+
+        public void SetAnimation(string triggerName)
+        {
+            transform.GetComponentInChildren<Animator>().SetTrigger(triggerName);
+        }
     }
 }

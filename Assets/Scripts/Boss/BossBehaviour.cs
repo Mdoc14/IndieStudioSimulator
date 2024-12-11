@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CharactersBehaviour;
+using UnityEngine.AI;
 
 public class BossBehaviour : AgentBehaviour
 {
@@ -19,6 +20,7 @@ public class BossBehaviour : AgentBehaviour
         agentVariables.Add("Irritability", Random.Range(0.10f, 1)); //El jefe tendrá una irritabilidad variable en cada ejecución
         agentVariables.Add("MaxWorkTime", _maxWorkTime);
         agentVariables.Add("CurrentAnger", Random.Range(0, 100));
+        agentVariables.Add("Speed", GetComponent<NavMeshAgent>().speed);
         _bossMachine.State = new BossWorkState(_bossMachine, this);
     }
 

@@ -15,6 +15,8 @@ public class PerformReunionAction : ASimpleAction
         base.Enter();
         _time = Random.Range(5, 60);
         Debug.Log("Todos los trabajadores presentes. Comenzando reunión...");
+        agent.SetBark("Meeting");
+        agent.SetAnimation("Scolding");
     }
 
     public override void Exit()

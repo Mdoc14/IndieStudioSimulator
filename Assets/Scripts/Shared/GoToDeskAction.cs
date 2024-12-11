@@ -18,6 +18,7 @@ public class GoToDeskAction : ASimpleAction
         _agentChair = agent.GetChair();
         _navAgent.SetDestination(_agentChair.transform.position);
         agent.SetBark("Walk");
+        agent.SetAnimation("Walk");
     }
 
     public override void Exit()

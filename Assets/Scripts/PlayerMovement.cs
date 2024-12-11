@@ -9,10 +9,12 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private Vector2 input;
     public bool canMove = true;
+    public static bool collides = false;
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        ToggleCollision();
     }
 
     void Update()
@@ -38,5 +40,11 @@ public class PlayerMovement : MonoBehaviour
     public void ChangeSimulationSpeed(InputAction.CallbackContext context)
     {
         if (canMove && context.performed) WorldManager.Instance.AddSpeed(context.ReadValue<float>());
+    }
+
+    public void ToggleCollision()
+    {
+        if (collides) this.gameObject.layer = 0;
+        else this.gameObject.layer = 6;
     }
 }

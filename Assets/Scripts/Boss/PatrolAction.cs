@@ -8,6 +8,7 @@ public class PatrolAction : ASimpleAction
 {
     BossBehaviour _boss;
     NavMeshAgent _navAgent;
+    float _initSpeed;
 
     public PatrolAction(IAgent agent) : base(agent) { }
 
@@ -17,13 +18,16 @@ public class PatrolAction : ASimpleAction
         Debug.Log("Patrullando...");
         _boss = agent.GetAgentGameObject().GetComponent<BossBehaviour>();
         _navAgent = _boss.GetComponent<NavMeshAgent>();
+        _initSpeed = _navAgent.speed;
+        _navAgent.speed = 0.5f;
         _navAgent.SetDestination(_boss.GetCurrentWaypoint().position);
         agent.SetBark("Look");
+        agent.SetAnimation("Patrol");
     }
 
     public override void Exit()
     {
-        
+
     }
 
     public override void FixedUpdate()

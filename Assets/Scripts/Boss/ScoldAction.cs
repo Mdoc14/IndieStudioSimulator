@@ -14,10 +14,12 @@ public class ScoldAction : ASimpleAction
     public override void Enter()
     {
         base.Enter();
-        //Acciones de mirar con la cabeza hacia el trabajaador y comenzar la animación y audios de regañar.
+        //Acciones de mirar con la cabeza hacia el trabajador y comenzar la animación y audios de regañar.
         _time = Random.Range(1, 10);
         if (_inOffice) _time *= 3; //Si regaña al trabajador en la oficina está más tiempo
         agent.SetBark("Scold");
+        agent.SetAnimation("Scolding");
+        agent.GetAgentGameObject().GetComponent<NavMeshAgent>().isStopped = true;
     }
 
     public override void Exit()

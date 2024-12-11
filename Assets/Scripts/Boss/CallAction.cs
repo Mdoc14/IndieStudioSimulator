@@ -14,6 +14,7 @@ public class CallAction : ASimpleAction
         base.Enter();
         _workTime = Random.Range(5, agent.GetAgentVariable("MaxWorkTime"));
         agent.SetBark("PhoneCall");
+        agent.SetAnimation("PhoneCall");
         Debug.Log("El jefe está llamando por teléfono...");
     }
 

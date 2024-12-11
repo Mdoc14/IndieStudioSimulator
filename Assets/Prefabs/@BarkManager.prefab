@@ -91,3 +91,11 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: b0df87b5463d0eb40ad27d01a3626850, type: 3}
   - name: Write
     sprite: {fileID: 21300000, guid: 95e33339e3ddf6743851869e5b963604, type: 3}
+  - name: Wait
+    sprite: {fileID: 21300000, guid: 74011ffc8e62dc14fbe219ec121ae59f, type: 3}
+  - name: Meeting
+    sprite: {fileID: 21300000, guid: b7d6e9598ba9e5440900114cb3da2056, type: 3}
+  - name: Empty
+    sprite: {fileID: 21300000, guid: 72ad73aecc9b71546a9d423af9d10b83, type: 3}
+  - name: BossWork
+    sprite: {fileID: 21300000, guid: ac16ad2dac753fa42a59577d74dbddc2, type: 3}

@@ -14,5 +14,6 @@ namespace CharactersBehaviour
         public void SetBath(Chair bath);
         public Chair GetBath();
         public void SetBark(string name);
+        public void SetAnimation(string triggerName);
     }
 }

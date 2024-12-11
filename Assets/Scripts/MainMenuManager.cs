@@ -51,4 +51,11 @@ public class MainMenuManager : MonoBehaviour
     {
         speedText.text = $"Velocidad: x{text}";
     }
+
+    public void ToggleCollisions(bool c)
+    {
+        PlayerMovement.collides = c;
+        PlayerMovement player = GameObject.FindObjectOfType<PlayerMovement>();
+        if (player) player.ToggleCollision();
+    }
 }
