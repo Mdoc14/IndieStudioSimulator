@@ -7,10 +7,23 @@ namespace CharactersBehaviour
     public class State_Dormir : AState
     {
         public State_Dormir(StateMachine FSM2, IAgent agent) : base(FSM2, agent) { }
+        CompositeAction _irADormir;
+
 
         public override void Enter()
         {
+            agent.SetAgentVariable("lastState", 1);
             Debug.Log("Entrando en el estado Dormir");
+
+            //Va a su silla y despues duerme
+            List<IAction> actions = new List<IAction>();
+            if (!agent.GetChair().IsOccupied())
+            {
+                actions.Add(new GoToDeskAction(agent));
+            }
+            actions.Add(new ActionDormir(agent));
+            _irADormir = new CompositeAction(actions);
+
 
         }
 
@@ -21,19 +34,23 @@ namespace CharactersBehaviour
 
         public override void Update()
         {
-            Debug.Log("Durmiendo...");
-            if (agent.GetAgentVariable("lastState") == 1) {
-                context.State = new State_TrabajarOficina(context, agent);
-            }
-            if (agent.GetAgentVariable("lastState") == 2)
+            
+            _irADormir?.Update();
+
+            if (_irADormir != null && _irADormir.HasFinished)
             {
-                context.State = new State_RepararIncidencia(context, agent);
+
+                agent.SetAgentVariable("cansancio", 0);
+                Debug.Log(agent.GetAgentVariable("cansancio"));
+                context.State = new State_TrabajarOficina(context, agent);
+                
             }
 
         }
 
         public override void FixedUpdate()
         {
+            _irADormir?.FixedUpdate();
         }
     }
 }
