@@ -22,7 +22,9 @@ namespace CharactersBehaviour
         {
             if (maxN == 0)
             {
-                return child.Execute();
+                child.Execute();
+
+                return BehaviourState.Running;
             }
 
             if (currentIteration < maxN)
@@ -34,7 +36,7 @@ namespace CharactersBehaviour
                     currentIteration++;
                 }
 
-                return state;
+                return BehaviourState.Running;
             }
             else
             {
