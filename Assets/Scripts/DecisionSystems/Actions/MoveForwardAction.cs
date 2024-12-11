@@ -4,18 +4,16 @@ using UnityEngine;
 
 namespace CharactersBehaviour
 {
-    public class MoveState : AState
+    public class MoveForwardAction : ASimpleAction
     {
-        MoveAction moveAction;
-
-        public MoveState(StateMachine sm, IAgent agent) : base(sm, agent)
+        public MoveForwardAction(IAgent agent) : base(agent)
         {
 
         }
 
         public override void Enter()
         {
-            moveAction = new MoveAction(agent);
+            started = true;
         }
 
         public override void Exit()
@@ -25,7 +23,7 @@ namespace CharactersBehaviour
 
         public override void Update()
         {
-            moveAction.Update();
+            agent.GetAgentGameObject().transform.Translate(Vector3.forward * (1 * Time.deltaTime));
         }
 
         public override void FixedUpdate()

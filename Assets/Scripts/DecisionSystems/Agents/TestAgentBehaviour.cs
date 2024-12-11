@@ -15,7 +15,7 @@ namespace CharactersBehaviour
         {
             agentVariables[_timeWithoutMoving] = 0f;
             List<UtilityBasedAction> actions = new List<UtilityBasedAction>();
-            actions.Add(new UtilityBasedAction(new MoveAction(this), new LeafFactor(_timeWithoutMoving, 0, 0.5f)));
+            actions.Add(new UtilityBasedAction(new MoveForwardAction(this), new LeafFactor(_timeWithoutMoving, 0, 0.5f)));
             behaviourSystem = new UtilitySystem(actions, this);
         }
 
