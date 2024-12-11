@@ -42,7 +42,8 @@ namespace CharactersBehaviour
 
         public void SetBark(string name)
         {
-            Sprite bark = BarkManager.Instance.GetBark(name);
+            Sprite bark = null;
+            if(BarkManager.Instance != null) bark = BarkManager.Instance.GetBark(name);
             if (bark != null) transform.GetComponentInChildren<SpriteRenderer>().sprite = bark;
         }
     }
