@@ -64,5 +64,6 @@ public class JanitorWalkState : AState
     {
         isOnObjectiveRoom = true;
         isWalking = false;
+        destinationRoom.GetComponent<Room>().OnColliderTriggered -= IsOnObjective;
     }
 }

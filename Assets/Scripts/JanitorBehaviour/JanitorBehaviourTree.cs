@@ -15,6 +15,8 @@ public class JanitorBehaviourTree : AState
 
     public override void Enter()
     {
+        WorldManager.Instance.GenerateTrash(new Vector3(-5.84f, 0.61f, 1.16f));
+
         Debug.Log("He entrado al behaviour tree....");
         behaviourTree = new BehaviourTree();
 
@@ -44,7 +46,7 @@ public class JanitorBehaviourTree : AState
             new ThrowTrashAction(agent), behaviourTree));
 
         //Creamos la primera secuencia de acciones del arbol
-        SequenceNode firstSequence = new SequenceNode(sequenceNodeList);
+        SequenceNode firstSequence = new SequenceNode(new List<IBehaviourNode>(sequenceNodeList));
         sequenceNodeList.Clear();
 
         //Creacion de los nodos de la tercera secuencia -> Esta vacia la maquina?, Reponer
@@ -56,7 +58,7 @@ public class JanitorBehaviourTree : AState
             new RefillAction(agent), behaviourTree));
 
         //Creacion de la tercera secuencia
-        SequenceNode thirdSequence = new SequenceNode(sequenceNodeList);
+        SequenceNode thirdSequence = new SequenceNode(new List<IBehaviourNode>(sequenceNodeList));
         sequenceNodeList.Clear();
 
         //Creacion de los nodos de la cuarta secuencia -> Esta la caja sucia?, ir a la caja, limpiar caja
@@ -72,14 +74,14 @@ public class JanitorBehaviourTree : AState
             new CleanCatBoxAction(agent), behaviourTree));
 
         //Creacion de la cuarta secuencia
-        SequenceNode fourthSequence = new SequenceNode(sequenceNodeList);
+        SequenceNode fourthSequence = new SequenceNode(new List<IBehaviourNode>(sequenceNodeList));
         sequenceNodeList.Clear();
 
         sequenceNodeList.Add(thirdSequence);
         sequenceNodeList.Add(fourthSequence);
 
         //Creacion del nodo selector
-        SelectorNode selection = new SelectorNode(sequenceNodeList);
+        SelectorNode selection = new SelectorNode(new List<IBehaviourNode>(sequenceNodeList));
 
         sequenceNodeList.Clear();
 
@@ -92,14 +94,14 @@ public class JanitorBehaviourTree : AState
 
 
         //Creamos la segunda secuencia de acciones del arbol
-       SequenceNode secondSecuence = new SequenceNode(sequenceNodeList);
+       SequenceNode secondSecuence = new SequenceNode(new List<IBehaviourNode>(sequenceNodeList));
         sequenceNodeList.Clear();
 
         //Creacion de la lista final para la primera secuencia
         sequenceNodeList.Add(firstSequence);
         sequenceNodeList.Add(secondSecuence);
 
-        treeNodes.Add(new SelectorNode(sequenceNodeList));
+        behaviourTree.Root = new SelectorNode(new List<IBehaviourNode>(sequenceNodeList));
     }
 
     public override void Exit()
@@ -108,10 +110,12 @@ public class JanitorBehaviourTree : AState
 
     public override void FixedUpdate()
     {
+        behaviourTree.FixedUpdateBehaviour();
     }
 
     public override void Update()
     {
+        behaviourTree.UpdateBehaviour();
     }
 
 }

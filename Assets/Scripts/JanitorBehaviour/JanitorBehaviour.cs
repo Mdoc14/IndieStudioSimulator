@@ -16,7 +16,7 @@ public class JanitorBehaviour : AgentBehaviour
     private void Start()
     {
         //Inicializar las variables del conserje
-        agentVariables[restTime] = Random.Range(5f, 10f);
+        agentVariables[restTime] = Random.Range(1f, 3f);
         Debug.Log("El conserje descansará " + agentVariables[restTime] + " segundos");
 
         stateMachine = new StateMachine();

@@ -24,26 +24,32 @@ public class Room : MonoBehaviour
 
     public bool IsDirty()
     {
+        Debug.Log("Comporbando si la sala esta sucia");
         return trash.Count > 0;
     }
 
     public Vector3 GetTrashPosition()
     {
+        Debug.Log("Caminando a la basura");
         return trash[0].gameObject.transform.position;
+        //return new Vector3(8.72f, 0.91f, 14.97f);
     }
 
     public bool IsMachineEmpty()
     {
-        return true; //Habria que preguntarle a la maquina si esta vacia y tal
+        Debug.Log("Comporbando si la maquina esta vacia");
+        return false; //Habria que preguntarle a la maquina si esta vacia y tal
     }
 
     public bool IsCatBoxDirty()
     {
+        Debug.Log("Comporbando si la caja esta sucia");
         return true; //Habria que preguntarle a la caja si esta sucia
     }
 
     public Vector3 GetCatBoxPosition() 
     {
-        return new Vector3(1.2f, 0.91f, 14.97f); //Habria que devolver la posicion de la caja
+        Debug.Log("Comporbando si la caja esta sucia");
+        return new Vector3(2.31f, 0.91f, 7.44f); //Habria que devolver la posicion de la caja
     }
 }

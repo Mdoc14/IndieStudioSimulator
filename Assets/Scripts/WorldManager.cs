@@ -26,7 +26,7 @@ public class WorldManager : MonoBehaviour
     {
         NavMeshHit navHit;
         NavMesh.SamplePosition(position, out navHit, 20, 1);
-        GameObject.Instantiate(trashPrefab, navHit.position, Quaternion.identity);
+        GameObject.Instantiate(trashPrefab, position, Quaternion.identity);
     }
 
     public Chair GetBathroom(IAgent agent) //Devuelve un baño libre que ni está siendo usado ni ha sido seleccionado por un personaje para usarse
