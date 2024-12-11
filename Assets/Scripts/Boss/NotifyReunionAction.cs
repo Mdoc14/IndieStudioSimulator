@@ -13,13 +13,15 @@ public class NotifyReunionAction : ASimpleAction
     {
         base.Enter();
         GameObject.Find("BossReunionChair").GetComponent<Chair>().Sit(agent.GetAgentGameObject());
-        WorldManager.Instance.StartReunion();
+        WorldManager.Instance.ReunionNotified();
+        WorldManager.Instance.OnWorkersReady += StartReunion;
         Debug.Log("Reunión notificada. Esperando a los trabajadores...");
+        agent.SetBark("Smoke");
     }
 
     public override void Exit()
     {
-
+        WorldManager.Instance.OnWorkersReady -= StartReunion;
     }
 
     public override void FixedUpdate()
@@ -29,9 +31,11 @@ public class NotifyReunionAction : ASimpleAction
 
     public override void Update()
     {
-        if (WorldManager.Instance.AreWorkersReady())
-        {
-            finished = true;
-        }
+
+    }
+
+    public void StartReunion()
+    {
+        finished = true;
     }
 }

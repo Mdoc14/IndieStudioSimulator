@@ -729,7 +729,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a42d5be0837d144f8838b646cdd9324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trashPrefab: {fileID: 249484301588445142, guid: 7042c685c999a5140ab318427032b0ba, type: 3}
+  _timeSpeed: 1
+  _trashPrefab: {fileID: 249484301588445142, guid: 7042c685c999a5140ab318427032b0ba, type: 3}
 --- !u!1 &1539222494
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +775,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.05666667
+  m_VoxelSize: 0.033333335
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 548ddbfe26a2dea41b022e8dd54e7778, type: 2}
   m_BuildHeightMesh: 0

@@ -20,6 +20,7 @@ public class UseBathroomAction : ASimpleAction
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _bath = agent.GetBath();
         _navAgent.SetDestination(_bath.transform.position);
+        agent.SetBark("Bathroom");
     }
 
     public override void Exit()

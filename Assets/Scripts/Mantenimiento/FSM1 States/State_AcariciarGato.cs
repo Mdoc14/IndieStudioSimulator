@@ -23,7 +23,8 @@ namespace CharactersBehaviour
         public override void Update()
         {
             Debug.Log("Acariciando al gato...");
-            
+            context.State = new State_Dormir(context, agent);
+
         }
 
         public override void FixedUpdate()

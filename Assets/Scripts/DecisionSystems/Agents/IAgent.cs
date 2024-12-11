@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace CharactersBehaviour
@@ -12,5 +13,6 @@ namespace CharactersBehaviour
         public Chair GetChair();
         public void SetBath(Chair bath);
         public Chair GetBath();
+        public void SetBark(string name);
     }
 }

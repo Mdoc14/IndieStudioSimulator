@@ -20,13 +20,15 @@ namespace CharactersBehaviour
 
                 _currentAction = value;
 
-                _currentAction.Enter();
+                _currentAction?.Enter();
             }
         }
 
         IBehaviourNode _root;
-
         public IBehaviourNode Root { get { return _root; } set { _root = value; } }
+
+        BehaviourState _state = BehaviourState.Running;
+        public BehaviourState State { get { return _state; } }
 
         public BehaviourTree()
         {
@@ -34,7 +36,9 @@ namespace CharactersBehaviour
 
         public void UpdateBehaviour()
         {
-            _root.Execute();
+            if (_state == BehaviourState.Running) {
+                _state = _root.Execute();
+            }
             _currentAction?.Update();
         }
 

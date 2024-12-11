@@ -39,5 +39,12 @@ namespace CharactersBehaviour
         {
             return _bath;
         }
+
+        public void SetBark(string name)
+        {
+            Sprite bark = null;
+            if(BarkManager.Instance != null) bark = BarkManager.Instance.GetBark(name);
+            if (bark != null) transform.GetComponentInChildren<SpriteRenderer>().sprite = bark;
+        }
     }
 }

@@ -7,38 +7,36 @@ using UnityEngine;
 
 namespace CharactersBehaviour
 {
-    public class Mantenimiento : AgentBehaviour
+    public class Mantenimiento : AgentMantenimiento
     {
+        //Maquina de estado FSM1
+        private CharactersBehaviour.StateMachine FSM1;
 
-        //FSM interna que se manejará en este estado
-        private StateMachine FSM2; 
-
-        //Estados de FSM2
-        private State_TrabajarOficina trabajarOficinaState;
-        //private State_AtenderIncidencia atenderIncidenciaState;
-        //private State_ExaminarIncidencia examinarIncidenciaState;
-        //private State_BuscarHerramientas buscarHerramientasState;
-        //private State_RepararIncidencia repararIncidenciaState;
-        //private State_Dormir dormirState;
-
-        
+        //Estados de FSM1 SOLO TENGO QUE CREAR EL ESTADO INCIAL YA EL RESTO SE VAN CREANDO SOBRE A MARCHA
+        //private CharactersBehaviour.State_AcariciarGato acariciarGatoState;
+        //private CharactersBehaviour.State_ArreglarLuz arreglarLuzState;
+        private CharactersBehaviour.State_FSM2 trabajarState;
 
         //Start is called before the first frame update
         void Start()
         {
-
+            
             //Inicializar máquina de estados FSM1
-            FSM2 = new StateMachine();
+            FSM1 = new CharactersBehaviour.StateMachine();
+
+            //Inicializar los estados de FSM1
+            //acariciarGatoState = new CharactersBehaviour.State_AcariciarGato(FSM1, this);
+            //arreglarLuzState = new CharactersBehaviour.State_ArreglarLuz(FSM1, this);
+            trabajarState = new CharactersBehaviour.State_FSM2(FSM1, this); // Aquí se gestiona FSM2
 
             //Establecer el estado inicial
-            trabajarOficinaState = new State_TrabajarOficina(FSM2, this);
-            FSM2.State = trabajarOficinaState;
+            FSM1.State = trabajarState;
         }
 
         //Update is called once per frame
         void Update()
         {
-            FSM2.UpdateBehaviour();
+            FSM1.UpdateBehaviour();
 
         }
     }
