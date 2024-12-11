@@ -62,7 +62,7 @@ public class PatrolState : AState
         nodes.Clear();
         nodes.Add(new ConditionNode(SlackerOnSight()));
         nodes.Add(scoldSelector);
-        IBehaviourNode slackerSearchSequence = new SelectorNode(new List<IBehaviourNode>(nodes));
+        IBehaviourNode slackerSearchSequence = new SequenceNode(new List<IBehaviourNode>(nodes));
         //Selector correspondiente a buscar holgazanes y patrullar:
         nodes.Clear();
         nodes.Add(slackerSearchSequence);
