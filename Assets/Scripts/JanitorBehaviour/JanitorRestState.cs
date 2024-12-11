@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CharactersBehaviour;
+using UnityEngine.AI;
 
 public class JanitorRestState : AState
 {
     float timer;
     string restVariableName;
+    NavMeshAgent navMeshAgent;
+    bool isOnChair = false;
 
     public JanitorRestState(StateMachine sm, IAgent agent, string restVariable) : base(sm, agent) 
     {
@@ -15,10 +18,14 @@ public class JanitorRestState : AState
 
     public override void Enter()
     {
-        Debug.Log("el conserje está descansando...");
-        //Iniciar animacion de descansar
-        timer = 0f;
+        //El conserje debe estar en su oficina para poder dormir
+        navMeshAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
+        navMeshAgent.SetDestination(agent.GetChair().transform.position);
+        agent.SetBark("Walk");
 
+        //Iniciar animacion de descansar
+        Debug.Log("El conserje va a descansar...");
+        timer = 0f;
     }
 
     public override void Exit()
@@ -31,11 +38,25 @@ public class JanitorRestState : AState
 
     public override void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= agent.GetAgentVariable(restVariableName)) 
+        //Cuando llegue a su silla, el conserje comenzara a descansar
+        if (!isOnChair && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !navMeshAgent.pathPending)
         {
-            Debug.Log("el conserje ya terminó de descansar...");
-            context.State = new JanitorWalkState(context, agent, agent.GetAgentGameObject().GetComponent<JanitorBehaviour>().GetOfficeRooms());
+            navMeshAgent.ResetPath();
+            agent.GetChair();
+            isOnChair = true;
+            agent.SetBark("Sleep");
+            //navMeshAgent.isStopped = true;
+        }
+
+        //Al descansar, comenzara a contar el tiempo
+        if (isOnChair)
+        {
+            timer += Time.deltaTime;
+            if (timer >= agent.GetAgentVariable(restVariableName))
+            {
+                Debug.Log("el conserje ya terminó de descansar...");
+                context.State = new JanitorWalkState(context, agent, agent.GetAgentGameObject().GetComponent<JanitorBehaviour>().GetOfficeRooms());
+            }
         }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     private List<GameObject> trash = new List<GameObject>();
+    [SerializeField] private GameObject trashcan;
     public event Action<GameObject> OnColliderTriggered;
 
     private void OnTriggerEnter(Collider other)
@@ -24,16 +25,26 @@ public class Room : MonoBehaviour
 
     public bool IsDirty()
     {
-        Debug.Log("Comprobando si la sala esta sucia");
-        Debug.Log("Resultado: " + false);
         return trash.Count > 0;
     }
 
     public Vector3 GetTrashPosition()
     {
-        Debug.Log("Caminando a la basura");
         return trash[0].gameObject.transform.position;
-        //return new Vector3(8.72f, 0.91f, 14.97f);
+    }
+
+    public void DeleteTrash()
+    {
+        Debug.Log("Eliminando...");
+        GameObject trashGO = trash[0];
+        Destroy(trashGO);
+        trash.RemoveAt(0);
+    }
+
+    public Vector3 GetTrashCanPosition() 
+    {
+        Debug.Log("Buscando papelera de la sala");
+        return trashcan.transform.position;
     }
 
     public bool IsMachineEmpty()

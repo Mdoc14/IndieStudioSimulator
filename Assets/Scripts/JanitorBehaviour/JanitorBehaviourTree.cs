@@ -15,7 +15,6 @@ public class JanitorBehaviourTree : AState
 
     public override void Enter()
     {
-        WorldManager.Instance.GenerateTrash(new Vector3(7.51f, 0.61f, 6.13f));
 
         Debug.Log("He entrado al behaviour tree....");
         behaviourTree = new BehaviourTree();
@@ -32,15 +31,16 @@ public class JanitorBehaviourTree : AState
         //Ir a la basura
         sequenceNodeList.Add(new ActionNode(
             //new GoToPositionAction(agent, currentRoom.GetTrashPosition()), behaviourTree));
-            new GoToAction(agent, currentRoom.GetTrashPosition), behaviourTree));
+            new GoToAction(agent, currentRoom.GetTrashPosition, "Look"), behaviourTree));
+
         //Recoger basura
         sequenceNodeList.Add(new ActionNode(
-            new PickUpTrashAction(agent), behaviourTree));
+            new PickUpTrashAction(agent, currentRoom), behaviourTree));
 
-        //Ir a la papelera (de momento las tira en el mismo sitio donde las recoge)
+        //Ir a la papelera
         sequenceNodeList.Add(new ActionNode(
             //new GoToPositionAction(agent, currentRoom.GetTrashPosition()), behaviourTree));
-            new GoToAction(agent, currentRoom.GetTrashPosition), behaviourTree));
+            new GoToAction(agent, currentRoom.GetTrashCanPosition, "Walk"), behaviourTree));
 
         //Tirar basura
         sequenceNodeList.Add(new ActionNode(
@@ -69,7 +69,7 @@ public class JanitorBehaviourTree : AState
         //Ir la caja
         sequenceNodeList.Add(new ActionNode(
             //new GoToPositionAction(agent, currentRoom.GetCatBoxPosition()), behaviourTree));
-            new GoToAction(agent, currentRoom.GetCatBoxPosition), behaviourTree));
+            new GoToAction(agent, currentRoom.GetCatBoxPosition, "Walk"), behaviourTree));
 
         //Limpiar caja
         sequenceNodeList.Add(new ActionNode(
@@ -104,6 +104,7 @@ public class JanitorBehaviourTree : AState
         sequenceNodeList.Add(secondSecuence);
 
         behaviourTree.Root = new SelectorNode(new List<IBehaviourNode>(sequenceNodeList));
+        Debug.Log("Arbol creado");
     }
 
     public override void Exit()
@@ -118,6 +119,7 @@ public class JanitorBehaviourTree : AState
     public override void Update()
     {
         behaviourTree.UpdateBehaviour();
+        //if (behaviourTree.State == BehaviourState.Success) { }
     }
 
 }

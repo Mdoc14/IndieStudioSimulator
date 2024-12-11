@@ -22,6 +22,7 @@ public class JanitorWalkState : AState
     public override void Enter()
     {
         Debug.Log("Entrando al estado de caminar a sala...");
+        agent.SetBark("Walk");
 
         //Determina la sala a la que debe ir de forma aleatoria
         rand = new System.Random();
@@ -54,7 +55,7 @@ public class JanitorWalkState : AState
         //Cuando llega a la sala objetivo
         if (isOnObjectiveRoom) 
         {
-            navMeshAgent.isStopped = true;
+            navMeshAgent.ResetPath();
             context.State = new JanitorBehaviourTree(context, agent, destinationRoom.GetComponent<Room>());
         }
     }

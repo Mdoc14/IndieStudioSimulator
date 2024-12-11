@@ -10,17 +10,25 @@ public class GoToAction : ASimpleAction
     private NavMeshAgent _navAgent;
     Func<Vector3> destination;
     Room currentRoomn;
+    string barkName;
 
-    public GoToAction(IAgent agent, Func<Vector3> destinationInRoom) : base(agent)
+    //Variable temporales
+    float timer;
+
+    public GoToAction(IAgent agent, Func<Vector3> destinationInRoom, string bark) : base(agent)
     {
         destination = destinationInRoom;
+        barkName = bark;
     }
 
     public override void Enter()
     {
         base.Enter();
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
-        _navAgent.SetDestination(destination.Invoke());
+        Vector3 destiny = destination.Invoke();
+        _navAgent.SetDestination(destiny);
+
+        agent.SetBark(barkName);
     }
     public override void Exit()
     {
@@ -35,6 +43,7 @@ public class GoToAction : ASimpleAction
         if (_navAgent.remainingDistance <= _navAgent.stoppingDistance && !_navAgent.pathPending)
         {
             finished = true;
+            _navAgent.ResetPath();
         }
     }
 
