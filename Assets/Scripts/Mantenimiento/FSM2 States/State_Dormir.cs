@@ -22,6 +22,13 @@ namespace CharactersBehaviour
         public override void Update()
         {
             Debug.Log("Durmiendo...");
+            if (agent.GetAgentVariable("lastState") == 1) {
+                context.State = new State_TrabajarOficina(context, agent);
+            }
+            if (agent.GetAgentVariable("lastState") == 2)
+            {
+                context.State = new State_RepararIncidencia(context, agent);
+            }
 
         }
 

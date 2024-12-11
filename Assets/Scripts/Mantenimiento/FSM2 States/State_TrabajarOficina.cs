@@ -7,9 +7,11 @@ namespace CharactersBehaviour
     public class State_TrabajarOficina : AState
     {
         public State_TrabajarOficina(StateMachine FSM2, IAgent agent) : base(FSM2, agent) { }
+       
 
         public override void Enter()
         {
+            agent.SetAgentVariable("lastState", 1);
             Debug.Log("Entrando en el estado TrabajarOficina");
 
         }
@@ -23,6 +25,7 @@ namespace CharactersBehaviour
         {
             Debug.Log("Trabajando en la oficina...");
             context.State = new State_Dormir(context,agent);
+            
 
         }
 

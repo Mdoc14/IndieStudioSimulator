@@ -7,7 +7,8 @@ namespace CharactersBehaviour
     public class AgentMantenimiento : AgentBehaviour
     {
 
-        private bool isTired;  //Variable que determina si está cansado
+        private string lastState;
+        private float cansancio;
 
         // Implementación del método GetAgentGameObject:
         public GameObject GetAgentGameObject()
