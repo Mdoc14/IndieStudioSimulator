@@ -25,7 +25,7 @@ namespace CharactersBehaviour
 
             if (action.HasFinished)
             {
-                tree.Action = null;
+                if (tree.Action == action) tree.Action = null;
                 return BehaviourState.Success;
             }
             else
