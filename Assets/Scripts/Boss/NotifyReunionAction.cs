@@ -16,6 +16,7 @@ public class NotifyReunionAction : ASimpleAction
         WorldManager.Instance.ReunionNotified();
         WorldManager.Instance.OnWorkersReady += StartReunion;
         Debug.Log("Reunión notificada. Esperando a los trabajadores...");
+        agent.SetBark("Smoke");
     }
 
     public override void Exit()

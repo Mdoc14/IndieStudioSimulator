@@ -13,6 +13,7 @@ public class WorkAction : ASimpleAction
         base.Enter();
         _workTime = Random.Range(5, agent.GetAgentVariable("MaxWorkTime"));
         Debug.Log("El jefe está trabajando en su ordenador...");
+        agent.SetBark("Program");
     }
 
     public override void Exit()

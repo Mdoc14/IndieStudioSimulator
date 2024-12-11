@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CharactersBehaviour
 {
-    public class AgentMantenimiento : MonoBehaviour, IAgent
+    public class AgentMantenimiento : AgentBehaviour
     {
 
         private bool isTired;  //Variable que determina si está cansado

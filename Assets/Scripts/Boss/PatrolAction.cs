@@ -18,6 +18,7 @@ public class PatrolAction : ASimpleAction
         _boss = agent.GetAgentGameObject().GetComponent<BossBehaviour>();
         _navAgent = _boss.GetComponent<NavMeshAgent>();
         _navAgent.SetDestination(_boss.GetCurrentWaypoint().position);
+        agent.SetBark("Look");
     }
 
     public override void Exit()
