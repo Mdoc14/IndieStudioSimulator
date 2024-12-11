@@ -24,6 +24,15 @@ namespace CharactersBehaviour
             } 
         }
 
+        Stack<IState> _previousStates = new Stack<IState>();
+        public Stack<IState> PreviousStates
+        {
+            get
+            {
+                return _previousStates;
+            }
+        }
+
         public StateMachine()
         {
         }
