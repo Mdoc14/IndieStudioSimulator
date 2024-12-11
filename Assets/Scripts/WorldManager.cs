@@ -1,6 +1,7 @@
 using CharactersBehaviour;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,18 +9,35 @@ using UnityEngine.AI;
 public class WorldManager : MonoBehaviour
 {
     public static WorldManager Instance { get; private set; }
+    [SerializeField] private float _timeSpeed = 1;
+    //Manejo de la basura:
     [SerializeField] private GameObject trashPrefab;
+    //Manejo del baño:
     private List<Chair> _baths = new List<Chair>();
-    
+    //Reuniones:
+    private int _numWorkersReunion = 0;
+
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(Instance);
         DontDestroyOnLoad(Instance);
+
         foreach(GameObject bathroom in GameObject.FindGameObjectsWithTag("Bath"))
         {
             _baths.Add(bathroom.GetComponent<Chair>());
         }
+
+        foreach(GameObject c in GameObject.FindGameObjectsWithTag("ReunionChair")) 
+        { 
+            c.GetComponent<Chair>().OnSit += AddWorkerToReunion; 
+            c.GetComponent<Chair>().OnLeave += DecreaseWorkerInReunion; 
+        }
+    }
+
+    private void Update()
+    {
+        Time.timeScale = _timeSpeed;
     }
 
     public void GenerateTrash(Vector3 position) //Instancia basura dada una posición
@@ -41,5 +59,35 @@ public class WorldManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void StartReunion()
+    {
+        //Falta aplicar la lógica para que los trabajadores vayan a la reunión
+        //Se debería notificar a los trabajadores para que vayan a la sala de reuniones, busquen una silla y se sienten, solamente
+    }
+
+    public void EndReunion()
+    {
+        //Lógica similar a StartReunion
+    }
+
+    public void AddWorkerToReunion()
+    {
+        _numWorkersReunion++;
+    }
+
+    public void DecreaseWorkerInReunion()
+    {
+        _numWorkersReunion--;
+    }
+
+    public bool AreWorkersReady()
+    {
+        if(_numWorkersReunion == GameObject.FindObjectsOfType<ProgrammerBehaviour>().Length)
+        {
+            return true;
+        }
+        return false;
     }
 }

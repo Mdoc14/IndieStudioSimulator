@@ -10,6 +10,7 @@ TagManager:
   - Pizza
   - Trash
   - Bath
+  - ReunionChair
   layers:
   - Default
   - TransparentFX

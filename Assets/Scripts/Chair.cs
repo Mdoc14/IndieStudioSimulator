@@ -1,4 +1,5 @@
 using CharactersBehaviour;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,8 @@ public class Chair : MonoBehaviour
     private GameObject _agent; //Agente que se sienta
     private bool _occupied = false; //Si la silla está ocupada
     public bool selected = false; //Si la silla ha sido seleccionada por un agente para sentarse en ella
+    public event Action OnSit;
+    public event Action OnLeave;
 
     private void Update()
     {
@@ -26,6 +29,7 @@ public class Chair : MonoBehaviour
         this._agent = agent;
         _agent.GetComponent<NavMeshAgent>().enabled = false;
         _occupied = true;
+        OnSit?.Invoke();
     }
 
     public void Leave()
@@ -34,6 +38,7 @@ public class Chair : MonoBehaviour
         _agent = null;
         _occupied = false;
         selected = false;
+        OnLeave?.Invoke();
     }
 
     public bool IsOccupied()
