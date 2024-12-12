@@ -20,6 +20,7 @@ public class UseBathroomAction : ASimpleAction
     public override void Enter()
     {
         base.Enter();
+        _reached = false;
         _time = Random.Range(3, 60); //Está un tiempo aleatorio usando el baño
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _bath = agent.GetBath();
