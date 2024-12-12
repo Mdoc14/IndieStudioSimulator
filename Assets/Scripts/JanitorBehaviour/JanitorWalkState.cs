@@ -33,6 +33,7 @@ public class JanitorWalkState : AState
         {
             Debug.Log("Entrando al estado de caminar a sala...");
             agent.SetBark("Walk");
+            agent.SetAnimation("Walk");
 
             //Determina la sala a la que debe ir de forma aleatoria
             int roomIndex = janitorBehaviour.GetRandomRoom();

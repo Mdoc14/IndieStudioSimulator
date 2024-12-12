@@ -1,3 +1,4 @@
+using CharactersBehaviour;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,9 +26,11 @@ public class Room : MonoBehaviour
         }
     }
 
-    public bool IsDirty()
+    public bool IsDirty(AgentBehaviour agent)
     {
-        Debug.Log("Accion: Ver si hay basura");
+        //agent.SetBark("Look");
+        //agent.SetAnimation("Looking");
+        
         return trash.Count > 0;
     }
 

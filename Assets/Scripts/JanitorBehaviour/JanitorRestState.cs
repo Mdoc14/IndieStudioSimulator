@@ -23,6 +23,7 @@ public class JanitorRestState : AState
         navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(agent.GetChair().transform.position);
         agent.SetBark("Walk");
+        agent.SetAnimation("Walk");
 
         //Iniciar animacion de descansar
         Debug.Log("El conserje va a descansar...");
@@ -48,6 +49,7 @@ public class JanitorRestState : AState
             agent.GetChair();
             isOnChair = true;
             agent.SetBark("Sleep");
+            agent.SetAnimation("Idle");
             //navMeshAgent.isStopped = true;
         }
 

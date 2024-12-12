@@ -25,8 +25,12 @@ public class JanitorBehaviourTree : AState
         //Creacion de los nodos de la primera secuencia -> Hay basura?, Ir a la basura, Recoger basura, ir a papelera, tirar basura
         List<IBehaviourNode> sequenceNodeList = new List<IBehaviourNode>();
 
+        //Observar la sala
+        sequenceNodeList.Add(new ActionNode(
+            new JanitorLookAction(agent), behaviourTree));
+
         //Hay basura?
-        sequenceNodeList.Add(new ConditionNode(() => { return currentRoom.IsDirty(); }));
+        sequenceNodeList.Add(new ConditionNode(() => { return currentRoom.IsDirty(agent.GetAgentGameObject().GetComponent<AgentBehaviour>()); }));
 
         //Ir a la basura
         sequenceNodeList.Add(new ActionNode(

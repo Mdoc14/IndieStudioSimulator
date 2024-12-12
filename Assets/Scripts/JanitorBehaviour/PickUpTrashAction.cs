@@ -6,7 +6,7 @@ using UnityEngine;
 public class PickUpTrashAction : ASimpleAction
 {
     float timer = 0f;
-    float pickUpTotalTime = 5f;
+    float pickUpTotalTime = 1.167f; //Coincide con la duracion de la animacion Take
 
     Room currentRoom;
     public PickUpTrashAction(IAgent agent, Room currentRoom) : base(agent)
@@ -19,6 +19,7 @@ public class PickUpTrashAction : ASimpleAction
         Debug.Log("Accion: recoger basura");
         base.Enter();
         //Iniciar animacion de recoger 
+        agent.SetAnimation("PickUp");
         agent.SetBark("Take");
     }
     public override void Exit()

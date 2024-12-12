@@ -3,22 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RefillAction : ASimpleAction
+public class JanitorLookAction : ASimpleAction
 {
     float timer = 0f;
-    float refillTotalTime = 3f;
+    float lookTotalTime = 2f; //Coincide con la duracion de la animacion Looking
 
-    public RefillAction(IAgent agent) : base(agent)
+    public JanitorLookAction(IAgent agent) : base(agent)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        //Iniciar aniamcion de reponer
-        Debug.Log("Reponiendo maquina...");
-        agent.SetBark("Supply");
-        agent.SetAnimation("Refill");
+        Debug.Log("Accion: observar habitacion");
+        base.Enter();
+        //Iniciar animacion de mirar
+        agent.SetAnimation("Looking");
+        agent.SetBark("Look");
     }
 
     public override void Exit()
@@ -33,16 +34,10 @@ public class RefillAction : ASimpleAction
     {
         timer += Time.deltaTime;
 
-        if (timer >= refillTotalTime)
+        if (timer >= lookTotalTime)
         {
             timer = 0f;
             finished = true;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
     }
 }

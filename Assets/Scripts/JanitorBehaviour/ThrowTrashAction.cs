@@ -6,7 +6,7 @@ using UnityEngine;
 public class ThrowTrashAction : ASimpleAction
 {
     float timer = 0f;
-    float throwTotalTime = 0.5f;
+    float throwTotalTime = 1.33f; //Coincide con la duracion de la animacion Using
 
     Room currentRoom;
 
@@ -20,6 +20,7 @@ public class ThrowTrashAction : ASimpleAction
         base.Enter();
         Debug.Log("Accion: tirar basura");
         agent.SetBark("CleanBathroom");
+        agent.SetAnimation("Throw");
     }
     public override void Exit()
     {

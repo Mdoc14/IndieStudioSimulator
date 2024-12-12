@@ -32,6 +32,7 @@ public class GoToAction : ASimpleAction
         _navAgent.SetDestination(destiny);
 
         agent.SetBark(barkName);
+        agent.SetAnimation("Walk");
     }
     public override void Exit()
     {
