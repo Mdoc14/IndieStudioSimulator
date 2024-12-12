@@ -24,8 +24,8 @@ public class UseBathroomAction : ASimpleAction
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _bath = agent.GetBath();
         _navAgent.SetDestination(_bath.transform.position);
-        //agent.SetBark("Bathroom");
-        //agent.SetAnimation("Walk");
+        agent.SetBark("Bathroom");
+        agent.SetAnimation("Walk");
     }
 
     public override void Exit()
@@ -46,7 +46,7 @@ public class UseBathroomAction : ASimpleAction
             {
                 _reached = true;
                 _bath.Sit(agent.GetAgentGameObject());
-                //agent.SetAnimation("Idle");
+                agent.SetAnimation("Idle");
             } 
         }
         else //Si lo ha alcanzado el tiempo comienza a descontarse
