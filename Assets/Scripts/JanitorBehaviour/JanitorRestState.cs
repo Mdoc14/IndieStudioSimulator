@@ -20,6 +20,7 @@ public class JanitorRestState : AState
     {
         //El conserje debe estar en su oficina para poder dormir
         navMeshAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
+        navMeshAgent.isStopped = false;
         navMeshAgent.SetDestination(agent.GetChair().transform.position);
         agent.SetBark("Walk");
 
@@ -41,7 +42,9 @@ public class JanitorRestState : AState
         //Cuando llegue a su silla, el conserje comenzara a descansar
         if (!isOnChair && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !navMeshAgent.pathPending)
         {
-            navMeshAgent.ResetPath();
+            navMeshAgent.isStopped = true;
+            //navMeshAgent.ResetPath();
+
             agent.GetChair();
             isOnChair = true;
             agent.SetBark("Sleep");

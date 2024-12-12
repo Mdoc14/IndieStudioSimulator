@@ -9,7 +9,7 @@ public class JanitorWalkState : AState
     List<GameObject> officeRooms;
     NavMeshAgent navMeshAgent;
     GameObject destinationRoom;
-    System.Random rand;
+    JanitorBehaviour janitorBehaviour;
 
     bool isWalking = false;
     bool isOnObjectiveRoom = false;
@@ -21,23 +21,34 @@ public class JanitorWalkState : AState
 
     public override void Enter()
     {
-        Debug.Log("Entrando al estado de caminar a sala...");
-        agent.SetBark("Walk");
+        janitorBehaviour = agent.GetAgentGameObject().GetComponent<JanitorBehaviour>();
 
-        //Determina la sala a la que debe ir de forma aleatoria
-        rand = new System.Random();
-        int roomIndex = rand.Next(0, officeRooms.Count);
+        if (janitorBehaviour.HaveToRest())
+        {
+            Debug.Log("El conserje ya ha visitado todas las salas, va a descansar");
+            janitorBehaviour.ClearVisitatedRooms();
+            context.State = new JanitorRestState(context, agent, janitorBehaviour.restTime);
+        }
+        else 
+        {
+            Debug.Log("Entrando al estado de caminar a sala...");
+            agent.SetBark("Walk");
 
-        //Suscripcion al evento en el que el conserje entra en el collider de una sala
-        destinationRoom = officeRooms[roomIndex];
-        destinationRoom.GetComponent<Room>().OnColliderTriggered += IsOnObjective;
+            //Determina la sala a la que debe ir de forma aleatoria
+            int roomIndex = janitorBehaviour.GetRandomRoom();
 
-        //Indicamos la sala a la que el agente debe caminar
-        navMeshAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
-        navMeshAgent.SetDestination(destinationRoom.transform.position);
-        Debug.Log("Caminando a la sala " + officeRooms[roomIndex].name);
+            //Suscripcion al evento en el que el conserje entra en el collider de una sala
+            destinationRoom = officeRooms[roomIndex];
+            destinationRoom.GetComponent<Room>().OnColliderTriggered += IsOnObjective;
 
-        isWalking = true;
+            //Indicamos la sala a la que el agente debe caminar
+            navMeshAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
+            navMeshAgent.isStopped = false;
+            navMeshAgent.SetDestination(destinationRoom.transform.position);
+            Debug.Log("Caminando a la sala " + officeRooms[roomIndex].name);
+
+            isWalking = true;
+        }
     }
 
     public override void Exit()
@@ -55,7 +66,7 @@ public class JanitorWalkState : AState
         //Cuando llega a la sala objetivo
         if (isOnObjectiveRoom) 
         {
-            navMeshAgent.ResetPath();
+            navMeshAgent.isStopped = true;
             context.State = new JanitorBehaviourTree(context, agent, destinationRoom.GetComponent<Room>());
         }
     }

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class RefillAction : ASimpleAction
 {
+    float timer = 0f;
+    float refillTotalTime = 3f;
+
     public RefillAction(IAgent agent) : base(agent)
     {
     }
@@ -14,6 +17,7 @@ public class RefillAction : ASimpleAction
         base.Enter();
         //Iniciar aniamcion de reponer
         Debug.Log("Reponiendo maquina...");
+        agent.SetBark("Supply");
     }
 
     public override void Exit()
@@ -26,6 +30,13 @@ public class RefillAction : ASimpleAction
 
     public override void Update()
     {
+        timer += Time.deltaTime;
+
+        if (timer >= refillTotalTime)
+        {
+            timer = 0f;
+            finished = true;
+        }
     }
 
     // Start is called before the first frame update

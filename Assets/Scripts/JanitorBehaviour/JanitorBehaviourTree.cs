@@ -16,7 +16,7 @@ public class JanitorBehaviourTree : AState
     public override void Enter()
     {
 
-        Debug.Log("He entrado al behaviour tree....");
+        Debug.Log("He entrado al BT State");
         behaviourTree = new BehaviourTree();
 
         //Lista de nodos del arbol
@@ -44,7 +44,7 @@ public class JanitorBehaviourTree : AState
 
         //Tirar basura
         sequenceNodeList.Add(new ActionNode(
-            new ThrowTrashAction(agent), behaviourTree));
+            new ThrowTrashAction(agent, currentRoom), behaviourTree));
 
         //Creamos la primera secuencia de acciones del arbol
         SequenceNode firstSequence = new SequenceNode(new List<IBehaviourNode>(sequenceNodeList));
@@ -54,6 +54,9 @@ public class JanitorBehaviourTree : AState
         //Esta vacia?
         sequenceNodeList.Add(new ConditionNode(() => { return currentRoom.IsMachineEmpty(); }));
 
+        //Ir a la maquina
+        sequenceNodeList.Add(new ActionNode(
+            new GoToAction(agent, currentRoom.GetMachinePosition, "Walk"), behaviourTree));
         //Reponer
         sequenceNodeList.Add(new ActionNode(
             new RefillAction(agent), behaviourTree));
@@ -96,15 +99,14 @@ public class JanitorBehaviourTree : AState
 
 
         //Creamos la segunda secuencia de acciones del arbol
-       SequenceNode secondSecuence = new SequenceNode(new List<IBehaviourNode>(sequenceNodeList));
+       SequenceNode secondSequence = new SequenceNode(new List<IBehaviourNode>(sequenceNodeList));
         sequenceNodeList.Clear();
 
         //Creacion de la lista final para la primera secuencia
         sequenceNodeList.Add(firstSequence);
-        sequenceNodeList.Add(secondSecuence);
+        sequenceNodeList.Add(secondSequence);
 
-        behaviourTree.Root = new SelectorNode(new List<IBehaviourNode>(sequenceNodeList));
-        Debug.Log("Arbol creado");
+        behaviourTree.Root = new LoopUntilFailNode(new SelectorNode(new List<IBehaviourNode>(sequenceNodeList)));
     }
 
     public override void Exit()
@@ -119,7 +121,11 @@ public class JanitorBehaviourTree : AState
     public override void Update()
     {
         behaviourTree.UpdateBehaviour();
-        //if (behaviourTree.State == BehaviourState.Success) { }
+        if (behaviourTree.State == BehaviourState.Success) 
+        {
+            Debug.Log("Saliendo del BT");
+            context.State = new JanitorWalkState(context, agent, agent.GetAgentGameObject().GetComponent<JanitorBehaviour>().GetOfficeRooms());
+        }
     }
 
 }
