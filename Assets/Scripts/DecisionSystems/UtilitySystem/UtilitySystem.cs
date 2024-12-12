@@ -7,20 +7,20 @@ namespace CharactersBehaviour
 {
     public class UtilitySystem : IBehaviourSystem
     {
-        IAction _currentAction;
-        public IAction CurrentAction
+        UtilityBasedAction _currentAction;
+        public UtilityBasedAction CurrentAction
         {
             get { return _currentAction; }
             set
             {
                 if (_currentAction != null)
                 {
-                    _currentAction.Exit();
+                    _currentAction.Action.Exit();
                 }
 
                 _currentAction = value;
 
-                _currentAction?.Enter();
+                _currentAction?.Action.Enter();
             }
         }
 
@@ -50,7 +50,7 @@ namespace CharactersBehaviour
                 }
             }
 
-            CurrentAction = bestAction?.Action;
+            CurrentAction = bestAction;
         }
 
         void ComputeUtilities()
@@ -65,7 +65,7 @@ namespace CharactersBehaviour
         {
             if (activated)
             {
-                _currentAction?.FixedUpdate();
+                _currentAction?.Action.FixedUpdate();
             }
         }
 
@@ -82,13 +82,14 @@ namespace CharactersBehaviour
                 }
                 else
                 {
-                    if (_currentAction.HasFinished)
+                    if (_currentAction.Action.Finished)
                     {
+                        _currentAction.Reset();
                         _currentAction = null;
                         activated = false;
                     }
 
-                    _currentAction?.Update();
+                    _currentAction?.Action.Update();
                 }
             }
         }

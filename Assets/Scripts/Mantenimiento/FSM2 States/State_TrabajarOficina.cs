@@ -39,7 +39,7 @@ namespace CharactersBehaviour
             //Debug.Log("Trabajando en la oficina...");
             _trabajarEnOficina?.Update();
 
-            if (_trabajarEnOficina != null && _trabajarEnOficina.HasFinished)
+            if (_trabajarEnOficina != null && _trabajarEnOficina.Finished)
             {
                 
                 //float rand = Random.Range(0.0f, 1.0f);

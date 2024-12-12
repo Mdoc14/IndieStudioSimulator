@@ -20,8 +20,8 @@ namespace CharactersBehaviour
             Enter();
         }
 
-        public bool HasStarted { get { return started; } }
-        public bool HasFinished { get { return finished; } }
+        public bool Started { get { return started; } set { started = value; } }
+        public bool Finished { get { return finished; } set { finished = value; } }
 
         public IAction CurrentAction
         {
@@ -53,7 +53,7 @@ namespace CharactersBehaviour
         {
             if (CurrentAction == null) return;
 
-            if (CurrentAction.HasFinished)
+            if (CurrentAction.Finished)
             {
                 _currentIndex++;
                 if (_currentIndex >= _actions.Count)

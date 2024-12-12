@@ -28,7 +28,7 @@ public class ProgrammerWalkState : AState
     public override void Update()
     {
         _workAction.Update();
-        if (_workAction.HasFinished)
+        if (_workAction.Finished)
         {
             context.State = new ProgrammerWorkState(context, agent);
         }

@@ -15,8 +15,8 @@ namespace CharactersBehaviour
             this.agent = agent;
         }
 
-        public bool HasStarted { get { return started; } }
-        public bool HasFinished { get { return finished; } }
+        public bool Started { get { return started; } set { started = value; } }
+        public bool Finished { get { return finished; } set { finished = value; } }
         public virtual void Enter() { started = true; }
         public abstract void Exit();
         public abstract void Update();

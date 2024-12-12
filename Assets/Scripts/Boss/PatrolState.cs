@@ -34,7 +34,7 @@ public class PatrolState : AState
 
     public override void Update()
     {
-        if (!_goToStartingPos.HasFinished)
+        if (!_goToStartingPos.Finished)
         {
             _goToStartingPos?.Update();
         }

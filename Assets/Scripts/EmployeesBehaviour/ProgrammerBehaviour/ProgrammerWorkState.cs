@@ -31,7 +31,7 @@ public class ProgrammerWorkState : AState
     public override void Update()
     {
         _workAction.Update();
-        if (_workAction.HasFinished)
+        if (_workAction.Finished)
         {
             agent.GetChair().Leave();
             agent.SetAgentVariable("Motivation", agent.GetAgentVariable("Motivation") - Random.Range(0f, 0.1f));

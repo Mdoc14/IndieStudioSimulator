@@ -33,7 +33,7 @@ public class WanderingState : AState
         agent.SetAgentVariable(catBehaviour.Boredom, agent.GetAgentVariable(catBehaviour.Boredom) + Time.deltaTime);
         agent.SetAgentVariable(catBehaviour.Tiredness, agent.GetAgentVariable(catBehaviour.Tiredness) + Time.deltaTime);
 
-        if (!wanderAction.HasFinished)
+        if (!wanderAction.Finished)
         {
             wanderAction.Update();
         }

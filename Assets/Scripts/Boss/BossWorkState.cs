@@ -32,7 +32,7 @@ public class BossWorkState : AState
     public override void Update()
     {
         _workAction?.Update();
-        if (_workAction.HasFinished)
+        if (_workAction.Finished)
         {
             agent.GetChair().Leave();
             float rand = Random.Range(0.0f, 1.0f);

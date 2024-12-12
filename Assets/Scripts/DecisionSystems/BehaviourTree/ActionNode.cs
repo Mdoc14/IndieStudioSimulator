@@ -18,12 +18,12 @@ namespace CharactersBehaviour
 
         public BehaviourState Execute()
         {
-            if (!action.HasStarted)
+            if (!action.Started)
             {
                 tree.Action = action;
             }
 
-            if (action.HasFinished)
+            if (action.Finished)
             {
                 if (tree.Action == action) tree.Action = null;
                 return BehaviourState.Success;

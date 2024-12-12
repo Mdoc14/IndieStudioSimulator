@@ -37,7 +37,7 @@ namespace CharactersBehaviour
             
             _irADormir?.Update();
 
-            if (_irADormir != null && _irADormir.HasFinished)
+            if (_irADormir != null && _irADormir.Finished)
             {
 
                 agent.SetAgentVariable("cansancio", 0);

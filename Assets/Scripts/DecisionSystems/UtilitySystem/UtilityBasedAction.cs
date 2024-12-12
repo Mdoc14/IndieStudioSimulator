@@ -32,5 +32,11 @@ namespace CharactersBehaviour
             _action = action;
             _decisionFactor = decisionFactor;
         }
+
+        public void Reset()
+        {
+            _action.Started = false;
+            _action.Finished = false;
+        }
     }
 }

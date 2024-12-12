@@ -35,7 +35,7 @@ public class BathroomState : AState
     public override void Update()
     {
         _bathroomAction?.Update();
-        if (_bathroomAction.HasFinished)
+        if (_bathroomAction.Finished)
         {
             context.State = nextState;
         }

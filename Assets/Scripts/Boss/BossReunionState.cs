@@ -31,7 +31,7 @@ public class BossReunionState : AState
     public override void Update()
     {
         _reunionAction?.Update();
-        if (_reunionAction.HasFinished)
+        if (_reunionAction.Finished)
         {
             context.State = new BossWorkState(context, agent);
         }

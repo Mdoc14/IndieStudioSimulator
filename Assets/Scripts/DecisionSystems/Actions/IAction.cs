@@ -6,8 +6,8 @@ namespace CharactersBehaviour
 {
     public interface IAction
     {
-        public bool HasStarted { get; }
-        public bool HasFinished { get; }
+        public bool Started { get; set; }
+        public bool Finished { get; set; }
         public void Enter();
         public void Exit();
         public void Update();
