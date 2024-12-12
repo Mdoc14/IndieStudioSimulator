@@ -1040,6 +1040,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trashcan: {fileID: 0}
+  machine: {fileID: 0}
 --- !u!65 &788951261
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1284,6 +1285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trashcan: {fileID: 0}
+  machine: {fileID: 0}
 --- !u!65 &959848868
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1356,6 +1358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trashcan: {fileID: 0}
+  machine: {fileID: 0}
 --- !u!65 &1013760420
 BoxCollider:
   m_ObjectHideFlags: 0

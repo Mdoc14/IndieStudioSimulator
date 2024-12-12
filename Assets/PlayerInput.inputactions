@@ -24,6 +24,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ToggleFreeMode",
+                    "type": "Button",
+                    "id": "10f134f8-ee3c-4c52-bf03-41d1737bfa20",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(pressPoint=1)",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ChangeSimulationSpeed",
                     "type": "Button",
                     "id": "9d72f01f-634e-4584-a81a-32d1ebd8c29c",
@@ -238,6 +247,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a6cd81a5-ddc9-461c-b317-55c74f317cf0",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleFreeMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

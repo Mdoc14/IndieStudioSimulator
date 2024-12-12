@@ -10,9 +10,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 input;
     public bool canMove = true;
     public static bool collides = false;
+    private Transform camTransform;
+    private bool _freeMode = false;
 
     void Awake()
     {
+        camTransform = GameObject.FindWithTag("MainCamera").transform;
         controller = GetComponent<CharacterController>();
         ToggleCollision();
     }
@@ -20,8 +23,17 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (!canMove) return;
-        Vector3 movement = new Vector3(input.x, 0, input.y);
-        movement = transform.TransformDirection(movement) * movementSpeed * Time.deltaTime/Time.timeScale;
+        Vector3 movement;
+        if (_freeMode)
+        {
+            movement = (camTransform.forward * input.y + camTransform.right * input.x).normalized;
+        }
+        else
+        {
+            movement = new Vector3(input.x, 0, input.y);
+            movement = transform.TransformDirection(movement);
+        }
+        movement *= movementSpeed * Time.deltaTime / Time.timeScale;
         controller.Move(movement);
     }
 
@@ -46,5 +58,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collides) this.gameObject.layer = 0;
         else this.gameObject.layer = 6;
+    }
+
+    public void ToggleFreeMode(InputAction.CallbackContext context)
+    {
+        if (context.performed) _freeMode = !_freeMode;
     }
 }
