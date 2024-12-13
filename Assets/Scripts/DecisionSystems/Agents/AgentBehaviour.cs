@@ -8,6 +8,7 @@ namespace CharactersBehaviour
     {
         protected Dictionary<string, float> agentVariables = new Dictionary<string, float>();
         [SerializeField] private Chair _chair;
+        [SerializeField] private Computer _computer;
         private Chair _bath;
 
         public GameObject GetAgentGameObject()
@@ -28,6 +29,11 @@ namespace CharactersBehaviour
         public Chair GetChair() //La silla del puesto de trabajo del agente
         {
             return _chair;
+        }
+
+        public Computer GetComputer() //La silla del puesto de trabajo del agente
+        {
+            return _computer;
         }
 
         public void SetBath(Chair bath)

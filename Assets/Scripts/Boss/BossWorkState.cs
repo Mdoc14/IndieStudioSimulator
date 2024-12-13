@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class BossWorkState : AState
 {
-    public BossWorkState(StateMachine sm, IAgent agent) : base(sm, agent) { }
     CompositeAction _workAction;
+    private StateMachine _context;
+    public BossWorkState(StateMachine sm, IAgent agent) : base(sm, agent) { _context = sm; }
 
     public override void Enter()
     {
@@ -14,7 +15,7 @@ public class BossWorkState : AState
         //El jefe va a su silla y despu�s utiliza su ordenador o su tel�fono
         List<IAction> actions = new List<IAction>();
         actions.Add(new GoToDeskAction(agent));
-        if (Random.Range(0, 2) == 0) actions.Add(new WorkAction(agent));
+        if (Random.Range(0, 2) == 0) actions.Add(new WorkAction(agent, _context));
         else actions.Add(new CallAction(agent));
         _workAction = new CompositeAction(actions);
     }

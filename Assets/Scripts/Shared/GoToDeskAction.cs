@@ -9,13 +9,13 @@ public class GoToDeskAction : ASimpleAction
     NavMeshAgent _navAgent;
     Chair _agentChair;
 
-    public GoToDeskAction(IAgent agent) : base(agent) { }
+    public GoToDeskAction(IAgent agent, Chair chair = null) : base(agent) { _agentChair = chair; }
 
     public override void Enter()
     {
         base.Enter();
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
-        _agentChair = agent.GetChair();
+        if(_agentChair == null) _agentChair = agent.GetChair();
         _navAgent.SetDestination(_agentChair.transform.position);
         agent.SetBark("Walk");
         agent.SetAnimation("Walk");

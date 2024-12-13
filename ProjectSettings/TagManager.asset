@@ -11,6 +11,8 @@ TagManager:
   - Trash
   - Bath
   - ReunionChair
+  - MaintenanceChair
+  - IncidenceChair
   layers:
   - Default
   - TransparentFX

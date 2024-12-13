@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,17 +8,14 @@ public class Computer : AInteractable
 {
     [SerializeField] private GameObject _smokeParticles;
     [SerializeField] private Screen[] screens;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        SetScreensContent(ScreenContent.Working);
-    }
+    public bool broken { get; private set; } = false;
+    public event Action OnBreak;
 
     public override void Interact()
     {
         base.Interact();
-        //Poner sistemas de partículas para expresar que se ha roto
+        broken = true;
+        OnBreak?.Invoke();
         SetScreensContent(ScreenContent.Off);
         _smokeParticles.SetActive(true);
     }
@@ -25,6 +23,7 @@ public class Computer : AInteractable
     public void Repair()
     {
         base.ResetInteractable();
+        broken = false;
         _smokeParticles.SetActive(false);
     }
 

@@ -1,26 +1,33 @@
 using CharactersBehaviour;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 
 public class WorkAction : ASimpleAction
 {
     private float _workTime;
-    public WorkAction(IAgent agent) : base(agent) { }
+    private StateMachine _context;
+
+    public WorkAction(IAgent agent, StateMachine sm) : base(agent) { _context = sm; }
 
     public override void Enter()
     {
         base.Enter();
         _workTime = Random.Range(5, agent.GetAgentVariable("MaxWorkTime"));
-        Debug.Log("El jefe está trabajando en su ordenador...");
         agent.SetBark("BossWork");
         agent.SetAnimation("Work");
         WorldManager.Instance.SetWorkerActivity(true);
+        agent.GetComputer().OnBreak += OnComputerBroken;
+        agent.GetComputer().SetScreensContent(ScreenContent.Working);
+        if (agent.GetComputer().broken) OnComputerBroken();
     }
 
     public override void Exit()
     {
         WorldManager.Instance.SetWorkerActivity(false);
+        agent.GetComputer().OnBreak -= OnComputerBroken;
+        agent.GetComputer().SetScreensContent(ScreenContent.Off);
     }
 
     public override void FixedUpdate()
@@ -33,8 +40,14 @@ public class WorkAction : ASimpleAction
         _workTime -= Time.deltaTime;
         if (_workTime <= 0)
         {
-            Debug.Log("Fin del trabajo");
             finished = true;
         }
+    }
+
+    public void OnComputerBroken()
+    {
+        _workTime = 1000; //Se evitan transiciones indeseadas
+        Exit(); //Se hace el exit manualmente, pues al no poner finished = true en ningún momento no se va a hacer automaticamente
+        _context.State = new ReportIncidenceState(_context, agent, new BossWorkState(_context, agent));
     }
 }
