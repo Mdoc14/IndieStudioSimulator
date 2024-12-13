@@ -31,11 +31,7 @@ public class ActionFixLight : ASimpleAction
         _fixingTime -= Time.deltaTime;
         if (_fixingTime <= 0)
         {
-            RenderSettings.ambientIntensity = 1.0f;
-            RenderSettings.reflectionIntensity = 1.4f;
-            DynamicGI.UpdateEnvironment();
-            Debug.Log("¡Luz arreglada!");
-
+            GameObject.FindObjectOfType<LightSwitch>().Repair();
             finished = true;
         }
     }

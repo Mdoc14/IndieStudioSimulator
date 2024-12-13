@@ -25,7 +25,7 @@ public class WorldManager : MonoBehaviour
     private int _numWorkersReunion = 0;
     public event Action OnWorkersReady;
 
-    void Awake()
+    void Start()
     {
         Instance = this;
 

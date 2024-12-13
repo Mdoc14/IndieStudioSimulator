@@ -15,9 +15,9 @@ public class MainMenuManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) Destroy(gameObject);
-        Instance = this;
-        DontDestroyOnLoad(this);
+        if (Instance == null) Instance = this;
+        else Destroy(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
     }
 
     public void Play()

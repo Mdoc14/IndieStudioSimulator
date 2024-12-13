@@ -7,29 +7,37 @@ public class AInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private TextMeshPro displayText;
     [SerializeField] private string textInfo;
-    [SerializeField] private float outlineAmount = 1.02f;
+    [SerializeField] private GameObject outline;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         displayText.text = textInfo;
-        GetComponent<Renderer>().materials[0] = new Material(GetComponent<Renderer>().materials[0]);
+        int numMaterials = GetComponent<Renderer>().materials.Length; //El shader va a ser siempre el último
+        GetComponent<Renderer>().materials[numMaterials - 1] = new Material(GetComponent<Renderer>().materials[numMaterials - 1]);
         HoverExit();
     }
 
     public virtual void Interact()
     {
+        GetComponent<Collider>().enabled = false;
+        HoverExit();
         Debug.Log("Se ha interactuado");
     }
 
     public void HoverEnter()
     {
         displayText.gameObject.SetActive(true);
-        GetComponent<Renderer>().materials[0].SetFloat("_Value", outlineAmount);
+        outline.SetActive(true);
     }
 
     public void HoverExit()
     {
         displayText.gameObject.SetActive(false);
-        GetComponent<Renderer>().materials[0].SetFloat("_Value", 0);
+        outline.SetActive(false);
+    }
+
+    public void ResetInteractable()
+    {
+        GetComponent<Collider>().enabled = true;
     }
 }
