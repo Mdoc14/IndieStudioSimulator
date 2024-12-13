@@ -46,12 +46,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!context.performed) return;
         MainMenuManager.Instance.TogglePause(canMove);
-        canMove = !canMove;
     }
 
     public void ChangeSimulationSpeed(InputAction.CallbackContext context)
     {
-        if (canMove && context.performed) WorldManager.Instance.AddSpeed(context.ReadValue<float>());
+        if (canMove && context.performed) WorldManager.Instance.ChangeSimulationSpeed(context.ReadValue<float>() > 0);
     }
 
     public void ToggleCollision()

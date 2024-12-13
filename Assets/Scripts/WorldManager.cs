@@ -14,10 +14,9 @@ public class WorldManager : MonoBehaviour
     //Manejo de la simulación: 
     [SerializeField] private float _productivityFactor = 0.2f; //La productividad aumenta cada segundo * número de trabajadores trabajando
     [SerializeField] private float _productivityDecreaseFactor = 1; //La productividad baja cada segundo
-    [SerializeField] private Slider _productivitySlider;
+    private Slider _productivitySlider;
     private float _activeWorkers = 0;
     private float _productivity = 500; //0 -> bancarrota; 1000 -> éxito total, se van de vacaciones
-    [SerializeField] private float _timeSpeed = 1;
     //Manejo de la basura:
     [SerializeField] private GameObject _trashPrefab;
     //Manejo del baño:
@@ -28,9 +27,9 @@ public class WorldManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(Instance);
-        DontDestroyOnLoad(Instance);
+        Instance = this;
+
+        _productivitySlider = MainMenuManager.Instance.transform.GetComponentInChildren<Slider>();
 
         foreach(GameObject bathroom in GameObject.FindGameObjectsWithTag("Bath"))
         {
@@ -48,8 +47,14 @@ public class WorldManager : MonoBehaviour
     {
         _productivity -= _productivityDecreaseFactor * Time.deltaTime;
         _productivity += _activeWorkers * _productivityFactor * Time.deltaTime;
-        if (_productivity <= 0) Debug.Log("BANCARROTA");
-        else Debug.Log("ÉXITO");
+        if (_productivity <= 0 || _productivity >= 1000)
+        {
+            _productivityDecreaseFactor = _productivityFactor = 0;
+            _productivity = 50; //Para que no se llame múltiples veces al GameEnded()
+            ForceSimulationSpeed(1);
+            GameObject.FindObjectOfType<AudioListener>().enabled = false;
+            MainMenuManager.Instance.GameEnded(_productivity >= 1000);
+        }
         _productivitySlider.value = _productivity;
         //Time.timeScale = _timeSpeed;
         //Lo siguiente sólo está aquí para probar el jefe; hay que eliminarlo más adelante
@@ -62,10 +67,17 @@ public class WorldManager : MonoBehaviour
         _activeWorkers += active? 1 : -1;
     }
 
-    public void AddSpeed(float speed)
+    public void ChangeSimulationSpeed(bool add)
     {
-        if (Time.timeScale + speed <= 0) return;
-        Time.timeScale += speed;
+        if ((Time.timeScale == 0.25f && !add) || (Time.timeScale == 64 && add)) return;
+        if (add) Time.timeScale *= 2;
+        else Time.timeScale /= 2;
+        MainMenuManager.Instance.SetSpeedText(Time.timeScale.ToString());
+    }
+
+    public void ForceSimulationSpeed(float speed)
+    {
+        Time.timeScale = speed;
         MainMenuManager.Instance.SetSpeedText(Time.timeScale.ToString());
     }
 
@@ -89,6 +101,8 @@ public class WorldManager : MonoBehaviour
         }
         return null;
     }
+
+    #region REUNIONES
 
     public void ReunionNotified()
     {
@@ -119,4 +133,5 @@ public class WorldManager : MonoBehaviour
             OnWorkersReady?.Invoke();
         }
     }
+    #endregion
 }
