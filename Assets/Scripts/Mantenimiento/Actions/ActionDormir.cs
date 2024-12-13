@@ -14,6 +14,7 @@ public class ActionDormir : ASimpleAction
         _sleepTime = Random.Range(5, 10);
         Debug.Log("Está durmiendo...");
         agent.SetBark("Sleep");
+        agent.SetAnimation("Idle");
     }
 
     public override void Exit()

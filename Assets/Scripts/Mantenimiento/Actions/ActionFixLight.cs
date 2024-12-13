@@ -13,6 +13,7 @@ public class ActionFixLight : ASimpleAction
         _fixingTime = Random.Range(5, 10);
         Debug.Log("Está arreglando la luz...");
         agent.SetBark("Repair");
+        agent.SetAnimation("Repair");
     }
 
     public override void Exit()

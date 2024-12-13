@@ -15,6 +15,7 @@ public class ActionTrabajarOficina : ASimpleAction
         _workTime = Random.Range(5, 10);
         Debug.Log("Está trabajando en su ordenador...");
         agent.SetBark("Program");
+        agent.SetAnimation("Work");
     }
 
     public override void Exit()
