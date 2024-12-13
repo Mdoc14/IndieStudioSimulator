@@ -14,6 +14,8 @@ public class ProgrammingAction : ASimpleAction
         Debug.Log("Programador está programando...");
         _programmingTime = Random.Range(5, agent.GetAgentVariable("maxWorkTime"));
         agent.SetAgentVariable("maxWorkTime", Random.Range(15f, 30f));
+        agent.SetBark("Program");
+        agent.SetAnimation("Program");
     }
     public override void Exit()
     {
