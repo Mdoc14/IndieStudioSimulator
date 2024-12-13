@@ -16,11 +16,12 @@ public class CallAction : ASimpleAction
         agent.SetBark("PhoneCall");
         agent.SetAnimation("PhoneCall");
         Debug.Log("El jefe está llamando por teléfono...");
+        WorldManager.Instance.SetWorkerActivity(true);
     }
 
     public override void Exit()
     {
-        
+        WorldManager.Instance.SetWorkerActivity(false);
     }
 
     public override void FixedUpdate()

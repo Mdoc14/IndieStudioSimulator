@@ -5,11 +5,18 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 
 public class WorldManager : MonoBehaviour
 {
     public static WorldManager Instance { get; private set; }
+    //Manejo de la simulación: 
+    [SerializeField] private float _productivityFactor = 0.2f; //La productividad aumenta cada segundo * número de trabajadores trabajando
+    [SerializeField] private float _productivityDecreaseFactor = 1; //La productividad baja cada segundo
+    [SerializeField] private Slider _productivitySlider;
+    private float _activeWorkers = 0;
+    private float _productivity = 500; //0 -> bancarrota; 1000 -> éxito total, se van de vacaciones
     [SerializeField] private float _timeSpeed = 1;
     //Manejo de la basura:
     [SerializeField] private GameObject _trashPrefab;
@@ -39,10 +46,20 @@ public class WorldManager : MonoBehaviour
 
     private void Update()
     {
+        _productivity -= _productivityDecreaseFactor * Time.deltaTime;
+        _productivity += _activeWorkers * _productivityFactor * Time.deltaTime;
+        if (_productivity <= 0) Debug.Log("BANCARROTA");
+        else Debug.Log("ÉXITO");
+        _productivitySlider.value = _productivity;
         //Time.timeScale = _timeSpeed;
         //Lo siguiente sólo está aquí para probar el jefe; hay que eliminarlo más adelante
         DecreaseWorkerInReunion();
         AddWorkerToReunion();
+    }
+
+    public void SetWorkerActivity(bool active)
+    {
+        _activeWorkers += active? 1 : -1;
     }
 
     public void AddSpeed(float speed)

@@ -15,11 +15,12 @@ public class WorkAction : ASimpleAction
         Debug.Log("El jefe está trabajando en su ordenador...");
         agent.SetBark("BossWork");
         agent.SetAnimation("Work");
+        WorldManager.Instance.SetWorkerActivity(true);
     }
 
     public override void Exit()
     {
-        
+        WorldManager.Instance.SetWorkerActivity(false);
     }
 
     public override void FixedUpdate()
