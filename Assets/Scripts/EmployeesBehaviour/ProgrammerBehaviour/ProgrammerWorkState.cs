@@ -15,7 +15,6 @@ public class ProgrammerWorkState : AState
         actions.Add(new GoToDeskAction(agent));
         actions.Add(new ProgrammingAction(agent));
         _workAction = new CompositeAction(actions);
-        
     }
 
     public override void Exit()
@@ -34,9 +33,9 @@ public class ProgrammerWorkState : AState
         if (_workAction.Finished)
         {
             agent.GetChair().Leave();
-            agent.SetAgentVariable("Motivation", agent.GetAgentVariable("Motivation") - Random.Range(0f, 0.1f));
-            agent.SetAgentVariable("Boredom", agent.GetAgentVariable("Boredom") + Random.Range(0f, 0.1f));
-            agent.SetAgentVariable("Stress", agent.GetAgentVariable("Stress") + Random.Range(0f, 0.1f));
+            if (agent.GetAgentVariable("Motivation") > 0.1f) agent.SetAgentVariable("Motivation", agent.GetAgentVariable("Motivation") - Random.Range(0f, 0.1f));
+            if (agent.GetAgentVariable("Boredom") < 0.9f) agent.SetAgentVariable("Boredom", agent.GetAgentVariable("Boredom") + Random.Range(0f, 0.1f));
+            if (agent.GetAgentVariable("Boredom") < 0.9f) agent.SetAgentVariable("Stress", agent.GetAgentVariable("Stress") + Random.Range(0f, 0.1f));
             context.State = new BathroomState(context, agent, new ProgrammerWorkState(context, agent));
         }
     }
