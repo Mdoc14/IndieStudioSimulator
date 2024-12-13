@@ -20,7 +20,7 @@ public class GoToLightAction : ASimpleAction
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _navAgent.SetDestination(lightSwitch.transform.position);
         agent.SetBark("Walk");
-        //agent.SetAnimation("Walk");
+        agent.SetAnimation("Walk");
     }
 
     public override void Exit()
