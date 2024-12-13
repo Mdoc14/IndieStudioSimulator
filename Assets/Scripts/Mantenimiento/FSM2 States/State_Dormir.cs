@@ -12,7 +12,7 @@ namespace CharactersBehaviour
 
         public override void Enter()
         {
-            agent.SetAgentVariable("lastState", 1);
+            agent.SetAgentVariable("lastState", 2);
             Debug.Log("Entrando en el estado Dormir");
 
             //Va a su silla y despues duerme
