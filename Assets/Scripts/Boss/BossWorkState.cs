@@ -7,7 +7,8 @@ public class BossWorkState : AState
 {
     CompositeAction _workAction;
     private StateMachine _context;
-    public BossWorkState(StateMachine sm, IAgent agent) : base(sm, agent) { _context = sm; }
+    bool _forceUseComputer = false;
+    public BossWorkState(StateMachine sm, IAgent agent, bool forceUseComputer = false) : base(sm, agent) { _context = sm; _forceUseComputer = forceUseComputer; }
 
     public override void Enter()
     {
@@ -15,7 +16,7 @@ public class BossWorkState : AState
         //El jefe va a su silla y despu�s utiliza su ordenador o su tel�fono
         List<IAction> actions = new List<IAction>();
         actions.Add(new GoToDeskAction(agent));
-        if (Random.Range(0, 2) == 0) actions.Add(new WorkAction(agent, _context));
+        if (Random.Range(0, 2) == 0 || _forceUseComputer) actions.Add(new WorkAction(agent, _context));
         else actions.Add(new CallAction(agent));
         _workAction = new CompositeAction(actions);
     }

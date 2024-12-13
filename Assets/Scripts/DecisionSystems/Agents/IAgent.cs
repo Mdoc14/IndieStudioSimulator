@@ -12,8 +12,8 @@ namespace CharactersBehaviour
         public void SetAgentVariable(string name, float value);
         public Chair GetChair();
         public Computer GetComputer();
-        public void SetBath(Chair bath);
-        public Chair GetBath();
+        public void SetCurrentChair(Chair bath);
+        public Chair GetCurrentChair();
         public void SetBark(string name);
         public void SetAnimation(string triggerName);
     }

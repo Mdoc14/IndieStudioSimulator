@@ -5,13 +5,15 @@ using CharactersBehaviour;
 
 public class ActionDormir : ASimpleAction
 {
-    private float _sleepTime;
+    private float _cansancio;
+    private float _multiplier = 0.1f;
+
     public ActionDormir(IAgent agent) : base(agent) { }
 
     public override void Enter()
     {
         base.Enter();
-        _sleepTime = Random.Range(5, 10);
+        _cansancio = agent.GetAgentVariable("cansancio");
         Debug.Log("Está durmiendo...");
         agent.SetBark("Sleep");
         agent.SetAnimation("Idle");
@@ -19,7 +21,6 @@ public class ActionDormir : ASimpleAction
 
     public override void Exit()
     {
-
     }
 
     public override void FixedUpdate()
@@ -29,10 +30,10 @@ public class ActionDormir : ASimpleAction
 
     public override void Update()
     {
-        _sleepTime -= Time.deltaTime;
-        if (_sleepTime <= 0)
+        _cansancio -= Time.deltaTime * _multiplier;
+        agent.SetAgentVariable("cansancio", _cansancio);
+        if (_cansancio <= 0)
         {
-            Debug.Log("Fin de la siesta!");
             finished = true;
         }
     }

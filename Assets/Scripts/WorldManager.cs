@@ -94,7 +94,7 @@ public class WorldManager : MonoBehaviour
         {
             if (!bath.IsOccupied() && !bath.selected) 
             {
-                agent.SetBath(bath);
+                agent.SetCurrentChair(bath);
                 bath.selected = true;
                 return bath;
             }

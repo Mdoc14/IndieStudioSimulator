@@ -40,8 +40,8 @@ namespace CharactersBehaviour
                 agent.SetAgentVariable("cansancio", cansancio);
                 Debug.Log(agent.GetAgentVariable("cansancio"));
 
-                if (agent.GetAgentVariable("lastState") ==1) context.State = new State_TrabajarOficina(context, agent);
-                else if (agent.GetAgentVariable("lastState") == 2) context.State = new State_Dormir(context, agent);
+                if (cansancio < agent.GetAgentVariable("maxCansancio")) context.State = new State_TrabajarOficina(context, agent);
+                else context.State = new State_Dormir(context, agent);
             }
 
         }

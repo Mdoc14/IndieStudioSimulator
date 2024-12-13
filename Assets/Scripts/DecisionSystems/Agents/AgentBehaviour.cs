@@ -9,7 +9,7 @@ namespace CharactersBehaviour
         protected Dictionary<string, float> agentVariables = new Dictionary<string, float>();
         [SerializeField] private Chair _chair;
         [SerializeField] private Computer _computer;
-        private Chair _bath;
+        private Chair _currentChair;
 
         public GameObject GetAgentGameObject()
         {
@@ -36,14 +36,14 @@ namespace CharactersBehaviour
             return _computer;
         }
 
-        public void SetBath(Chair bath)
+        public void SetCurrentChair(Chair bath)
         {
-            _bath = bath;
+            _currentChair = bath;
         }
 
-        public Chair GetBath()
+        public Chair GetCurrentChair()
         {
-            return _bath;
+            return _currentChair;
         }
 
         public void SetBark(string name)

@@ -23,7 +23,7 @@ public class UseBathroomAction : ASimpleAction
         _reached = false;
         _time = Random.Range(3, 60); //Está un tiempo aleatorio usando el baño
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
-        _bath = agent.GetBath();
+        _bath = agent.GetCurrentChair();
         _navAgent.SetDestination(_bath.transform.position);
         agent.SetBark("Bathroom");
         agent.SetAnimation("Walk");
@@ -56,7 +56,7 @@ public class UseBathroomAction : ASimpleAction
             if (_time <= 0)
             {
                 _bath.Leave();
-                if (!keepBathroom) agent.SetBath(null);
+                if (!keepBathroom) agent.SetCurrentChair(null);
                 finished = true;
             }
         }

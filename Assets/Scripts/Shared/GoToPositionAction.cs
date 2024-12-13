@@ -14,6 +14,8 @@ public class GoToPositionAction : ASimpleAction
     public override void Enter()
     {
         base.Enter();
+        if (agent.GetChair().IsOccupied()) agent.GetChair().Leave();
+        if (agent.GetCurrentChair() != null && agent.GetCurrentChair().IsOccupied()) agent.GetCurrentChair().Leave();
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _navAgent.SetDestination(_destination);
         agent.SetBark("Walk");

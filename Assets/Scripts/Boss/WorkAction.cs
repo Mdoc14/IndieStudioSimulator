@@ -48,6 +48,6 @@ public class WorkAction : ASimpleAction
     {
         _workTime = 1000; //Se evitan transiciones indeseadas
         Exit(); //Se hace el exit manualmente, pues al no poner finished = true en ningún momento no se va a hacer automaticamente
-        _context.State = new ReportIncidenceState(_context, agent, new BossWorkState(_context, agent));
+        _context.State = new ReportIncidenceState(_context, agent, new BossWorkState(_context, agent, true));
     }
 }

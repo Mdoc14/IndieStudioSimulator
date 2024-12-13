@@ -35,7 +35,7 @@ public class CatBehaviour : AgentBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetBath(catBath);
+        SetCurrentChair(catBath);
 
         agentVariables[_boredom] = 0f;
         agentVariables[_tiredness] = 0f;

@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class LookIncidenceAction : ASimpleAction
 {
-    private float _lookTime = 3;
+    private float _lookTime = Random.Range(3, 5);
 
     public LookIncidenceAction(IAgent agent) : base(agent) { }
 
     public override void Enter()
     {
         base.Enter();
-        agent.SetBark("Empty");
+        agent.SetBark("Checking");
         agent.SetAnimation("Look");
     }
 

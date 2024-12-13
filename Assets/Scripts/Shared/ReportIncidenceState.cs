@@ -1,4 +1,5 @@
 using CharactersBehaviour;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,8 @@ public class ReportIncidenceState : AState
         actions.Add(new GoToPositionAction(agent, GameObject.Find("MaintenanceRoom").transform.position));
         actions.Add(new WaitingMaintenanceAction(agent));
         actions.Add(new GoToDeskAction(agent, GameObject.FindWithTag("IncidenceChair").GetComponent<Chair>()));
-        //actions.Add(new UseBathroomAction(agent));
+        actions.Add(new TalkAction(agent, TalkCondition(), () => GameObject.FindObjectOfType<Mantenimiento>().SetCurrentIncidence(agent.GetComputer())));
+        actions.Add(new FollowAgentAction(agent, GameObject.FindObjectOfType<Mantenimiento>(), FollowCondition()));
         _incidenceAction = new CompositeAction(actions);
     }
 
@@ -42,5 +44,29 @@ public class ReportIncidenceState : AState
         {
             context.State = nextState;
         }
+    }
+
+    private Func<bool> TalkCondition()
+    {
+        return () =>
+        {
+            if (!GameObject.FindWithTag("MaintenanceChair").GetComponent<Chair>().IsOccupied())
+            {
+                return true;
+            }
+            return false;
+        };
+    }
+
+    private Func<bool> FollowCondition()
+    {
+        return () =>
+        {
+            if (!agent.GetComputer().broken)
+            {
+                return true;
+            }
+            return false;
+        };
     }
 }

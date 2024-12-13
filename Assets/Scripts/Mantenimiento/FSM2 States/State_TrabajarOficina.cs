@@ -14,6 +14,7 @@ namespace CharactersBehaviour
 
         public override void Enter()
         {
+            (agent as Mantenimiento).OnIncidence += OnIncidence;
             agent.SetAgentVariable("lastState", 1);
             Debug.Log("Entrando en el estado TrabajarOficina");
 
@@ -31,30 +32,32 @@ namespace CharactersBehaviour
 
         public override void Exit()
         {
+            (agent as Mantenimiento).OnIncidence -= OnIncidence;
             Debug.Log("Saliendo del estado TrabajarOficina");
         }
 
         public override void Update()
         {
-            //Debug.Log("Trabajando en la oficina...");
             _trabajarEnOficina?.Update();
 
             if (_trabajarEnOficina != null && _trabajarEnOficina.Finished)
             {
-                
-                //float rand = Random.Range(0.0f, 1.0f);
                 float cansancio = agent.GetAgentVariable("cansancio") + Random.Range(0.1f, 0.5f);
                 agent.SetAgentVariable("cansancio",cansancio);
                 Debug.Log(agent.GetAgentVariable("cansancio"));
-                if (agent.GetAgentVariable("cansancio")<0.5) context.State = new State_TrabajarOficina(context, agent);
+                if (agent.GetAgentVariable("cansancio")<agent.GetAgentVariable("maxCansancio")) context.State = new State_TrabajarOficina(context, agent);
                 else context.State = new State_Dormir(context, agent);
             }
-
         }
 
         public override void FixedUpdate()
         {
             _trabajarEnOficina?.FixedUpdate();
+        }
+
+        private void OnIncidence()
+        {
+            context.State = new State_AtenderIncidencia(context, agent);
         }
     }
 }

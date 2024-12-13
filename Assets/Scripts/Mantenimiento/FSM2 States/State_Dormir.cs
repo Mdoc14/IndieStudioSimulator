@@ -12,6 +12,7 @@ namespace CharactersBehaviour
 
         public override void Enter()
         {
+            (agent as Mantenimiento).OnIncidence += OnIncidence;
             agent.SetAgentVariable("lastState", 2);
             Debug.Log("Entrando en el estado Dormir");
 
@@ -29,6 +30,7 @@ namespace CharactersBehaviour
 
         public override void Exit()
         {
+            (agent as Mantenimiento).OnIncidence -= OnIncidence;
             Debug.Log("Saliendo del estado Dormir");
         }
 
@@ -51,6 +53,11 @@ namespace CharactersBehaviour
         public override void FixedUpdate()
         {
             _irADormir?.FixedUpdate();
+        }
+
+        private void OnIncidence()
+        {
+            context.State = new State_AtenderIncidencia(context, agent);
         }
     }
 }

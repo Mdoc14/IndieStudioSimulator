@@ -36,6 +36,7 @@ public class GoToDeskAction : ASimpleAction
         if(!_navAgent.pathPending && _navAgent.remainingDistance <= _navAgent.stoppingDistance)
         {
             _agentChair.Sit(agent.GetAgentGameObject());
+            if(_agentChair != agent.GetChair()) agent.SetCurrentChair(_agentChair);
             finished = true;
         }
     }
