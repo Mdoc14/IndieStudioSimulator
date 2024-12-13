@@ -10,10 +10,12 @@ public class JanitorRestState : AState
     string restVariableName;
     NavMeshAgent navMeshAgent;
     bool isOnChair = false;
+    IAgent agent;
 
     public JanitorRestState(StateMachine sm, IAgent agent, string restVariable) : base(sm, agent) 
     {
         restVariableName = restVariable;
+        this.agent = agent;
     }
 
     public override void Enter()
@@ -26,7 +28,7 @@ public class JanitorRestState : AState
         agent.SetAnimation("Walk");
 
         //Iniciar animacion de descansar
-        Debug.Log("El conserje va a descansar...");
+        Debug.Log("El conserje descansará " + agent.GetAgentVariable(restVariableName) + " segundos");
         timer = 0f;
     }
 
@@ -43,10 +45,10 @@ public class JanitorRestState : AState
         //Cuando llegue a su silla, el conserje comenzara a descansar
         if (!isOnChair && navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance && !navMeshAgent.pathPending)
         {
-            navMeshAgent.isStopped = true;
+            //navMeshAgent.isStopped = true;
             //navMeshAgent.ResetPath();
 
-            agent.GetChair();
+            agent.GetChair().Sit(agent.GetAgentGameObject());
             isOnChair = true;
             agent.SetBark("Sleep");
             agent.SetAnimation("Idle");
@@ -60,6 +62,7 @@ public class JanitorRestState : AState
             if (timer >= agent.GetAgentVariable(restVariableName))
             {
                 Debug.Log("el conserje ya terminó de descansar...");
+                agent.GetChair().Leave();
                 context.State = new JanitorWalkState(context, agent, agent.GetAgentGameObject().GetComponent<JanitorBehaviour>().GetOfficeRooms());
             }
         }

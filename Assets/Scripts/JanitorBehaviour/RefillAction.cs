@@ -6,7 +6,7 @@ using UnityEngine;
 public class RefillAction : ASimpleAction
 {
     float timer = 0f;
-    float refillTotalTime = 3f;
+    float refillTotalTime = 5f;
 
     public RefillAction(IAgent agent) : base(agent)
     {
@@ -38,11 +38,5 @@ public class RefillAction : ASimpleAction
             timer = 0f;
             finished = true;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
     }
 }

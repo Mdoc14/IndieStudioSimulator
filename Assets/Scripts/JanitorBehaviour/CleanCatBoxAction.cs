@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class CleanCatBoxAction : ASimpleAction
 {
+    float timer = 0f;
+    float cleanTotalTime = 1.167f;
+
     public CleanCatBoxAction(IAgent agent) : base(agent)
     {
     }
@@ -14,6 +17,8 @@ public class CleanCatBoxAction : ASimpleAction
         base.Enter();
         //Iniciar animacion de limpair caja
         Debug.Log("Limpiando caja del gato...");
+        agent.SetBark("CleanBathroom");
+        agent.SetAnimation("Take");
     }
     public override void Exit()
     {
@@ -25,11 +30,13 @@ public class CleanCatBoxAction : ASimpleAction
 
     public override void Update()
     {
+        timer += Time.deltaTime;
+
+        if (timer >= cleanTotalTime)
+        {
+            timer = 0f;
+            finished = true;
+        }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 }

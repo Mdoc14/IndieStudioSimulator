@@ -38,6 +38,8 @@ public class PickUpTrashAction : ASimpleAction
         {
             timer = 0f;
             currentRoom.HideTrash();
+            float count = agent.GetAgentVariable("TrashCleaned") + 1;
+            agent.SetAgentVariable("TrashCleaned", count);
             finished = true;
         }
     }
