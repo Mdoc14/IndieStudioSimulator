@@ -16,7 +16,7 @@ public class AInteractable : MonoBehaviour, IInteractable
         HoverExit();
     }
 
-    public void Interact()
+    public virtual void Interact()
     {
         Debug.Log("Se ha interactuado");
     }

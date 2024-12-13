@@ -17,12 +17,15 @@ namespace CharactersBehaviour
         //private CharactersBehaviour.State_ArreglarLuz arreglarLuzState;
         private CharactersBehaviour.State_FSM2 trabajarState;
 
+        // Referencia al interruptor de luz
+        [SerializeField] private LightSwitch lightSwitch;
+
         void Awake()
         {
 
             agentVariables.Add("cansancio", 0);
             agentVariables.Add("lastState", 0);
-            
+            lightSwitch.LightsOut += OnLightsOut;
         }
 
         void Start()
@@ -38,6 +41,12 @@ namespace CharactersBehaviour
 
             //Establecer el estado inicial
             FSM1.State = trabajarState;
+
+        }
+        private void OnLightsOut()
+        {
+            Debug.Log("¡Se han ido las luces! El personal de mantenimiento va a areglarlo.");
+            FSM1.State = new CharactersBehaviour.State_ArreglarLuz(FSM1, this);
         }
 
         //Update is called once per frame

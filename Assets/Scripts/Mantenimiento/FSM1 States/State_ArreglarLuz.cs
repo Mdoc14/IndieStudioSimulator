@@ -8,10 +8,19 @@ namespace CharactersBehaviour
     public class State_ArreglarLuz : AState
     {
         public State_ArreglarLuz(StateMachine FSM1, IAgent agent) : base(FSM1, agent) { }
-
+        CompositeAction arreglarLuz;
         public override void Enter()
         {
             Debug.Log("Entrando en el estado ArreglarLuz");
+            //Va a su silla y despues utiliza su ordenador 
+            List<IAction> actions = new List<IAction>();
+            if (agent.GetChair().IsOccupied())
+            {
+                agent.GetChair().Leave();
+            }
+            actions.Add(new GoToLightAction(agent));
+            actions.Add(new ActionFixLight(agent));
+            arreglarLuz = new CompositeAction(actions);
 
         }
 
@@ -22,12 +31,24 @@ namespace CharactersBehaviour
 
         public override void Update()
         {
-            Debug.Log("Arreglando la luz...");
+            arreglarLuz?.Update();
+
+            if (arreglarLuz != null && arreglarLuz.Finished)
+            {
+
+                float cansancio = agent.GetAgentVariable("cansancio") + Random.Range(0.1f, 0.5f);
+                agent.SetAgentVariable("cansancio", cansancio);
+                Debug.Log(agent.GetAgentVariable("cansancio"));
+
+                if (agent.GetAgentVariable("lastState") ==1) context.State = new State_TrabajarOficina(context, agent);
+                else if (agent.GetAgentVariable("lastState") == 2) context.State = new State_Dormir(context, agent);
+            }
 
         }
 
         public override void FixedUpdate()
         {
+            arreglarLuz?.FixedUpdate();
         }
     }
 }
