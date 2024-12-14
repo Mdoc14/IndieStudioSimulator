@@ -14,15 +14,15 @@ namespace CharactersBehaviour
         float _maxValue;
         float _utility;
 
-        Func<float, float> _curve;
-
         float _threshold;
         float _weight;
+
+        Func<float, float> _curve;
 
         public string FactorName { get { return _factorName; } }
         public float Utility { get { return _utility; } set { _utility = value; } }
 
-        public LeafFactor(IAgent agent, string factorName, float minValue, float maxValue, Func<float, float> curve = null, float threshold = 0f, float weight = 1f)
+        public LeafFactor(IAgent agent, string factorName, float minValue, float maxValue, float threshold = 0f, float weight = 1f, Func<float, float> curve = null)
         {
             _agent = agent;
             _factorName = factorName;
