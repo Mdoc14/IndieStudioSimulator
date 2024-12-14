@@ -16,8 +16,8 @@ public class RepairAction : ASimpleAction
 
     public override void Exit()
     {
-        (agent as Mantenimiento).GetCurrentIncidence().Repair();
-        (agent as Mantenimiento).SetCurrentIncidence(null);
+        (agent as MaintenanceBehaviour).GetCurrentIncidence().Repair();
+        (agent as MaintenanceBehaviour).SetCurrentIncidence(null);
     }
 
     public override void FixedUpdate()

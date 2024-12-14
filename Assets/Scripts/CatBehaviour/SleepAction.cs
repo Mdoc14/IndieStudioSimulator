@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class UseLitterBoxAction : ASimpleAction
+public class SleepAction : ASimpleAction
 {
-    private float _time;
+    private float _timeSleeping;
     private bool _reached = false;
     private NavMeshAgent _navAgent;
-    Chair _bath;
     CatBehaviour _catBehaviour;
+    Chair _catBed;
 
-    public UseLitterBoxAction(IAgent agent) : base(agent) 
+    public SleepAction(IAgent agent) : base(agent) 
     { 
     }
 
@@ -21,12 +21,14 @@ public class UseLitterBoxAction : ASimpleAction
         base.Enter();
         _catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
         _reached = false;
-        _time = Random.Range(10, 30); //Está un tiempo aleatorio usando el baño
+        _timeSleeping = Random.Range(60, 120); //Está un tiempo aleatorio durmiendo
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
-        _bath = agent.GetCurrentChair();
-        _navAgent.SetDestination(_bath.transform.position);
-        agent.SetBark("Bathroom");
+        _catBed = _catBehaviour.CatBed;
+        _navAgent.SetDestination(_catBed.transform.position);
+        agent.SetBark("Sleep");
         //agent.SetAnimation("Walk");
+
+        Debug.Log("Gato: Va a dormir");
     }
 
     public override void Exit()
@@ -41,23 +43,25 @@ public class UseLitterBoxAction : ASimpleAction
 
     public override void Update()
     {
-        if (!_reached)  //Si no ha llegado a él comprueba si está lo suficientemente cerca para usarlo
+        if (!_reached)  //Si no ha llegado a la cama comprueba si está lo suficientemente cerca para usarla
         {
             if (!_navAgent.pathPending && _navAgent.remainingDistance <= _navAgent.stoppingDistance)
             {
                 _reached = true;
-                _bath.Sit(agent.GetAgentGameObject());
+                _catBed.Sit(agent.GetAgentGameObject());
                 //agent.SetAnimation("Idle");
             } 
         }
-        else //Si lo ha alcanzado el tiempo comienza a descontarse
+        else //Si la ha alcanzado el tiempo comienza a descontarse
         {
-            _time -= Time.deltaTime;
-            if (_time <= 0)
+            _timeSleeping -= Time.deltaTime;
+            if (_timeSleeping <= 0)
             {
-                _bath.Leave();
-                agent.SetAgentVariable(_catBehaviour.TimeWithoutBath, 0f);
+                _catBed.Leave();
+                agent.SetAgentVariable(_catBehaviour.Tiredness, 0f);
                 finished = true;
+
+                Debug.Log("Gato: Ha terminado de dormir");
             }
         }
     }

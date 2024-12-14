@@ -12,7 +12,7 @@ namespace CharactersBehaviour
 
         public override void Enter()
         {
-            (agent as Mantenimiento).OnIncidence += OnIncidence;
+            (agent as MaintenanceBehaviour).OnIncidence += OnIncidence;
             agent.SetAgentVariable("lastState", 2);
             Debug.Log("Entrando en el estado Dormir");
 
@@ -30,7 +30,7 @@ namespace CharactersBehaviour
 
         public override void Exit()
         {
-            (agent as Mantenimiento).OnIncidence -= OnIncidence;
+            (agent as MaintenanceBehaviour).OnIncidence -= OnIncidence;
             Debug.Log("Saliendo del estado Dormir");
         }
 

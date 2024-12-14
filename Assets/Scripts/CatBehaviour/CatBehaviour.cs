@@ -6,14 +6,14 @@ using UnityEngine;
 public class CatBehaviour : AgentBehaviour
 {
     StateMachine sm = new StateMachine();
-    UtilitySystem us;
 
+    UtilitySystem us;
     public UtilitySystem US { get { return us; } }
 
     List<UtilityBasedAction> utilityActions = new List<UtilityBasedAction>();
 
     UtilityBasedAction goBathUAction;
-    UtilityBasedAction purgeUAction;
+    UtilityBasedAction purgueUAction;
     UtilityBasedAction eatUAction;
     UtilityBasedAction sleepUAction;
     UtilityBasedAction playUAction;
@@ -22,20 +22,22 @@ public class CatBehaviour : AgentBehaviour
     [SerializeField] Chair _catBed;
     public Chair CatBed { get { return _catBed; } }
 
-    [SerializeField] Chair catBath;
+    [SerializeField] Chair _catLitterBox;
 
     string _boredom = "boredom";
     string _tiredness = "tiredness";
     string _timeWithoutBath = "timeWithoutBath";
+    string _timeWithoutPurguing = "timeWithoutPurguing";
 
     public string Boredom { get { return _boredom; } }
     public string Tiredness { get { return _tiredness; } }
     public string TimeWithoutBath { get { return _timeWithoutBath; } }
+    public string TimeWithoutPurguing { get { return _timeWithoutPurguing; } }
 
     // Start is called before the first frame update
     void Start()
     {
-        SetCurrentChair(catBath);
+        SetCurrentChair(_catLitterBox);
 
         agentVariables[_boredom] = 0f;
         agentVariables[_tiredness] = 0f;
@@ -44,6 +46,7 @@ public class CatBehaviour : AgentBehaviour
         sm.State = new WanderingState(sm, this);
 
         InitializeGoBathUAction();
+        InitializeSleepUAction();
 
         us = new UtilitySystem(new List<UtilityBasedAction>(utilityActions));
     }
@@ -59,8 +62,22 @@ public class CatBehaviour : AgentBehaviour
 
     void InitializeGoBathUAction()
     {
-        IDecisionFactor timeWithoutBathFactor = new LeafFactor(this, _timeWithoutBath, 0, float.MaxValue, (300/float.MaxValue));
-        goBathUAction = new UtilityBasedAction(new UseLitterBox(this), timeWithoutBathFactor);
+        IDecisionFactor bathNecessityFactor = new LeafFactor(this, _timeWithoutBath, 0, float.MaxValue, (150 / float.MaxValue));
+        goBathUAction = new UtilityBasedAction(new UseLitterBoxAction(this), bathNecessityFactor);
         utilityActions.Add(goBathUAction);
+    }
+
+    void InitializePurgueUAction()
+    {
+        IDecisionFactor needsToPurgueFactor = new LeafFactor(this, _timeWithoutPurguing, 0, float.MaxValue, (120 / float.MaxValue));
+        purgueUAction = new UtilityBasedAction(new PurgueAction(this), needsToPurgueFactor);
+        utilityActions.Add(purgueUAction);
+    }
+
+    void InitializeSleepUAction()
+    {
+        IDecisionFactor sleepNecessity = new LeafFactor(this, _tiredness, 0, float.MaxValue, (420 / float.MaxValue));
+        sleepUAction = new UtilityBasedAction(new SleepAction(this), sleepNecessity);
+        utilityActions.Add(sleepUAction);
     }
 }

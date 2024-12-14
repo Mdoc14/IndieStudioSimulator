@@ -30,6 +30,7 @@ public class CheckNecessitiesState : AState
     {
         if (catBehaviour.US.CurrentAction == null)
         {
+            Debug.Log("GATO: NECESIDAD COMPLETADA");
             context.State = new WanderingState(context, agent);
         }
     }

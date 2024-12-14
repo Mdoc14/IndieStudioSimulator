@@ -13,11 +13,11 @@ namespace CharactersBehaviour
         {
             List<IAction> actions = new List<IAction>();
             actions.Add(new ListenIncidenceAction(agent));
-            actions.Add(new GoToPositionAction(agent, (agent as Mantenimiento).GetCurrentIncidence().transform.position));
+            actions.Add(new GoToPositionAction(agent, (agent as MaintenanceBehaviour).GetCurrentIncidence().transform.position));
             actions.Add(new LookIncidenceAction(agent));
             actions.Add(new GoToPositionAction(agent, GameObject.FindWithTag("Toolbox").transform.position));
             actions.Add(new SearchToolAction(agent));
-            actions.Add(new GoToPositionAction(agent, (agent as Mantenimiento).GetCurrentIncidence().transform.position));
+            actions.Add(new GoToPositionAction(agent, (agent as MaintenanceBehaviour).GetCurrentIncidence().transform.position));
             actions.Add(new RepairAction(agent));
             _incidenceAction = new CompositeAction(actions);
         }

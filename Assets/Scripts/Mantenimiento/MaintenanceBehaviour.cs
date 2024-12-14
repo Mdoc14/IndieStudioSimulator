@@ -8,7 +8,7 @@ using System;
 
 namespace CharactersBehaviour
 {
-    public class Mantenimiento : AgentBehaviour
+    public class MaintenanceBehaviour : AgentBehaviour
     {
         //Maquina de estado FSM1
         private StateMachine FSM1;

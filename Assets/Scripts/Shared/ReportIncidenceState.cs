@@ -22,8 +22,8 @@ public class ReportIncidenceState : AState
         actions.Add(new GoToPositionAction(agent, GameObject.Find("MaintenanceRoom").transform.position));
         actions.Add(new WaitingMaintenanceAction(agent));
         actions.Add(new GoToDeskAction(agent, GameObject.FindWithTag("IncidenceChair").GetComponent<Chair>()));
-        actions.Add(new TalkAction(agent, TalkCondition(), () => GameObject.FindObjectOfType<Mantenimiento>().SetCurrentIncidence(agent.GetComputer())));
-        actions.Add(new FollowAgentAction(agent, GameObject.FindObjectOfType<Mantenimiento>(), FollowCondition()));
+        actions.Add(new TalkAction(agent, TalkCondition(), () => GameObject.FindObjectOfType<MaintenanceBehaviour>().SetCurrentIncidence(agent.GetComputer())));
+        actions.Add(new FollowAgentAction(agent, GameObject.FindObjectOfType<MaintenanceBehaviour>(), FollowCondition()));
         _incidenceAction = new CompositeAction(actions);
     }
 
