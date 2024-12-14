@@ -31,7 +31,10 @@ namespace CharactersBehaviour
                 return BehaviourState.Success;
             }
 
-            child.RestartNode();
+            if (state == BehaviourState.Success)
+            {
+                child.RestartNode();
+            }
 
             return BehaviourState.Running;
         }

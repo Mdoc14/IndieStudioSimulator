@@ -22,9 +22,12 @@ namespace CharactersBehaviour
         {
             if (maxN == 0)
             {
-                child.Execute();
+                BehaviourState state = child.Execute();
 
-                child.RestartNode();
+                if (state == BehaviourState.Success || state == BehaviourState.Failure)
+                {
+                    child.RestartNode();
+                }
 
                 return BehaviourState.Running;
             }
@@ -36,9 +39,8 @@ namespace CharactersBehaviour
                 if (state == BehaviourState.Success || state == BehaviourState.Failure)
                 {
                     currentIteration++;
+                    child.RestartNode();
                 }
-
-                child.RestartNode();
 
                 return BehaviourState.Running;
             }
