@@ -269,6 +269,9 @@ MonoBehaviour:
   _chair: {fileID: 0}
   _computer: {fileID: 0}
   _catBed: {fileID: 363758961}
+  _catBowls:
+  - {fileID: 527830566}
+  - {fileID: 1067309987}
   _catLitterBox: {fileID: 1869097217}
 --- !u!114 &363758961 stripped
 MonoBehaviour:
@@ -350,6 +353,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 14.02, y: 2.6, z: 13.98}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &527830566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7138712224382595396, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+  m_PrefabInstance: {fileID: 2054177926}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &691135503
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +549,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1067309987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3533869161992562658, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+  m_PrefabInstance: {fileID: 2054177926}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1158558637
 GameObject:
   m_ObjectHideFlags: 0

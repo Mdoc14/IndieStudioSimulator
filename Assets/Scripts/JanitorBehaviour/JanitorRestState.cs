@@ -10,12 +10,10 @@ public class JanitorRestState : AState
     string restVariableName;
     NavMeshAgent navMeshAgent;
     bool isOnChair = false;
-    IAgent agent;
 
     public JanitorRestState(StateMachine sm, IAgent agent, string restVariable) : base(sm, agent) 
     {
         restVariableName = restVariable;
-        this.agent = agent;
     }
 
     public override void Enter()

@@ -6,28 +6,22 @@ namespace CharactersBehaviour
     {
         List<LeafFactor> decisionFactors;
         float _utility;
+        float _threshold;
         float _weight;
 
         public float Utility { get { return _utility; } set { _utility = value; } }
 
-        public FusionFactor(List<LeafFactor> leafFactors, float weight)
+        public FusionFactor(List<LeafFactor> leafFactors, float threshold, float weight = 1f)
         {
             decisionFactors = leafFactors;
+            _threshold = threshold;
             _weight = weight;
             ComputeUtility();
         }
 
         public bool HasUtility()
         {
-            foreach (LeafFactor leafFactor in decisionFactors)
-            {
-                if (!leafFactor.HasUtility())
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return _utility >= _threshold;
         }
 
         public void ComputeUtility()
@@ -39,6 +33,11 @@ namespace CharactersBehaviour
                 _utility += leafFactor.Utility;
             }
             _utility *= _weight;
+        }
+
+        public List<LeafFactor> GetDecisionFactors()
+        {
+            return new List<LeafFactor>(decisionFactors);
         }
     }
 }

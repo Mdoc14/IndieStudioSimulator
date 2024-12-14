@@ -21,14 +21,14 @@ public class SleepAction : ASimpleAction
         base.Enter();
         _catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
         _reached = false;
-        _timeSleeping = Random.Range(60, 120); //Está un tiempo aleatorio durmiendo
+        _timeSleeping = Random.Range(180, 360); //Está un tiempo aleatorio durmiendo
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _catBed = _catBehaviour.CatBed;
         _navAgent.SetDestination(_catBed.transform.position);
         agent.SetBark("Sleep");
         //agent.SetAnimation("Walk");
 
-        Debug.Log("Gato: Va a dormir");
+        Debug.Log("Gato: va a dormir");
     }
 
     public override void Exit()
@@ -55,13 +55,14 @@ public class SleepAction : ASimpleAction
         else //Si la ha alcanzado el tiempo comienza a descontarse
         {
             _timeSleeping -= Time.deltaTime;
+            agent.SetAgentVariable(_catBehaviour.Tiredness, agent.GetAgentVariable(_catBehaviour.Tiredness) - Time.deltaTime);
+
             if (_timeSleeping <= 0)
             {
                 _catBed.Leave();
-                agent.SetAgentVariable(_catBehaviour.Tiredness, 0f);
                 finished = true;
 
-                Debug.Log("Gato: Ha terminado de dormir");
+                Debug.Log("Gato: ha terminado de dormir");
             }
         }
     }

@@ -105,3 +105,9 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 352902e56803cc64fa6d5e5a9a1a4e00, type: 3}
   - name: Listen
     sprite: {fileID: 21300000, guid: 57320105389cbcc4eb01c9e285bbc5b4, type: 3}
+  - name: Vomit
+    sprite: {fileID: 21300000, guid: 5300e6659e2bff744bee70f58a8ef355, type: 3}
+  - name: ThrowTrash
+    sprite: {fileID: 21300000, guid: a6a2905e28ee7c248ac4900289279d66, type: 3}
+  - name: BiteWires
+    sprite: {fileID: 21300000, guid: a737014e61a096a4aaf78fd75e045608, type: 3}

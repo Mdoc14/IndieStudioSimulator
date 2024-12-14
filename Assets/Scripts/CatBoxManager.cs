@@ -6,7 +6,7 @@ public class CatBoxManager : MonoBehaviour
 {
 
     [SerializeField] bool isDirty;
-    [SerializeField] GameObject feces;
+    [SerializeField] List<GameObject> feces = new List<GameObject>();
 
     void Start()
     {
@@ -21,12 +21,18 @@ public class CatBoxManager : MonoBehaviour
     public void SetDirty()
     {
         isDirty = true;
-        feces.SetActive(true);
+        foreach (GameObject obj in feces)
+        {
+            obj.SetActive(true);
+        }
     }
 
     public void HideFeces() 
     {
-        feces.SetActive(false);
+        foreach (GameObject obj in feces)
+        {
+            obj.SetActive(false);
+        }
     }
 
     public void CleanBox()

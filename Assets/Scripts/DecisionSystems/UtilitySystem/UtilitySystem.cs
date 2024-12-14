@@ -34,6 +34,30 @@ namespace CharactersBehaviour
             this.activated = activated;
         }
 
+        public float GetFactorUtility(string factorName)
+        {
+            foreach (UtilityBasedAction action in _posibleActions)
+            {
+                if (action.DecisionFactor is LeafFactor leafFactor1 && leafFactor1.FactorName.Equals(factorName))
+                {
+                    return leafFactor1.Utility;
+                }
+
+                if (action.DecisionFactor is FusionFactor fusionFactor)
+                {
+                    foreach(LeafFactor leafFactor2 in fusionFactor.GetDecisionFactors())
+                    {
+                        if (leafFactor2.FactorName.Equals(factorName))
+                        {
+                            return leafFactor2.Utility;
+                        }
+                    }
+                }
+            }
+
+            return -1f;
+        }
+
         void SelectBestAction()
         {
             float highestUtility = 0;
@@ -85,6 +109,7 @@ namespace CharactersBehaviour
                         _currentAction.Reset();
                         _currentAction = null;
                         activated = false;
+                        return;
                     }
 
                     _currentAction?.Action.Update();

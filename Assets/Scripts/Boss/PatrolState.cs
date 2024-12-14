@@ -62,7 +62,7 @@ public class PatrolState : AState
         IBehaviourNode scoldSelector = new SelectorNode(new List<IBehaviourNode>(nodes));
         //Secuencia correspondiente a comprobar si ve a algún trabajador holgazaneando:
         nodes.Clear();
-        nodes.Add(new ConditionNode(SlackerOnSight()));
+        nodes.Add(new ConditionNode(SlackerOnSight));
         nodes.Add(scoldSelector);
         IBehaviourNode slackerSearchSequence = new SequenceNode(new List<IBehaviourNode>(nodes));
         //Selector correspondiente a buscar holgazanes y patrullar:
@@ -75,17 +75,14 @@ public class PatrolState : AState
         _bt.Root = rootNode;
     }
 
-    private Func<bool> SlackerOnSight()
+    private bool SlackerOnSight()
     {
-        return () =>
+        if (agent.GetAgentGameObject().GetComponent<BossBehaviour>().ScoldedAgent != null)
         {
-            if (agent.GetAgentGameObject().GetComponent<BossBehaviour>().ScoldedAgent != null)
-            {
-                float newAnger = agent.GetAgentVariable("CurrentAnger") + 100 * agent.GetAgentVariable("Irritability");
-                agent.SetAgentVariable("CurrentAnger", newAnger);
-                return true;
-            }
-            return false;
-        };
+            float newAnger = agent.GetAgentVariable("CurrentAnger") + 100 * agent.GetAgentVariable("Irritability");
+            agent.SetAgentVariable("CurrentAnger", newAnger);
+            return true;
+        }
+        return false;
     }
 }
