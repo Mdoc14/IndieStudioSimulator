@@ -41,10 +41,4 @@ public class ThrowTrashAction : ASimpleAction
             finished = true;
         }
     }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 }

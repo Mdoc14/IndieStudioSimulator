@@ -54,10 +54,14 @@ public class JanitorBehaviourTree : AState
         SequenceNode firstSequence = new SequenceNode(new List<IBehaviourNode>(sequenceNodeList));
         sequenceNodeList.Clear();
 
-        //Creacion de los nodos de la tercera secuencia -> Ir a la maquina, Esta vacia la maquina?, Reponer
+        //Creacion de los nodos de la tercera secuencia -> Ir a la maquina, Observar, Esta vacia la maquina?, Reponer
         //Ir a la máquina
         sequenceNodeList.Add(new ActionNode(
             new GoToAction(agent, currentRoom.GetMachinePosition, "Walk"), behaviourTree));
+
+        //Observar la máquina
+        sequenceNodeList.Add(new ActionNode(
+            new JanitorLookAction(agent), behaviourTree));
 
         //Esta vacia?
         sequenceNodeList.Add(new ConditionNode(() => { return currentRoom.IsMachineEmpty(); }));
@@ -68,7 +72,7 @@ public class JanitorBehaviourTree : AState
 
         //Reponer
         sequenceNodeList.Add(new ActionNode(
-            new RefillAction(agent), behaviourTree));
+            new RefillAction(agent, currentRoom), behaviourTree));
 
         //Creacion de la tercera secuencia
         SequenceNode thirdSequence = new SequenceNode(new List<IBehaviourNode>(sequenceNodeList));
@@ -79,21 +83,25 @@ public class JanitorBehaviourTree : AState
         sequenceNodeList.Add(new ActionNode(
             new GoToAction(agent, currentRoom.GetCatBoxPosition, "Walk"), behaviourTree));
 
+        //Observar la caja
+        sequenceNodeList.Add(new ActionNode(
+            new JanitorLookAction(agent), behaviourTree));
+
         //Esta sucia?
         sequenceNodeList.Add(new ConditionNode(() => {return currentRoom.IsCatBoxDirty(); }));
 
         //Limpiar caja
         sequenceNodeList.Add(new ActionNode(
-            new CleanCatBoxAction(agent), behaviourTree));
+            new CleanCatBoxAction(agent, currentRoom), behaviourTree));
 
         //Ir a la papelera
         sequenceNodeList.Add(new ActionNode(
             //new GoToPositionAction(agent, currentRoom.GetTrashPosition()), behaviourTree));
             new GoToAction(agent, currentRoom.GetTrashCanPosition, "Walk"), behaviourTree));
 
-        //Tirar basura
-        //sequenceNodeList.Add(new ActionNode(
-            //new ThrowTrashAction(agent, currentRoom), behaviourTree));
+        //Tirar heces
+        sequenceNodeList.Add(new ActionNode(
+            new ThrowCatFecesAction(agent, currentRoom), behaviourTree));
 
         //Creacion de la cuarta secuencia
         SequenceNode fourthSequence = new SequenceNode(new List<IBehaviourNode>(sequenceNodeList));
@@ -140,15 +148,8 @@ public class JanitorBehaviourTree : AState
         behaviourTree.UpdateBehaviour();
         if (behaviourTree.State == BehaviourState.Success) 
         {
-            if (currentRoom.IsDirty())
-            {
-                context.State = new JanitorBehaviourTree(context, agent, currentRoom);
-            }
-            else 
-            {
-                Debug.Log("Saliendo del BT");
-                context.State = new JanitorWalkState(context, agent, agent.GetAgentGameObject().GetComponent<JanitorBehaviour>().GetOfficeRooms());
-            }
+            Debug.Log("Saliendo del BT");
+            context.State = new JanitorWalkState(context, agent, agent.GetAgentGameObject().GetComponent<JanitorBehaviour>().GetOfficeRooms());
         }
     }
 

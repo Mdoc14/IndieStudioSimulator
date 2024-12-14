@@ -9,8 +9,8 @@ public class Room : MonoBehaviour
 {
     private List<GameObject> trash = new List<GameObject>();
     [SerializeField] private GameObject trashcan;
-    [SerializeField] private GameObject machine;
-    [SerializeField] private GameObject catBox;
+    public VendingMachineManager machine;
+    [SerializeField] private CatBoxManager catBox;
     public event Action<GameObject> OnColliderTriggered;
 
     private void OnTriggerEnter(Collider other)
@@ -60,7 +60,7 @@ public class Room : MonoBehaviour
     public bool IsMachineEmpty()
     {
         Debug.Log("Comprobando si la maquina esta vacia");
-        return false; //Habria que preguntarle a la maquina si esta vacia y tal
+        return machine.IsEmpty();
     }
 
     public Vector3 GetMachinePosition()
@@ -69,10 +69,12 @@ public class Room : MonoBehaviour
         return machine.transform.position;
     }
 
+    public VendingMachineManager GetVendingMachine() { return machine; }
+
     public bool IsCatBoxDirty()
     {
         Debug.Log("Comprobando si la caja esta sucia");
-        return true; //Habria que preguntarle a la caja si esta sucia
+        return catBox.IsDirty();
     }
 
     public Vector3 GetCatBoxPosition() 
@@ -80,4 +82,6 @@ public class Room : MonoBehaviour
         Debug.Log("Yendo a la caja de arena");
         return catBox.transform.position;
     }
+
+    public CatBoxManager GetCatBox() { return catBox; }
 }

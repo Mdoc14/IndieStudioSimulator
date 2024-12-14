@@ -7,9 +7,10 @@ public class CleanCatBoxAction : ASimpleAction
 {
     float timer = 0f;
     float cleanTotalTime = 1.167f;
-
-    public CleanCatBoxAction(IAgent agent) : base(agent)
+    Room currentRoom;
+    public CleanCatBoxAction(IAgent agent, Room room) : base(agent)
     {
+        currentRoom = room;
     }
 
     public override void Enter()
@@ -18,7 +19,7 @@ public class CleanCatBoxAction : ASimpleAction
         //Iniciar animacion de limpair caja
         Debug.Log("Limpiando caja del gato...");
         agent.SetBark("CleanBathroom");
-        agent.SetAnimation("Take");
+        agent.SetAnimation("PickUp");
     }
     public override void Exit()
     {
@@ -36,6 +37,7 @@ public class CleanCatBoxAction : ASimpleAction
         {
             timer = 0f;
             finished = true;
+            currentRoom.GetCatBox().HideFeces();
         }
     }
 

@@ -1,15 +1,16 @@
-using CharactersBehaviour;
 using System.Collections;
 using System.Collections.Generic;
+using CharactersBehaviour;
 using UnityEngine;
 
-public class RefillAction : ASimpleAction
+public class ThrowCatFecesAction : ASimpleAction
 {
     float timer = 0f;
-    float refillTotalTime = 5f;
+    float throwTotalTime = 1.33f; //Coincide con la duracion de la animacion Using
+
     Room currentRoom;
 
-    public RefillAction(IAgent agent, Room currentRoom) : base(agent)
+    public ThrowCatFecesAction(IAgent agent, Room currentRoom) : base(agent)
     {
         this.currentRoom = currentRoom;
     }
@@ -17,12 +18,10 @@ public class RefillAction : ASimpleAction
     public override void Enter()
     {
         base.Enter();
-        //Iniciar aniamcion de reponer
-        Debug.Log("Reponiendo maquina...");
-        agent.SetBark("Supply");
-        agent.SetAnimation("Refill");
+        Debug.Log("Accion: tirar heces de gato");
+        agent.SetBark("CleanBathroom");
+        agent.SetAnimation("Throw");
     }
-
     public override void Exit()
     {
     }
@@ -35,12 +34,11 @@ public class RefillAction : ASimpleAction
     {
         timer += Time.deltaTime;
 
-        if (timer >= refillTotalTime)
+        if (timer >= throwTotalTime)
         {
             timer = 0f;
+            currentRoom.GetCatBox().CleanBox();
             finished = true;
-            currentRoom.GetVendingMachine().RefillMachine();
-
         }
     }
 }

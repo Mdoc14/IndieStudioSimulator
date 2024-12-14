@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class GoToAction : ASimpleAction
 {
@@ -52,12 +53,15 @@ public class GoToAction : ASimpleAction
             }
             Debug.Log("He llegado a mi destino");
             finished = true;
+            AlignWithTarget();
             _navAgent.isStopped = true;
         }
     }
 
-    void Start()
+    void AlignWithTarget()
     {
-        
+         Vector3 direction = (destination.Invoke() - agent.GetAgentGameObject().transform.position).normalized;
+         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+         agent.GetAgentGameObject().transform.rotation = Quaternion.Slerp(agent.GetAgentGameObject().transform.rotation, lookRotation, Time.deltaTime * 5f); // Ajusta la velocidad de alineación
     }
 }
