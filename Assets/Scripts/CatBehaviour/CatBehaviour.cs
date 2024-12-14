@@ -45,13 +45,13 @@ public class CatBehaviour : AgentBehaviour
 
         InitializeGoBathUAction();
 
-        us = new UtilitySystem(new List<UtilityBasedAction>(utilityActions), this);
+        us = new UtilitySystem(new List<UtilityBasedAction>(utilityActions));
     }
 
     // Update is called once per frame
     void Update()
     {
-        agentVariables[_timeWithoutBath] += Time.deltaTime * 0.1f;
+        agentVariables[_timeWithoutBath] += Time.deltaTime;
 
         us.UpdateBehaviour();
         sm.UpdateBehaviour();
@@ -59,8 +59,8 @@ public class CatBehaviour : AgentBehaviour
 
     void InitializeGoBathUAction()
     {
-        IDecisionFactor timeWithoutBathFactor = new LeafFactor(_timeWithoutBath, 0, 0.5f);
-        goBathUAction = new UtilityBasedAction(new UseBathroomAction(this, true), timeWithoutBathFactor);
+        IDecisionFactor timeWithoutBathFactor = new LeafFactor(this, _timeWithoutBath, 0, float.MaxValue, (300/float.MaxValue));
+        goBathUAction = new UtilityBasedAction(new UseLitterBox(this), timeWithoutBathFactor);
         utilityActions.Add(goBathUAction);
     }
 }

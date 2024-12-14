@@ -4,27 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class UseBathroomAction : ASimpleAction
+public class UseLitterBox : ASimpleAction
 {
     private float _time;
     private bool _reached = false;
     private NavMeshAgent _navAgent;
     Chair _bath;
+    CatBehaviour catBehaviour;
 
-    public UseBathroomAction(IAgent agent) : base(agent) 
+    public UseLitterBox(IAgent agent) : base(agent) 
     { 
     }
 
     public override void Enter()
     {
         base.Enter();
+        catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
         _reached = false;
-        _time = Random.Range(3, 60); //Está un tiempo aleatorio usando el baño
+        _time = Random.Range(10, 40); //Está un tiempo aleatorio usando el baño
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _bath = agent.GetCurrentChair();
         _navAgent.SetDestination(_bath.transform.position);
         agent.SetBark("Bathroom");
-        agent.SetAnimation("Walk");
+        //agent.SetAnimation("Walk");
     }
 
     public override void Exit()
@@ -45,7 +47,7 @@ public class UseBathroomAction : ASimpleAction
             {
                 _reached = true;
                 _bath.Sit(agent.GetAgentGameObject());
-                agent.SetAnimation("Idle");
+                //agent.SetAnimation("Idle");
             } 
         }
         else //Si lo ha alcanzado el tiempo comienza a descontarse
@@ -54,7 +56,7 @@ public class UseBathroomAction : ASimpleAction
             if (_time <= 0)
             {
                 _bath.Leave();
-                agent.SetCurrentChair(null);
+                agent.SetAgentVariable(catBehaviour.TimeWithoutBath, 0f);
                 finished = true;
             }
         }

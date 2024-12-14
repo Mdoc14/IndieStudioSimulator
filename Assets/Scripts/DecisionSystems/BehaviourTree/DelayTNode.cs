@@ -14,6 +14,7 @@ namespace CharactersBehaviour
 
         public DelayTNode(IBehaviourNode child, float time)
         {
+            timer = 0f;
             this.child = child;
             this.maxTime = time;
         }
@@ -27,6 +28,12 @@ namespace CharactersBehaviour
 
             timer += Time.deltaTime;
             return BehaviourState.Running;
+        }
+
+        public void RestartNode()
+        {
+            timer = 0f;
+            child.RestartNode();
         }
     }
 }

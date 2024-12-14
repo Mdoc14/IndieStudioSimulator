@@ -36,9 +36,9 @@ namespace CharactersBehaviour
             return _computer;
         }
 
-        public void SetCurrentChair(Chair bath)
+        public void SetCurrentChair(Chair chair)
         {
-            _currentChair = bath;
+            _currentChair = chair;
         }
 
         public Chair GetCurrentChair()

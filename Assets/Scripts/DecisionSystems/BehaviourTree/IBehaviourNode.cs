@@ -7,6 +7,7 @@ namespace CharactersBehaviour
     public interface IBehaviourNode
     {
         public BehaviourState Execute();
+        public void RestartNode();
     }
 
     public enum BehaviourState

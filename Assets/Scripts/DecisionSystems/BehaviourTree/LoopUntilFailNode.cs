@@ -31,7 +31,15 @@ namespace CharactersBehaviour
                 return BehaviourState.Success;
             }
 
-            return state;
+            child.RestartNode();
+
+            return BehaviourState.Running;
+        }
+
+        public void RestartNode()
+        {
+            hasFailed = false;
+            child.RestartNode();
         }
     }
 }

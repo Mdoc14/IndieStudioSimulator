@@ -24,6 +24,8 @@ namespace CharactersBehaviour
             {
                 child.Execute();
 
+                child.RestartNode();
+
                 return BehaviourState.Running;
             }
 
@@ -36,12 +38,20 @@ namespace CharactersBehaviour
                     currentIteration++;
                 }
 
+                child.RestartNode();
+
                 return BehaviourState.Running;
             }
             else
             {
                 return BehaviourState.Success;
             }
+        }
+
+        public void RestartNode()
+        {
+            currentIteration = 0;
+            child.RestartNode();
         }
     }
 }

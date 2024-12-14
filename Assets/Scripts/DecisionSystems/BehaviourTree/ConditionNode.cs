@@ -18,5 +18,9 @@ namespace CharactersBehaviour
         {
             return condition()? BehaviourState.Success: BehaviourState.Failure;
         }
+
+        public void RestartNode()
+        {
+        }
     }
 }

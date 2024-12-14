@@ -34,5 +34,13 @@ namespace CharactersBehaviour
 
             return BehaviourState.Failure;
         }
+
+        public void RestartNode()
+        {
+            foreach (IBehaviourNode node in children)
+            {
+                node.RestartNode();
+            }
+        }
     }
 }

@@ -27,12 +27,10 @@ namespace CharactersBehaviour
         public bool activated;
 
         List<UtilityBasedAction> _posibleActions;
-        IAgent _agent;
 
-        public UtilitySystem(List<UtilityBasedAction> actions, IAgent agent, bool activated = false)
+        public UtilitySystem(List<UtilityBasedAction> actions, bool activated = false)
         {
             _posibleActions = actions;
-            _agent = agent;
             this.activated = activated;
         }
 
@@ -57,7 +55,7 @@ namespace CharactersBehaviour
         {
             foreach (UtilityBasedAction action in _posibleActions)
             {
-                action.DecisionFactor.ComputeUtility(_agent);
+                action.DecisionFactor.ComputeUtility();
             }
         }
 

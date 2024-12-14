@@ -9,16 +9,12 @@ namespace CharactersBehaviour
         float _weight;
 
         public float Utility { get { return _utility; } set { _utility = value; } }
-        public float Weight { get { return _weight; } set { _weight = value; } }
 
-        public FusionFactor(List<LeafFactor> leafFactors)
+        public FusionFactor(List<LeafFactor> leafFactors, float weight)
         {
             decisionFactors = leafFactors;
-            _utility = 0f;
-            foreach (LeafFactor leafFactor in decisionFactors)
-            {
-                _utility += leafFactor.Weight * leafFactor.Utility;
-            }
+            _weight = weight;
+            ComputeUtility();
         }
 
         public bool HasUtility()
@@ -34,14 +30,15 @@ namespace CharactersBehaviour
             return true;
         }
 
-        public void ComputeUtility(IAgent agent)
+        public void ComputeUtility()
         {
             _utility = 0f;
             foreach (LeafFactor leafFactor in decisionFactors)
             {
-                leafFactor.ComputeUtility(agent);
-                _utility += leafFactor.Weight * leafFactor.Utility;
+                leafFactor.ComputeUtility();
+                _utility += leafFactor.Utility;
             }
+            _utility *= _weight;
         }
     }
 }
