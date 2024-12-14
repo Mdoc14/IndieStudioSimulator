@@ -9,19 +9,20 @@ namespace CharactersBehaviour
     {
         IAgent _agent;
         string _factorName;
+
         float _minValue;
         float _maxValue;
-
         float _utility;
+
         float _threshold;
         float _weight;
 
         Func<float, float> _curve;
 
-        public float Utility {  get { return _utility; } set { _utility = value; } }
         public string FactorName { get { return _factorName; } }
+        public float Utility { get { return _utility; } set { _utility = value; } }
 
-        public LeafFactor(IAgent agent, string factorName, float minValue, float maxValue, float threshold, float weight = 1f, Func<float, float> curve = null)
+        public LeafFactor(IAgent agent, string factorName, float minValue, float maxValue, float threshold = 0f, float weight = 1f, Func<float, float> curve = null)
         {
             _agent = agent;
             _factorName = factorName;
@@ -42,8 +43,7 @@ namespace CharactersBehaviour
 
         public void ComputeUtility()
         {
-            _utility = _curve(ScaleFeature(_agent.GetAgentVariable(_factorName)));
-            _utility = Mathf.Clamp(_utility, 0f, 1f) * _weight;
+            _utility = Mathf.Clamp(ScaleFeature(_curve(_agent.GetAgentVariable(_factorName))), 0f, 1f) * _weight;
         }
 
         float ScaleFeature(float data)

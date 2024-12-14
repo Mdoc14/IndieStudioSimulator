@@ -11,7 +11,7 @@ namespace CharactersBehaviour
 
         public float Utility { get { return _utility; } set { _utility = value; } }
 
-        public FusionFactor(List<LeafFactor> leafFactors, float threshold, float weight = 1f)
+        public FusionFactor(List<LeafFactor> leafFactors, float threshold = 0f, float weight = 1f)
         {
             decisionFactors = leafFactors;
             _threshold = threshold;
