@@ -1,25 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace CharactersBehaviour
 {
     public class State_AtenderIncidencia : AState
     {
         private CompositeAction _incidenceAction;
+    
         public State_AtenderIncidencia(StateMachine FSM2, IAgent agent) : base(FSM2, agent) { }
 
         public override void Enter()
         {
-            List<IAction> actions = new List<IAction>();
-            actions.Add(new ListenIncidenceAction(agent));
-            actions.Add(new GoToPositionAction(agent, (agent as MaintenanceBehaviour).GetCurrentIncidence().transform.position));
-            actions.Add(new LookIncidenceAction(agent));
-            actions.Add(new GoToPositionAction(agent, GameObject.FindWithTag("Toolbox").transform.position));
-            actions.Add(new SearchToolAction(agent));
-            actions.Add(new GoToPositionAction(agent, (agent as MaintenanceBehaviour).GetCurrentIncidence().transform.position));
-            actions.Add(new RepairAction(agent));
-            _incidenceAction = new CompositeAction(actions);
+            List<IAction> _actions = new List<IAction>();
+            //AÑADIR: GOTODESKACTION 
+            _actions.Add(new ListenIncidenceAction(agent));
+            //SEPARAR
+            _actions.Add(new GoToPositionAction(agent, (agent as MaintenanceBehaviour).GetCurrentIncidence().transform.position));
+            _actions.Add(new LookIncidenceAction(agent));
+            //SEPARAR
+            _actions.Add(new GoToPositionAction(agent, GameObject.FindWithTag("Toolbox").transform.position));
+            _actions.Add(new SearchToolAction(agent));
+            //SEPARAR
+            _actions.Add(new GoToPositionAction(agent, (agent as MaintenanceBehaviour).GetCurrentIncidence().transform.position));
+            _actions.Add(new RepairAction(agent));
+            _incidenceAction = new CompositeAction(_actions);
         }
 
         public override void Exit()

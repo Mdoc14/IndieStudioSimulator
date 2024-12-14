@@ -1,7 +1,9 @@
 using CharactersBehaviour;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace CharactersBehaviour
 {
@@ -40,8 +42,7 @@ namespace CharactersBehaviour
                 agent.SetAgentVariable("cansancio", cansancio);
                 Debug.Log(agent.GetAgentVariable("cansancio"));
 
-                if (cansancio < agent.GetAgentVariable("maxCansancio")) context.State = new State_TrabajarOficina(context, agent);
-                else context.State = new State_Dormir(context, agent);
+                context.State = context.PreviousStates.Pop();
             }
 
         }

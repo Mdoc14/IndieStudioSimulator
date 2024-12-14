@@ -132,7 +132,7 @@ public class WorldManager : MonoBehaviour
 
     public void AreWorkersReady()
     {
-        if(_numWorkersReunion == GameObject.FindObjectsOfType<ProgrammerBehaviour>().Length)
+        if(_numWorkersReunion == GameObject.FindObjectsOfType<EmployeeBehaviour>().Length)
         {
             OnWorkersReady?.Invoke();
         }

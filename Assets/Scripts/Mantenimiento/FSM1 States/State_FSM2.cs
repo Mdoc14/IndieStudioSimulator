@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 namespace CharactersBehaviour
 {
@@ -15,8 +16,10 @@ namespace CharactersBehaviour
         public override void Enter()
         {
             Debug.Log("Entrando en el estado Trabajar");
+            context.PreviousStates.Push(this);
             //Establecer estado inicial para FSM2
-            FSM2.State = new State_TrabajarOficina(FSM2, agent);
+            if (FSM2.State == null) FSM2.State = new State_TrabajarOficina(FSM2, agent);
+            else FSM2.State.Enter();
         }
 
         public override void Exit()
