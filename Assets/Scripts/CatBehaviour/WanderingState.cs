@@ -15,6 +15,7 @@ public class WanderingState : AState
     public override void Enter()
     {
         Debug.Log("GATO: HE COMENZADO A DEAMBULAR");
+        agent.SetBark("Walk");
         catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
         wanderAction = new WanderAction(agent);
         wanderAction.Enter();
