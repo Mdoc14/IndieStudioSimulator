@@ -7,6 +7,8 @@ public class EmployeeBehaviour : AgentBehaviour
 {
     [SerializeField] float _lastMealTimer;
     [SerializeField] float _lastWCTimer;
+    [SerializeField] GameObject reunionChair;
+    public bool working;
     protected StateMachine _workerFSM = new StateMachine();
     protected void Awake()
     {
@@ -22,6 +24,11 @@ public class EmployeeBehaviour : AgentBehaviour
         agentVariables.Add("LastWCTimer", _lastWCTimer);
     }
 
+    protected void Start()
+    {
+        WorldManager.Instance.OnNotifyEmployeesStart += MeetingStarted;
+    }
+
     void Update()
     {
         _workerFSM.UpdateBehaviour();
@@ -29,5 +36,34 @@ public class EmployeeBehaviour : AgentBehaviour
     void FixedUpdate()
     {
         _workerFSM.FixedUpdateBehaviour();
+    }
+    public void SetReunionChair(GameObject chair)
+    {
+        reunionChair = chair;
+    }
+    public GameObject GetReunionChair() 
+    {
+        return reunionChair;
+    }
+    public void MeetingStarted()
+    {
+        if (working)
+        {
+            working = false;
+            WorldManager.Instance.SetWorkerActivity(false);
+        }
+        if (GetChair().IsOccupied())
+        {
+            GetChair().Leave();
+        }
+        if (GetCurrentChair()!= null)
+        {
+            if (GetCurrentChair().IsOccupied())
+            {
+                GetCurrentChair().Leave();
+            }
+        }
+
+        _workerFSM.State = new MeetingState(_workerFSM, this, (AState)_workerFSM.State);
     }
 }

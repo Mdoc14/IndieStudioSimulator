@@ -9,11 +9,14 @@ public class ProgrammerBehaviour : EmployeeBehaviour
     {
         base.Awake();
         _workerFSM.State = new ProgrammerWorkState(_workerFSM, this);
+        
+
     }
 
     void Update()
     {
         _workerFSM.UpdateBehaviour();
+
     }
     void FixedUpdate()
     {

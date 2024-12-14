@@ -24,8 +24,10 @@ public class WorldManager : MonoBehaviour
     //Reuniones:
     private int _numWorkersReunion = 0;
     public event Action OnWorkersReady;
+    public event Action OnNotifyEmployeesStart;
+    public event Action OnNotifyEmployeesEnd;
 
-    void Start()
+    void Awake()
     {
         Instance = this;
 
@@ -106,12 +108,14 @@ public class WorldManager : MonoBehaviour
 
     public void ReunionNotified()
     {
+        OnNotifyEmployeesStart?.Invoke();
         //Falta aplicar la lógica para que los trabajadores vayan a la reunión
         //Se debería notificar a los trabajadores para que vayan a la sala de reuniones, busquen una silla y se sienten, solamente
     }
 
     public void ReunionEnded()
     {
+        OnNotifyEmployeesEnd?.Invoke();
         //Lógica similar a ReunionNotified
     }
 

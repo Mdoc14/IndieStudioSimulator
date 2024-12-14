@@ -791,7 +791,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -812,8 +812,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chair: {fileID: 0}
+  _computer: {fileID: 0}
   _lastMealTimer: 0
   _lastWCTimer: 0
+  reunionChair: {fileID: 0}
+  working: 0
 --- !u!1 &7175053735756269289
 GameObject:
   m_ObjectHideFlags: 0
