@@ -15,6 +15,7 @@ public class PatrolState : AState
     public override void Enter()
     {
         Debug.Log("ENTRANDO EN ESTADO DE PATRULLAR");
+        context.PreviousStates.Push(this);
         _goToStartingPos = new GoToPositionAction(agent, agent.GetAgentGameObject().GetComponent<BossBehaviour>().GetFirstWaypoint().position);
         _goToStartingPos.Enter();
         _patrolTime = UnityEngine.Random.Range(10, 60);

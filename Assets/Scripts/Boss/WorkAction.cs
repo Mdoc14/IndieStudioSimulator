@@ -47,6 +47,7 @@ public class WorkAction : ASimpleAction
     public void OnComputerBroken()
     {
         _workTime = 1000; //Se evitan transiciones indeseadas
+        (agent as AgentBehaviour).currentIncidence = agent.GetComputer();
         Exit(); //Se hace el exit manualmente, pues al no poner finished = true en ningún momento no se va a hacer automaticamente
         _context.State = new ReportIncidenceState(_context, agent, new BossWorkState(_context, agent, true));
     }

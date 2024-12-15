@@ -14,7 +14,7 @@ namespace CharactersBehaviour
         private StateMachine FSM1;
         [SerializeField] private float _maxCansancio = 1;
         public event Action OnIncidence;
-        private Computer _currentIncidence = null;
+        private AInteractable _currentIncidence = null;
 
         //Estados de FSM1 SOLO TENGO QUE CREAR EL ESTADO INCIAL YA EL RESTO SE VAN CREANDO SOBRE A MARCHA
         //private CharactersBehaviour.State_AcariciarGato acariciarGatoState;
@@ -48,12 +48,12 @@ namespace CharactersBehaviour
             FSM1.UpdateBehaviour();
         }
 
-        public Computer GetCurrentIncidence()
+        public AInteractable GetCurrentIncidence()
         {
             return _currentIncidence;
         }
 
-        public void SetCurrentIncidence(Computer incidence)
+        public void SetCurrentIncidence(AInteractable incidence)
         {
             _currentIncidence = incidence;
             if (incidence != null) OnIncidence?.Invoke();

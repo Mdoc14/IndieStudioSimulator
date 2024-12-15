@@ -10,6 +10,7 @@ namespace CharactersBehaviour
         [SerializeField] private Chair _chair;
         [SerializeField] private Computer _computer;
         private Chair _currentChair;
+        public AInteractable currentIncidence;
         public bool male = true;
 
         public GameObject GetAgentGameObject()

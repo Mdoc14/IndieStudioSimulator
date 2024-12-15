@@ -20,7 +20,7 @@ public class Computer : AInteractable
         _smokeParticles.SetActive(true);
     }
 
-    public void Repair()
+    public override void Repair()
     {
         base.ResetInteractable();
         broken = false;

@@ -24,6 +24,8 @@ public class AInteractable : MonoBehaviour, IInteractable
         Debug.Log("Se ha interactuado");
     }
 
+    public virtual void Repair() { }
+
     public void HoverEnter()
     {
         displayText.gameObject.SetActive(true);
