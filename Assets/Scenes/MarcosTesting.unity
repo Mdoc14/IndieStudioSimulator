@@ -3860,6 +3860,7 @@ Transform:
   - {fileID: 2034204149}
   - {fileID: 1013760418}
   - {fileID: 1852981779}
+  - {fileID: 1978868811}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1676249443
@@ -4190,6 +4191,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sitTransform: {fileID: 1122616787}
   selected: 0
+--- !u!114 &1772816465 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8672238286822598449, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+  m_PrefabInstance: {fileID: 487735304}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e863357ef93d1a74092529febcadbfee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1780851471
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4432,6 +4444,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1852981779}
   - component: {fileID: 1852981780}
+  - component: {fileID: 1852981781}
   m_Layer: 0
   m_Name: RestArea
   m_TagString: Untagged
@@ -4475,6 +4488,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.257164, y: 3.2288086, z: 4.315195}
   m_Center: {x: 2.9686232, y: 0.31440437, z: 10.756843}
+--- !u!114 &1852981781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852981778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad8fc8596c94d745b51baaeb5e0378d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trashcan: {fileID: 0}
+  machine: {fileID: 1772816465}
+  catBox: {fileID: 0}
 --- !u!1 &1956112112
 GameObject:
   m_ObjectHideFlags: 0
@@ -4600,6 +4628,75 @@ Transform:
   - {fileID: 194178286}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1978868810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1978868811}
+  - component: {fileID: 1978868813}
+  - component: {fileID: 1978868812}
+  m_Layer: 0
+  m_Name: Terrace
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1978868811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978868810}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.44, y: 0, z: -5.57}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1625618364}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1978868812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978868810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad8fc8596c94d745b51baaeb5e0378d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trashcan: {fileID: 0}
+  machine: {fileID: 0}
+  catBox: {fileID: 0}
+--- !u!65 &1978868813
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1978868810}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.35001, y: 3.2288086, z: 6.305195}
+  m_Center: {x: 2.8835163, y: 0.31440437, z: 10.676167}
 --- !u!1 &1991234940
 GameObject:
   m_ObjectHideFlags: 0
