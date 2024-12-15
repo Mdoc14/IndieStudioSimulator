@@ -12,12 +12,12 @@ public class NotifyReunionAction : ASimpleAction
     public override void Enter()
     {
         base.Enter();
-        GameObject.Find("BossReunionChair").GetComponent<Chair>().Sit(agent.GetAgentGameObject());
+        GameObject.FindWithTag("BossReunionChair").GetComponent<Chair>().Sit(agent.GetAgentGameObject());
         WorldManager.Instance.ReunionNotified();
         WorldManager.Instance.OnWorkersReady += StartReunion;
         Debug.Log("Reunión notificada. Esperando a los trabajadores...");
         agent.SetBark("Wait");
-        agent.SetBark("Idle");
+        agent.SetAnimation("Idle");
     }
 
     public override void Exit()

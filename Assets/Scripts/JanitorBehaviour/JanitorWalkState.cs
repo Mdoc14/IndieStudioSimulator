@@ -27,6 +27,7 @@ public class JanitorWalkState : AState
         {
             Debug.Log("El conserje ya ha visitado todas las salas, va a descansar");
             janitorBehaviour.ClearVisitatedRooms();
+            janitorBehaviour.RoomDetectorsAreActive(false);
             context.State = new JanitorRestState(context, agent, janitorBehaviour.restTime);
         }
         else 
@@ -49,6 +50,7 @@ public class JanitorWalkState : AState
             Debug.Log("Caminando a la sala " + officeRooms[roomIndex].name);
 
             isWalking = true;
+            janitorBehaviour.RoomDetectorsAreActive(true);
         }
     }
 

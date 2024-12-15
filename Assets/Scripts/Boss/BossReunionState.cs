@@ -12,7 +12,7 @@ public class BossReunionState : AState
     {
         Debug.Log("EL JEFE VA A EFECTUAR UNA REUNIÓN...");
         List<IAction> actions = new List<IAction>();
-        actions.Add(new GoToPositionAction(agent, GameObject.Find("BossReunionChair").transform.position));
+        actions.Add(new GoToPositionAction(agent, GameObject.FindWithTag("BossReunionChair").transform.position));
         actions.Add(new NotifyReunionAction(agent));
         actions.Add(new PerformReunionAction(agent));
         _reunionAction = new CompositeAction(actions);

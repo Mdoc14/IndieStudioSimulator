@@ -86,4 +86,12 @@ public class JanitorBehaviour : AgentBehaviour
     {
         agentVariables[restTime] = agentVariables[trashCleaned] * 10;
     }
+
+    public void RoomDetectorsAreActive(bool value)
+    {
+        foreach (var room in officeRooms)
+        { 
+            room.SetActive(value);
+        }
+    }
 }
