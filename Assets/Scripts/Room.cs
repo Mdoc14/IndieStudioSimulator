@@ -51,10 +51,15 @@ public class Room : MonoBehaviour
         trash.RemoveAt(0);
     }
 
-    public Vector3 GetTrashCanPosition() 
+    public Vector3 GetTrashcanPosition() 
     {
         Debug.Log("Buscando papelera de la sala");
         return trashcan.transform.position;
+    }
+
+    public GameObject GetTrashcan()
+    {
+        return trashcan;
     }
 
     public bool IsMachineEmpty()

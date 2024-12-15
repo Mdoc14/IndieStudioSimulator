@@ -21,6 +21,7 @@ public class ThrowCatFecesAction : ASimpleAction
         Debug.Log("Accion: tirar heces de gato");
         agent.SetBark("CleanBathroom");
         agent.SetAnimation("Throw");
+        currentRoom.GetTrashcan().GetComponent<Trashcan>().Repair();
     }
     public override void Exit()
     {

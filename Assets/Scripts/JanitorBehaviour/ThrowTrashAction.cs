@@ -21,6 +21,7 @@ public class ThrowTrashAction : ASimpleAction
         Debug.Log("Accion: tirar basura");
         agent.SetBark("CleanBathroom");
         agent.SetAnimation("Throw");
+        currentRoom.GetTrashcan().GetComponent<Trashcan>().Repair();
     }
     public override void Exit()
     {
