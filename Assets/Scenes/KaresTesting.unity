@@ -307,6 +307,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.227456, y: 2.6, z: 4.1510696}
   m_Center: {x: -0.21690655, y: 0, z: -0.060865402}
+--- !u!114 &193571481 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1170533193973162736, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+  m_PrefabInstance: {fileID: 487735304}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ee225d9176d2ea46bbf78bd0292994f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &323988311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -319,6 +330,10 @@ PrefabInstance:
       propertyPath: _chair
       value: 
       objectReference: {fileID: 1050437044}
+    - target: {fileID: 548941542257509448, guid: e36c72406f8186440886c7c6cc0e0c2b, type: 3}
+      propertyPath: _computer
+      value: 
+      objectReference: {fileID: 193571481}
     - target: {fileID: 548941542257509448, guid: e36c72406f8186440886c7c6cc0e0c2b, type: 3}
       propertyPath: lightSwitch
       value: 
@@ -572,6 +587,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 3452736608705351636, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 5984893854557992986, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 7950066558981644588, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}

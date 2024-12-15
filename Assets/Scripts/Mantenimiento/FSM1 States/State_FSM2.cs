@@ -25,6 +25,7 @@ namespace CharactersBehaviour
         public override void Exit()
         {
             Debug.Log("Saliendo del estado Trabajar");
+            agent.GetComputer().SetScreensContent(ScreenContent.Off);
             //Limpiar o resetear FSM2 si es necesario
         }
 

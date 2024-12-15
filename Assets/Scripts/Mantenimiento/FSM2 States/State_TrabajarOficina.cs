@@ -24,7 +24,7 @@ namespace CharactersBehaviour
             {
                 actions.Add(new GoToDeskAction(agent));
             }
-            actions.Add(new ActionTrabajarOficina(agent));
+            actions.Add(new ActionTrabajarOficina(agent, context));
             _trabajarEnOficina = new CompositeAction(actions);
             
 
