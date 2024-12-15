@@ -15,6 +15,12 @@ namespace CharactersBehaviour
             this.agent = agent;
         }
 
+        public void RestartAction()
+        {
+            started = false;
+            finished = false;
+        }
+
         public bool Started { get { return started; } set { started = value; } }
         public bool Finished { get { return finished; } set { finished = value; } }
         public virtual void Enter() { started = true; }
