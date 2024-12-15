@@ -55,7 +55,31 @@ namespace CharactersBehaviour
                 }
             }
 
-            return -1f;
+            throw new Exception($"Intentaste obtener la utilidad de un factor de nombre {factorName}. No existe ningún factor de decisión en el sistema de utilidad con dicho nombre.");
+        }
+
+        public bool FactorHasUtility(string factorName)
+        {
+            foreach (UtilityBasedAction action in _posibleActions)
+            {
+                if (action.DecisionFactor is LeafFactor leafFactor1 && leafFactor1.FactorName.Equals(factorName))
+                {
+                    return leafFactor1.HasUtility();
+                }
+
+                if (action.DecisionFactor is FusionFactor fusionFactor)
+                {
+                    foreach (LeafFactor leafFactor2 in fusionFactor.GetDecisionFactors())
+                    {
+                        if (leafFactor2.FactorName.Equals(factorName))
+                        {
+                            return leafFactor2.HasUtility();
+                        }
+                    }
+                }
+            }
+
+            throw new Exception($"Intentaste obtener si un factor de nombre {factorName} tenía utilidad. No existe ningún factor de decisión en el sistema de utilidad con dicho nombre.");
         }
 
         void SelectBestAction()
