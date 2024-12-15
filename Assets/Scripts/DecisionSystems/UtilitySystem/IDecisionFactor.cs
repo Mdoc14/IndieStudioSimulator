@@ -2,7 +2,8 @@
 {
     public interface IDecisionFactor
     {
-        float Utility { get; }
+        float Utility { get; set; }
+        bool HasUtility();
         void ComputeUtility();
     }
 }

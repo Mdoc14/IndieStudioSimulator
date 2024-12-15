@@ -6,15 +6,22 @@ namespace CharactersBehaviour
     {
         List<LeafFactor> decisionFactors;
         float _utility;
+        float _threshold;
         float _weight;
 
-        public float Utility { get { return _utility; } }
+        public float Utility { get { return _utility; } set { _utility = value; } }
 
-        public FusionFactor(List<LeafFactor> leafFactors, float weight = 1f)
+        public FusionFactor(List<LeafFactor> leafFactors, float threshold = 0f, float weight = 1f)
         {
             decisionFactors = leafFactors;
+            _threshold = threshold;
             _weight = weight;
             ComputeUtility();
+        }
+
+        public bool HasUtility()
+        {
+            return _utility >= _threshold;
         }
 
         public void ComputeUtility()
