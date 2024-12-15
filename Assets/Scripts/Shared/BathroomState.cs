@@ -11,13 +11,15 @@ public class BathroomState : AState
     }
     AState nextState;
     CompositeAction _bathroomAction;
+    GameObject _currentWaitingLine;
 
     public override void Enter()
     {
         //El estado de ir al baño se divide en tres acciones: ir al baño, comprobar si hay un retrete libre y usarlo
+        SelectBathroom();
         List<IAction> actions = new List<IAction>();
-        actions.Add(new GoToPositionAction(agent, GameObject.Find("Bathroom").transform.position));
-        actions.Add(new WaitingBathroomAction(agent));
+        actions.Add(new GoToPositionAction(agent, _currentWaitingLine.transform.position));
+        actions.Add(new WaitingBathroomAction(agent, _currentWaitingLine.GetComponent<BathroomWaitingLine>()));
         actions.Add(new UseBathroomAction(agent));
         _bathroomAction = new CompositeAction(actions);
     }
@@ -38,6 +40,14 @@ public class BathroomState : AState
         if (_bathroomAction.Finished)
         {
             context.State = nextState;
+        }
+    }
+
+    private void SelectBathroom()
+    {
+        foreach(GameObject line in GameObject.FindGameObjectsWithTag("BathroomWaitingLine"))
+        {
+            if (line.GetComponent<BathroomWaitingLine>().maleBathroom == (agent as AgentBehaviour).male) _currentWaitingLine = line;
         }
     }
 }

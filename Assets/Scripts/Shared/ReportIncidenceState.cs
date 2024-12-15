@@ -19,7 +19,7 @@ public class ReportIncidenceState : AState
         //El estado de ir al baño se divide en tres acciones: ir al baño, comprobar si hay un retrete libre y usarlo
         List<IAction> actions = new List<IAction>();
         actions.Add(new LookIncidenceAction(agent));
-        actions.Add(new GoToPositionAction(agent, GameObject.Find("MaintenanceRoom").transform.position));
+        actions.Add(new GoToPositionAction(agent, GameObject.FindWithTag("IncidenceChair").transform.position));
         actions.Add(new WaitingMaintenanceAction(agent));
         actions.Add(new GoToDeskAction(agent, GameObject.FindWithTag("IncidenceChair").GetComponent<Chair>()));
         actions.Add(new TalkAction(agent, TalkCondition(), () => GameObject.FindObjectOfType<MaintenanceBehaviour>().SetCurrentIncidence(agent.GetComputer())));

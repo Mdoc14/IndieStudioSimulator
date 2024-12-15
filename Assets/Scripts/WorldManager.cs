@@ -19,8 +19,6 @@ public class WorldManager : MonoBehaviour
     private float _productivity = 500; //0 -> bancarrota; 1000 -> éxito total, se van de vacaciones
     //Manejo de la basura:
     [SerializeField] private GameObject _trashPrefab;
-    //Manejo del baño:
-    private List<Chair> _baths = new List<Chair>();
     //Reuniones:
     private int _numWorkersReunion = 0;
     public event Action OnWorkersReady;
@@ -32,11 +30,6 @@ public class WorldManager : MonoBehaviour
         Instance = this;
 
         _productivitySlider = MainMenuManager.Instance.transform.GetComponentInChildren<Slider>();
-
-        foreach(GameObject bathroom in GameObject.FindGameObjectsWithTag("Bath"))
-        {
-            _baths.Add(bathroom.GetComponent<Chair>());
-        }
 
         foreach(GameObject c in GameObject.FindGameObjectsWithTag("ReunionChair")) 
         { 
@@ -58,8 +51,9 @@ public class WorldManager : MonoBehaviour
             MainMenuManager.Instance.GameEnded(_productivity >= 1000);
         }
         _productivitySlider.value = _productivity;
-        //Time.timeScale = _timeSpeed;
-        //Lo siguiente sólo está aquí para probar el jefe; hay que eliminarlo más adelante
+
+
+        //Lo siguiente sólo está aquí para probar el jefe, HAY QUE ELIMINARLO MÁS ADELANTE
         DecreaseWorkerInReunion();
         AddWorkerToReunion();
     }
@@ -88,20 +82,6 @@ public class WorldManager : MonoBehaviour
         NavMeshHit navHit;
         NavMesh.SamplePosition(position, out navHit, 20, 1);
         GameObject.Instantiate(_trashPrefab, navHit.position, Quaternion.identity);
-    }
-
-    public Chair GetBathroom(IAgent agent) //Devuelve un baño libre que ni está siendo usado ni ha sido seleccionado por un personaje para usarse
-    {
-        foreach(Chair bath in _baths)
-        {
-            if (!bath.IsOccupied() && !bath.selected) 
-            {
-                agent.SetCurrentChair(bath);
-                bath.selected = true;
-                return bath;
-            }
-        }
-        return null;
     }
 
     #region REUNIONES

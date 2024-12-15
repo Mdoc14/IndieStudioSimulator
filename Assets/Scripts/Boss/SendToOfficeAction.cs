@@ -20,9 +20,9 @@ public class SendToOfficeAction : ASimpleAction
         _navAgent = _boss.GetComponent<NavMeshAgent>();
         _navAgent.speed = agent.GetAgentVariable("Speed");
         _navAgent.SetDestination(_boss.GetChair().transform.position);
-        GameObject.Find("ScoldedChair").GetComponent<Chair>().OnSit += OnWorkerReady;
+        GameObject.FindWithTag("ScoldedChair").GetComponent<Chair>().OnSit += OnWorkerReady;
         agent.SetBark("Scold");
-        agent.SetAnimation("Scolding");
+        agent.SetAnimation("Walk");
     }
 
     public override void Exit()

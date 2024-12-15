@@ -19,7 +19,7 @@ public class UseBathroomAction : ASimpleAction
     {
         base.Enter();
         _reached = false;
-        _time = Random.Range(3, 60); //Está un tiempo aleatorio usando el baño
+        _time = Random.Range(3, 20); //Está un tiempo aleatorio usando el baño
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _bath = agent.GetCurrentChair();
         _navAgent.SetDestination(_bath.transform.position);

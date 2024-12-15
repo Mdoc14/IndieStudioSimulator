@@ -34,7 +34,7 @@ public class PerformReunionAction : ASimpleAction
         _time -= Time.deltaTime;
         if (_time <= 0)
         {
-            GameObject.Find("BossReunionChair").GetComponent<Chair>().Leave();
+            GameObject.FindWithTag("BossReunionChair").GetComponent<Chair>().Leave();
             WorldManager.Instance.ReunionEnded();
             finished = true;
         }

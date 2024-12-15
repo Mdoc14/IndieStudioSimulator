@@ -77,7 +77,7 @@ public class PatrolState : AState
 
     private bool SlackerOnSight()
     {
-        if (agent.GetAgentGameObject().GetComponent<BossBehaviour>().ScoldedAgent != null)
+        if ((agent as BossBehaviour).ScoldedAgent != null)
         {
             float newAnger = agent.GetAgentVariable("CurrentAnger") + 100 * agent.GetAgentVariable("Irritability");
             agent.SetAgentVariable("CurrentAnger", newAnger);

@@ -6,7 +6,8 @@ using UnityEngine.AI;
 
 public class WaitingBathroomAction : ASimpleAction
 {
-    public WaitingBathroomAction(IAgent agent) : base(agent) { }
+    BathroomWaitingLine _currentLine;
+    public WaitingBathroomAction(IAgent agent, BathroomWaitingLine waitingLine = null) : base(agent) { _currentLine = waitingLine; }
 
     public override void Enter()
     {
@@ -27,7 +28,7 @@ public class WaitingBathroomAction : ASimpleAction
 
     public override void Update()
     {
-        Chair bath = WorldManager.Instance.GetBathroom(agent);
+        Chair bath = _currentLine.GetBathroom(agent);
         if(bath != null)
         {
             finished = true;
