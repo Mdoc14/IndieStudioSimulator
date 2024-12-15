@@ -65,7 +65,7 @@ namespace CharactersBehaviour
 
             foreach (UtilityBasedAction action in _posibleActions)
             {
-                if (action.DecisionFactor.HasUtility() && (action.DecisionFactor.Utility > highestUtility))
+                if (action.DecisionFactor.Utility > highestUtility)
                 {
                     highestUtility = action.DecisionFactor.Utility;
                     bestAction = action;
