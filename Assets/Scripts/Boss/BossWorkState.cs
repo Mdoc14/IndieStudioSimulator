@@ -13,9 +13,10 @@ public class BossWorkState : AState
     public override void Enter()
     {
         Debug.Log("ENTRANDO EN ESTADO DE TRABAJO...");
+        context.PreviousStates.Push(this);
         //El jefe va a su silla y despu�s utiliza su ordenador o su tel�fono
         List<IAction> actions = new List<IAction>();
-        actions.Add(new GoToDeskAction(agent));
+        actions.Add(new GoToDeskAction(agent)); 
         if (Random.Range(0, 2) == 0 || _forceUseComputer) actions.Add(new WorkAction(agent, _context));
         else actions.Add(new CallAction(agent));
         _workAction = new CompositeAction(actions);

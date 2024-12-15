@@ -22,7 +22,7 @@ public class ReportIncidenceState : AState
         actions.Add(new GoToPositionAction(agent, GameObject.FindWithTag("IncidenceChair").transform.position));
         actions.Add(new WaitingMaintenanceAction(agent));
         actions.Add(new GoToDeskAction(agent, GameObject.FindWithTag("IncidenceChair").GetComponent<Chair>()));
-        actions.Add(new TalkAction(agent, TalkCondition(), () => GameObject.FindObjectOfType<MaintenanceBehaviour>().SetCurrentIncidence(agent.GetComputer())));
+        actions.Add(new TalkAction(agent, TalkCondition(), () => GameObject.FindObjectOfType<MaintenanceBehaviour>().SetCurrentIncidence((agent as AgentBehaviour).currentIncidence)));
         actions.Add(new FollowAgentAction(agent, GameObject.FindObjectOfType<MaintenanceBehaviour>(), FollowCondition()));
         _incidenceAction = new CompositeAction(actions);
     }
@@ -40,9 +40,10 @@ public class ReportIncidenceState : AState
     public override void Update()
     {
         _incidenceAction?.Update();
-        if (_incidenceAction.Finished && nextState != null)
+        if (_incidenceAction.Finished)
         {
-            context.State = nextState;
+            if (nextState != null) context.State = nextState;
+            else context.State = context.PreviousStates.Pop();
         }
     }
 
@@ -62,7 +63,7 @@ public class ReportIncidenceState : AState
     {
         return () =>
         {
-            if (!agent.GetComputer().broken)
+            if (GameObject.FindObjectOfType<MaintenanceBehaviour>().GetCurrentIncidence() == null)
             {
                 return true;
             }

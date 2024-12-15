@@ -16,11 +16,13 @@ public class BathroomState : AState
     public override void Enter()
     {
         //El estado de ir al baño se divide en tres acciones: ir al baño, comprobar si hay un retrete libre y usarlo
+        Debug.Log("HE ENTRADO EN EL ESTADO DE IR AL BAÑO");
+        context.PreviousStates.Push(this);
         SelectBathroom();
         List<IAction> actions = new List<IAction>();
         actions.Add(new GoToPositionAction(agent, _currentWaitingLine.transform.position));
         actions.Add(new WaitingBathroomAction(agent, _currentWaitingLine.GetComponent<BathroomWaitingLine>()));
-        actions.Add(new UseBathroomAction(agent));
+        actions.Add(new UseBathroomAction(agent, context));
         _bathroomAction = new CompositeAction(actions);
     }
 
