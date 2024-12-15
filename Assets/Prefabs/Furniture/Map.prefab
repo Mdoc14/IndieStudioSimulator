@@ -2224,6 +2224,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3297,6 +3301,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4077,6 +4085,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JanitorTrashCube
       objectReference: {fileID: 0}
+    - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
+      propertyPath: m_TagString
+      value: Trashcan
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4783,6 +4795,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5166,6 +5182,10 @@ PrefabInstance:
     - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
       propertyPath: m_Name
       value: LightRoomTrashCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
+      propertyPath: m_TagString
+      value: Trashcan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5632,6 +5652,10 @@ PrefabInstance:
     - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
       propertyPath: m_Name
       value: WomansTrashCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
+      propertyPath: m_TagString
+      value: Trashcan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7481,6 +7505,10 @@ PrefabInstance:
     - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
       propertyPath: m_Name
       value: PC (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9469,6 +9497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10459,6 +10491,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC
       objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11173,6 +11209,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11844,6 +11884,10 @@ PrefabInstance:
     - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
       propertyPath: m_Name
       value: PC (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13405,6 +13449,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13677,6 +13725,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13804,6 +13856,10 @@ PrefabInstance:
     - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
       propertyPath: m_Name
       value: BossRoomTrashCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
+      propertyPath: m_TagString
+      value: Trashcan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14006,6 +14062,10 @@ PrefabInstance:
     - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
       propertyPath: m_Name
       value: MantanainceTrashCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
+      propertyPath: m_TagString
+      value: Trashcan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14961,6 +15021,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BreakroomTrashCube
       objectReference: {fileID: 0}
+    - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
+      propertyPath: m_TagString
+      value: Trashcan
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -15022,6 +15086,10 @@ PrefabInstance:
     - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
       propertyPath: m_Name
       value: BalconyTrashCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
+      propertyPath: m_TagString
+      value: Trashcan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15463,6 +15531,10 @@ PrefabInstance:
     - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
       propertyPath: m_Name
       value: ConferenceTrashCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
+      propertyPath: m_TagString
+      value: Trashcan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -16578,6 +16650,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC
       objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17089,6 +17165,10 @@ PrefabInstance:
     - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
       propertyPath: m_Name
       value: MensTrashCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
+      propertyPath: m_TagString
+      value: Trashcan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17626,6 +17706,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PC (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17749,6 +17833,10 @@ PrefabInstance:
     - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
       propertyPath: m_Name
       value: MainroomTrashCube
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910656850660924668, guid: c6f555e04e6688b4281c690d6513b608, type: 3}
+      propertyPath: m_TagString
+      value: Trashcan
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19104,6 +19192,10 @@ PrefabInstance:
     - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
       propertyPath: m_Name
       value: PC (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5433823367224466987, guid: fd84c19945bc66d4bbfdb2ab50a9ffff, type: 3}
+      propertyPath: m_TagString
+      value: Computer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

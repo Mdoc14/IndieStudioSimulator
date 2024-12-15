@@ -17,6 +17,8 @@ TagManager:
   - BossReunionChair
   - ScoldedChair
   - BathroomWaitingLine
+  - Trashcan
+  - Computer
   layers:
   - Default
   - TransparentFX
