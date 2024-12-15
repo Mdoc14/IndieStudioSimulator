@@ -25,6 +25,11 @@ namespace CharactersBehaviour
             started = false;
             finished = false;
             _currentIndex = 0;
+
+            foreach (IAction action in _actions)
+            {
+                action.RestartAction();
+            }
         }
 
         public bool Started { get { return started; } set { started = value; } }
