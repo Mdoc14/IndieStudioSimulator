@@ -36,8 +36,7 @@ namespace CharactersBehaviour
 
         public void RestartNode()
         {
-            action.Started = false;
-            action.Finished = false;
+            action.RestartAction();
         }
     }
 }

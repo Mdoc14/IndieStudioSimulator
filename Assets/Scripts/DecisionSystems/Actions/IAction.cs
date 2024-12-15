@@ -8,6 +8,7 @@ namespace CharactersBehaviour
     {
         public bool Started { get; set; }
         public bool Finished { get; set; }
+        public void RestartAction();
         public void Enter();
         public void Exit();
         public void Update();

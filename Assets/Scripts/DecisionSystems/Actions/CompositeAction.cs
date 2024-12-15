@@ -20,6 +20,13 @@ namespace CharactersBehaviour
             Enter();
         }
 
+        public void RestartAction()
+        {
+            started = false;
+            finished = false;
+            _currentIndex = 0;
+        }
+
         public bool Started { get { return started; } set { started = value; } }
         public bool Finished { get { return finished; } set { finished = value; } }
 

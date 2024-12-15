@@ -35,8 +35,7 @@ namespace CharactersBehaviour
 
         public void Reset()
         {
-            _action.Started = false;
-            _action.Finished = false;
+            _action.RestartAction();
         }
     }
 }
