@@ -99,6 +99,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 72ad73aecc9b71546a9d423af9d10b83, type: 3}
   - name: BossWork
     sprite: {fileID: 21300000, guid: ac16ad2dac753fa42a59577d74dbddc2, type: 3}
+  - name: MaintenanceWork
+    sprite: {fileID: 21300000, guid: c90cde70ec08ae14d8cd760cbf6422a1, type: 3}
   - name: Checking
     sprite: {fileID: 21300000, guid: 94dcbf446b78a6a45a3db43bdae06bd2, type: 3}
   - name: Report

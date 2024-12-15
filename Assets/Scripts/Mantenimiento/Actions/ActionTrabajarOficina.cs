@@ -14,7 +14,7 @@ public class ActionTrabajarOficina : ASimpleAction
         base.Enter();
         _workTime = Random.Range(5, 10);
         Debug.Log("Está trabajando en su ordenador...");
-        agent.SetBark("Program");
+        agent.SetBark("MaintenanceWork");
         agent.SetAnimation("Work");
     }
 
