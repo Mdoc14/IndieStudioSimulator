@@ -325,7 +325,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chair: {fileID: 0}
+  _computer: {fileID: 0}
   restTime: RestTime
+  trashCleaned: TrashCleaned
   officeRooms:
   - {fileID: 0}
   - {fileID: 0}
@@ -1057,7 +1059,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
