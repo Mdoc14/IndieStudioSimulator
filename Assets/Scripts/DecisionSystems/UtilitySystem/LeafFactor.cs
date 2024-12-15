@@ -20,6 +20,8 @@ namespace CharactersBehaviour
         Func<float, float> _curve;
 
         public string FactorName { get { return _factorName; } }
+        public float MinValue { get { return _minValue; } }
+        public float MaxValue { get { return _maxValue; } }
         public float Utility { get { return _utility; } set { _utility = value; } }
 
         public LeafFactor(IAgent agent, string factorName, float minValue, float maxValue, float threshold = 0f, float weight = 1f, Func<float, float> curve = null)

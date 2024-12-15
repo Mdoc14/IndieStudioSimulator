@@ -34,13 +34,13 @@ namespace CharactersBehaviour
             this.activated = activated;
         }
 
-        public float GetFactorUtility(string factorName)
+        public LeafFactor GetLeafFactor(string factorName)
         {
             foreach (UtilityBasedAction action in _posibleActions)
             {
                 if (action.DecisionFactor is LeafFactor leafFactor1 && leafFactor1.FactorName.Equals(factorName))
                 {
-                    return leafFactor1.Utility;
+                    return leafFactor1;
                 }
 
                 if (action.DecisionFactor is FusionFactor fusionFactor)
@@ -49,37 +49,13 @@ namespace CharactersBehaviour
                     {
                         if (leafFactor2.FactorName.Equals(factorName))
                         {
-                            return leafFactor2.Utility;
+                            return leafFactor2;
                         }
                     }
                 }
             }
 
-            throw new Exception($"Intentaste obtener la utilidad de un factor de nombre {factorName}. No existe ningún factor de decisión en el sistema de utilidad con dicho nombre.");
-        }
-
-        public bool FactorHasUtility(string factorName)
-        {
-            foreach (UtilityBasedAction action in _posibleActions)
-            {
-                if (action.DecisionFactor is LeafFactor leafFactor1 && leafFactor1.FactorName.Equals(factorName))
-                {
-                    return leafFactor1.HasUtility();
-                }
-
-                if (action.DecisionFactor is FusionFactor fusionFactor)
-                {
-                    foreach (LeafFactor leafFactor2 in fusionFactor.GetDecisionFactors())
-                    {
-                        if (leafFactor2.FactorName.Equals(factorName))
-                        {
-                            return leafFactor2.HasUtility();
-                        }
-                    }
-                }
-            }
-
-            throw new Exception($"Intentaste obtener si un factor de nombre {factorName} tenía utilidad. No existe ningún factor de decisión en el sistema de utilidad con dicho nombre.");
+            throw new Exception($"Intentaste obtener una referencia a un factor de nombre {factorName}. No existe ningún factor de decisión en el sistema de utilidad con dicho nombre.");
         }
 
         void SelectBestAction()
