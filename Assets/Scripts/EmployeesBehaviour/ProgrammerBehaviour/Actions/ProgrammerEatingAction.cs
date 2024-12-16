@@ -7,13 +7,18 @@ using UnityEngine.AI;
 public class ProgrammerEatingAction : ASimpleAction
 {
     private NavMeshAgent _navAgent;
-    StateMachine context;
+    StateMachine _context;
+    EmployeeBehaviour _programmerBehaviour;
 
-    public ProgrammerEatingAction(IAgent agent, StateMachine sm) : base(agent) { context = sm; }
+    float _time;
+
+    public ProgrammerEatingAction(IAgent agent, StateMachine sm) : base(agent) { _context = sm; }
 
     public override void Enter()
     {
         base.Enter();
+        _time = Random.Range(5, 15);
+        _programmerBehaviour = agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>();
         agent.SetBark("Eat");
         agent.SetAnimation("Eat");
     }
@@ -30,10 +35,13 @@ public class ProgrammerEatingAction : ASimpleAction
 
     public override void Update()
     {
-        if (_navAgent.remainingDistance <= _navAgent.stoppingDistance && !_navAgent.pathPending)
+        _time -= Time.deltaTime;
+        if (_time <=0)
         {
             finished = true;
-            context.State = new ProgrammerWorkState(context, agent);
+            agent.SetAgentVariable(_programmerBehaviour.TimeWithoutConsuming,0);
+            agent.SetAgentVariable(_programmerBehaviour.Motivation, agent.GetAgentVariable(_programmerBehaviour.Motivation) + Random.Range(0, 0.2f));
+            _context.State = new ProgrammerWorkState(_context, agent);
         }
     }
 }

@@ -19,6 +19,7 @@ TagManager:
   - BathroomWaitingLine
   - Trashcan
   - Computer
+  - SmokeArea
   layers:
   - Default
   - TransparentFX

@@ -7,14 +7,17 @@ using UnityEngine.AI;
 public class TakeFoodAction : ASimpleAction
 {
     private NavMeshAgent _navAgent;
+    private VendingMachineManager _machineManager;
+    float _time = 3f;
 
-    public TakeFoodAction(IAgent agent) : base(agent) { }
+    public TakeFoodAction(IAgent agent, VendingMachineManager vendingMachine) : base(agent) { _machineManager = vendingMachine; }
 
     public override void Enter()
     {
         base.Enter();
-        agent.SetBark("Walk");
-        agent.SetAnimation("Walk");
+        _machineManager.TakeProduct();
+        agent.SetBark("Take");
+        agent.SetAnimation("Take");
     }
 
     public override void Exit()
@@ -29,7 +32,8 @@ public class TakeFoodAction : ASimpleAction
 
     public override void Update()
     {
-        if (_navAgent.remainingDistance <= _navAgent.stoppingDistance && !_navAgent.pathPending)
+        _time -= Time.deltaTime;
+        if (_time <= 0)
         {
             finished = true;
         }

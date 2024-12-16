@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SitInChairAction : ASimpleAction
+public class SitInReunionChairAction : ASimpleAction
 {
     NavMeshAgent _navAgent;
     Chair _reunionChair;
 
-    public SitInChairAction(IAgent agent) : base(agent) {}
+    public SitInReunionChairAction(IAgent agent) : base(agent) {}
 
     public override void Enter()
     {

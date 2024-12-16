@@ -6,11 +6,11 @@ using UnityEngine;
 public class CheckEmployeeNecessitiesState : AState
 {
     EmployeeBehaviour _employeeBehaviour;
-    AState _employeeWorkState;
+    AState _employeeLastState;
 
-    public CheckEmployeeNecessitiesState(StateMachine sm, IAgent agent, AState employeeWorkState) : base(sm, agent)
+    public CheckEmployeeNecessitiesState(StateMachine sm, IAgent agent, AState employeeLastState) : base(sm, agent)
     {
-        _employeeWorkState = employeeWorkState;
+        _employeeLastState = employeeLastState;
     }
 
     public override void Enter()
@@ -31,7 +31,7 @@ public class CheckEmployeeNecessitiesState : AState
     {
         if (_employeeBehaviour.WorkerUS.CurrentAction == null)
         {
-            context.State = _employeeWorkState;
+            context.State = _employeeLastState;
         }
     }
 }

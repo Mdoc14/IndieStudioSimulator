@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ProgrammerBehaviour : EmployeeBehaviour
 {
+    
 
     UtilityBasedAction _goEatAction;
     UtilityBasedAction _playPCAction;
@@ -13,41 +14,35 @@ public class ProgrammerBehaviour : EmployeeBehaviour
     protected override void Start()
     {
         base.Start();
-        _workerFSM.State = new ProgrammerWorkState(_workerFSM, this);
-        InitializeGoEatAction();
         InitializePlayPCAction();
         InitializeSmokeAction();
+        InitializeGoEatAction();
         workerUS = new UtilitySystem(new List<UtilityBasedAction>(utilityActions));
-
-
+        _workerFSM.State = new ProgrammerWorkState(_workerFSM, this);
     }
 
-    void Update()
+    protected override void Update()
     {
-        _workerFSM.UpdateBehaviour();
+        base.Update();
 
     }
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
-        _workerFSM.FixedUpdateBehaviour();
+        base.FixedUpdate();
     }
     void InitializeGoEatAction()
     {
         List<LeafFactor> leafFactors = new List<LeafFactor>();
-        LeafFactor goEatFactor = new LeafFactor(this, _timeWithoutConsuming, 0, float.MaxValue, (150 / float.MaxValue), 0.7f);
-        LeafFactor motivationFactor = new LeafFactor(this, _motivation, 0, 1f, 0.3f, 0.3f, (x) => (1 - x));
+        LeafFactor goEatFactor = new LeafFactor(this, _timeWithoutConsuming, 0, 150, 0, 0.7f);
+        LeafFactor motivationFactor = new LeafFactor(this, _motivation, 0, 100, 0, 0.3f, (x) => (100 - x));
 
         leafFactors.Add(goEatFactor);
         leafFactors.Add(motivationFactor);
 
-        IDecisionFactor goEatNecessityFactor = new FusionFactor(new List<LeafFactor>(leafFactors));
+        IDecisionFactor goEatNecessityFactor = new FusionFactor(new List<LeafFactor>(leafFactors), 0.7f); 
 
-        List<IAction> actions = new List<IAction>();
-        actions.Add(new GoToPositionAction(this, GameObject.Find("RestArea").GetComponent<Room>().GetMachinePosition()));
-        actions.Add(new TakeFoodAction(this));
-        actions.Add(new WaitForFoodAction(this));
-        actions.Add(new ProgrammerEatingAction(this, _workerFSM));
-        CompositeAction eatingAction = new CompositeAction(actions);
+        GameObject vendingMachine = GameObject.Find("VendingMachine");
+        ASimpleAction eatingAction = new ChangeStateAction(_workerFSM, this, new EatState(_workerFSM, this));
 
         _goEatAction = new UtilityBasedAction(eatingAction, goEatNecessityFactor);
         utilityActions.Add(_goEatAction);
@@ -55,37 +50,31 @@ public class ProgrammerBehaviour : EmployeeBehaviour
     void InitializePlayPCAction()
     {
         List<LeafFactor> leafFactors = new List<LeafFactor>();
-        LeafFactor boredomFactor = new LeafFactor(this, _boredom, 0, 1f, 0.6f, 0.2f);
-        LeafFactor motivationFactor = new LeafFactor(this, _motivation, 0, 1f, 0.8f, 0.8f, (x) => (1 - x));
+        LeafFactor boredomFactor = new LeafFactor(this, _boredom, 0, 100f, 0, 0.2f);
+        LeafFactor motivationFactor = new LeafFactor(this, _motivation, 0, 100f, 0, 0.8f, (x) => (100 - x));
 
         leafFactors.Add(boredomFactor);
         leafFactors.Add(motivationFactor);
 
-        IDecisionFactor goPlayPCNecessityFactor = new FusionFactor(new List<LeafFactor>(leafFactors));
+        IDecisionFactor goPlayPCNecessityFactor = new FusionFactor(new List<LeafFactor>(leafFactors),0.68f); 
 
-        List<IAction> actions = new List<IAction>();
-        actions.Add(new GoToDeskAction(this, this.GetChair()));
-        actions.Add(new PlayPCAction(this));
-        CompositeAction bathroomAction = new CompositeAction(actions);
+        ASimpleAction playPCAction = new ChangeStateAction(_workerFSM, this, new PlayPCState(_workerFSM, this));
 
-        _playPCAction = new UtilityBasedAction(bathroomAction, goPlayPCNecessityFactor);
+        _playPCAction = new UtilityBasedAction(playPCAction, goPlayPCNecessityFactor);
         utilityActions.Add(_playPCAction);
     }
     void InitializeSmokeAction()
     {
         List<LeafFactor> leafFactors = new List<LeafFactor>();
-        LeafFactor stressFactor = new LeafFactor(this, _stress, 0, 1f, 0.7f, 0.8f, (x)=>(1 / (1 + Mathf.Exp( -20 * (x-0.5f) ))));
-        LeafFactor motivationFactor = new LeafFactor(this, _motivation, 0, 1f, 0.3f, 0.2f, (x) => (1 - x));
+        LeafFactor stressFactor = new LeafFactor(this, _stress, 0, 100f, 0, 0.8f);
+        LeafFactor motivationFactor = new LeafFactor(this, _motivation, 0, 100f, 0, 0.2f, (x) => (100 - x));
 
         leafFactors.Add(stressFactor);
         leafFactors.Add(motivationFactor);
 
-        IDecisionFactor smokeNecessityFactor = new FusionFactor(new List<LeafFactor>(leafFactors));
+        IDecisionFactor smokeNecessityFactor = new FusionFactor(new List<LeafFactor>(leafFactors), 0.68f); 
 
-        List<IAction> actions = new List<IAction>();
-        actions.Add(new GoToPositionAction(this, GameObject.Find("Terrace").transform.position));
-        actions.Add(new SmokeAction(this));
-        CompositeAction smokeAction = new CompositeAction(actions);
+        ASimpleAction smokeAction = new ChangeStateAction(_workerFSM, this, new SmokeState(_workerFSM, this));
 
         _smokeAction = new UtilityBasedAction(smokeAction, smokeNecessityFactor);
         utilityActions.Add(_smokeAction);

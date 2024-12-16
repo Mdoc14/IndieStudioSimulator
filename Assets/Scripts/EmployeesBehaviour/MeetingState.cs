@@ -19,8 +19,8 @@ public class MeetingState : AState
 
         WorldManager.Instance.OnNotifyEmployeesEnd += EndMeeting;
         List <IAction> actions = new List<IAction>();
-        actions.Add(new AssignChairAction(agent));
-        actions.Add(new SitInChairAction(agent));
+        actions.Add(new AssignReunionChairAction(agent));
+        actions.Add(new SitInReunionChairAction(agent));
         _workAction = new CompositeAction(actions);
         _onlyOnce = true;
     }
@@ -51,8 +51,11 @@ public class MeetingState : AState
 
     public void EndMeeting()
     {
-        agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>().GetReunionChair().GetComponent<Chair>().Leave();
-        agent.SetAgentVariable("Motivation", 1f);
+        if (agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>().GetReunionChair().GetComponent<Chair>().IsOccupied())
+        {
+            agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>().GetReunionChair().GetComponent<Chair>().Leave();
+        }
+        agent.SetAgentVariable(agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>().Motivation, 100f);
         context.State = nextState;
     }
 }

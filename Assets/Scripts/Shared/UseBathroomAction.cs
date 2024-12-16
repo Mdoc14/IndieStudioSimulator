@@ -1,4 +1,5 @@
 using CharactersBehaviour;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,16 +12,19 @@ public class UseBathroomAction : ASimpleAction
     private NavMeshAgent _navAgent;
     Chair _bath;
     StateMachine _context;
+    Action _action;
 
-    public UseBathroomAction(IAgent agent, StateMachine context = null) : base(agent) 
+    public UseBathroomAction(IAgent agent, StateMachine context = null, Action action = null) : base(agent) 
     {
         _context = context;
+        _action = action;
     }
 
     public override void Enter()
     {
         base.Enter();
-        _time = Random.Range(3, 20); //Está un tiempo aleatorio usando el baño
+        _reached = false;
+        _time = UnityEngine.Random.Range(3, 20); //Estï¿½ un tiempo aleatorio usando el baï¿½o
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _bath = agent.GetCurrentChair();
         agent.SetBark("Bathroom");
@@ -42,7 +46,7 @@ public class UseBathroomAction : ASimpleAction
 
     public override void Update()
     {
-        if (!_reached)  //Si no ha llegado a él comprueba si está lo suficientemente cerca para usarlo
+        if (!_reached)  //Si no ha llegado a ï¿½l comprueba si estï¿½ lo suficientemente cerca para usarlo
         {
             if (!_navAgent.pathPending && _navAgent.remainingDistance <= _navAgent.stoppingDistance)
             {
@@ -59,6 +63,7 @@ public class UseBathroomAction : ASimpleAction
                 _bath.GetComponent<BathroomInteractable>().OnBreak -= OnBreak;
                 _bath.Leave();
                 agent.SetCurrentChair(null);
+                _action?.Invoke();
                 finished = true;
             }
         }
@@ -70,7 +75,7 @@ public class UseBathroomAction : ASimpleAction
         (agent as AgentBehaviour).currentIncidence = _bath.GetComponent<BathroomInteractable>();
         if (_bath.IsOccupied())
         {
-            _bath.Leave(true); //Se deja el baño sin quitar el select
+            _bath.Leave(true); //Se deja el baï¿½o sin quitar el select
             agent.GetAgentGameObject().transform.LookAt(_bath.transform);
         }
         _context.State = new ReportIncidenceState(_context, agent);

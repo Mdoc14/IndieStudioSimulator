@@ -4,13 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssignChairAction : ASimpleAction
+public class AssignReunionChairAction : ASimpleAction
 {
-    public AssignChairAction(IAgent agent) : base(agent) { }
+    public AssignReunionChairAction(IAgent agent) : base(agent) { }
 
-public override void Enter()
-{
-    base.Enter();
+    public override void Enter()
+    {
+        base.Enter();
         try
         {
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ReunionChair"))
@@ -28,19 +28,19 @@ public override void Enter()
             Console.Write("No se ha encontrado una silla disponible");
             agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>().SetReunionChair(agent.GetChair().gameObject);
         }
-}
+    }
 
-public override void Exit()
-{
-}
+    public override void Exit()
+    {
+    }
 
-public override void FixedUpdate()
-{
+    public override void FixedUpdate()
+    {
 
-}
+    }
 
-public override void Update()
-{
+    public override void Update()
+    {
         finished = true;
-}
+    }
 }
