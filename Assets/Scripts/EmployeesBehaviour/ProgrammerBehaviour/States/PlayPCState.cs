@@ -7,7 +7,6 @@ public class PlayPCState : AState
 {
     public PlayPCState(StateMachine sm, IAgent agent) : base(sm, agent) { }
     CompositeAction _playPCAction;
-    EmployeeBehaviour _employeeBehaviour;
 
     public override void Enter()
     {
@@ -20,13 +19,13 @@ public class PlayPCState : AState
             actions.Add(new GoToDeskAction(agent));
         }
         actions.Add(new PlayPCAction(agent));
-        _employeeBehaviour = agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>();
         _playPCAction = new CompositeAction(actions);
     }
 
     public override void Exit()
     {
         Debug.Log("PROGRAMADOR HA SALIDO DE ESTADO DE JUGAR");
+        (agent as EmployeeBehaviour).isSlacking = false;
     }
 
     public override void FixedUpdate()

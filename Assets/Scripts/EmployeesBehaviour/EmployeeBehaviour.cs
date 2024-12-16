@@ -123,4 +123,6 @@ public class EmployeeBehaviour : AgentBehaviour
     {
         return _workerFSM;
     }
+
+    public virtual void SetState(string stateName) { }
 }

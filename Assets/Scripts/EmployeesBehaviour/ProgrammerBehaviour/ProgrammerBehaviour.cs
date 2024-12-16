@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class ProgrammerBehaviour : EmployeeBehaviour
 {
-    
-
     UtilityBasedAction _goEatAction;
     UtilityBasedAction _playPCAction;
     UtilityBasedAction _smokeAction;
@@ -78,5 +76,12 @@ public class ProgrammerBehaviour : EmployeeBehaviour
 
         _smokeAction = new UtilityBasedAction(smokeAction, smokeNecessityFactor);
         utilityActions.Add(_smokeAction);
+    }
+
+    public override void SetState(string stateName) 
+    {
+        if (stateName.Equals("WORK")) _workerFSM.State = new ProgrammerWorkState(_workerFSM, this);
+        else if (stateName.Equals("SCOLDED")) _workerFSM.State = new ScoldedState(_workerFSM, this, false);
+        else if (stateName.Equals("SCOLDED_OFFICE")) _workerFSM.State = new ScoldedState(_workerFSM, this, true);
     }
 }

@@ -15,17 +15,26 @@ public class ScoldAction : ASimpleAction
     {
         base.Enter();
         //Acciones de mirar con la cabeza hacia el trabajador y comenzar la animación y audios de regañar.
-        _time = Random.Range(1, 10);
+        _time = Random.Range(5, 10);
         if (_inOffice) _time *= 3; //Si regaña al trabajador en la oficina está más tiempo
+        ((agent as BossBehaviour).ScoldedAgent as EmployeeBehaviour).SetState("SCOLDED");
+        (agent as BossBehaviour).transform.forward = ((agent as BossBehaviour).ScoldedAgent as EmployeeBehaviour).transform.position - (agent as BossBehaviour).transform.position;
         agent.SetBark("Scold");
         agent.SetAnimation("Scolding");
-        agent.GetAgentGameObject().GetComponent<NavMeshAgent>().isStopped = true;
+        if(!agent.GetChair().IsOccupied()) agent.GetAgentGameObject().GetComponent<NavMeshAgent>().isStopped = true;
     }
 
     public override void Exit()
     {
-        agent.SetAgentVariable("CurrentAnger", 0);
+        ((agent as BossBehaviour).ScoldedAgent as EmployeeBehaviour).SetState("WORK");
         agent.GetAgentGameObject().GetComponent<BossBehaviour>().ScoldedAgent = null;
+        if (!_inOffice)
+        {
+            float newAnger = agent.GetAgentVariable("CurrentAnger") + 100 * agent.GetAgentVariable("Irritability");
+            agent.SetAgentVariable("CurrentAnger", newAnger);
+        }
+        else agent.SetAgentVariable("CurrentAnger", 0); //Cuando regaña a alguien en su despacho se calma
+        if(agent.GetAgentGameObject().GetComponent<NavMeshAgent>().enabled) agent.GetAgentGameObject().GetComponent<NavMeshAgent>().isStopped = false;
     }
 
     public override void FixedUpdate()

@@ -12,8 +12,10 @@ public class GoToDeskAction : ASimpleAction
     {
         base.Enter();
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
+        if(agent.GetChair().IsOccupied()) agent.GetChair().Leave();
+        if(agent.GetCurrentChair() != null && agent.GetCurrentChair().IsOccupied()) agent.GetCurrentChair().Leave();
         if(_agentChair == null) _agentChair = agent.GetChair();
-        _navAgent.SetDestination(_agentChair.transform.position);
+        if(_navAgent.enabled) _navAgent.SetDestination(_agentChair.transform.position);
         agent.SetBark("Walk");
         agent.SetAnimation("Walk");
     }

@@ -20,6 +20,7 @@ public class SendToOfficeAction : ASimpleAction
         _navAgent = _boss.GetComponent<NavMeshAgent>();
         _navAgent.speed = agent.GetAgentVariable("Speed");
         _navAgent.SetDestination(_boss.GetChair().transform.position);
+        ((agent as BossBehaviour).ScoldedAgent as EmployeeBehaviour).SetState("SCOLDED_OFFICE");
         GameObject.FindWithTag("ScoldedChair").GetComponent<Chair>().OnSit += OnWorkerReady;
         agent.SetBark("Scold");
         agent.SetAnimation("Walk");
@@ -27,7 +28,7 @@ public class SendToOfficeAction : ASimpleAction
 
     public override void Exit()
     {
-        GameObject.Find("ScoldedChair").GetComponent<Chair>().OnSit -= OnWorkerReady;
+        GameObject.FindWithTag("ScoldedChair").GetComponent<Chair>().OnSit -= OnWorkerReady;
     }
 
     public override void FixedUpdate()
@@ -37,10 +38,13 @@ public class SendToOfficeAction : ASimpleAction
 
     public override void Update()
     {
-        if (!_navAgent.pathPending && _navAgent.remainingDistance <= _navAgent.stoppingDistance && !_bossReady)
+        if (!_bossReady)
         {
-            _boss.GetChair().Sit(_boss.gameObject);
-            _bossReady = true;
+            if (!_navAgent.pathPending && _navAgent.remainingDistance <= _navAgent.stoppingDistance)
+            {
+                _boss.GetChair().Sit(_boss.gameObject);
+                _bossReady = true;
+            }
         }
         if (_bossReady && _workerReady) finished = true;
     }

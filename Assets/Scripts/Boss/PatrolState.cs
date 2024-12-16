@@ -48,7 +48,7 @@ public class PatrolState : AState
         {
             _bt?.UpdateBehaviour();
             _patrolTime -= Time.deltaTime;
-            if (_patrolTime <= 0) context.State = new BossWorkState(context, agent);
+            if (_patrolTime <= 0 && (agent as BossBehaviour).ScoldedAgent == null) context.State = new BossWorkState(context, agent);
         }
     }
 
@@ -57,7 +57,7 @@ public class PatrolState : AState
         _bt = new BehaviourTree();
         //Secuencia correspondiente a regañar en la oficina:
         List<IBehaviourNode> nodes = new List<IBehaviourNode>();
-        nodes.Add(new ConditionNode(() => { return agent.GetAgentVariable("CurrentAnger") >= 100; }));
+        nodes.Add(new ConditionNode(() =>  agent.GetAgentVariable("CurrentAnger") >= 100));
         nodes.Add(new ActionNode(new SendToOfficeAction(agent), _bt));
         nodes.Add(new ActionNode(new ScoldAction(agent, true), _bt));
         IBehaviourNode scoldOfficeSequenceNode = new SequenceNode(new List<IBehaviourNode>(nodes));
@@ -68,7 +68,7 @@ public class PatrolState : AState
         IBehaviourNode scoldSelector = new SelectorNode(new List<IBehaviourNode>(nodes));
         //Secuencia correspondiente a comprobar si ve a algún trabajador holgazaneando:
         nodes.Clear();
-        nodes.Add(new ConditionNode(SlackerOnSight));
+        nodes.Add(new ConditionNode(() => (agent as BossBehaviour).ScoldedAgent != null));
         nodes.Add(scoldSelector);
         IBehaviourNode slackerSearchSequence = new SequenceNode(new List<IBehaviourNode>(nodes));
         //Selector correspondiente a buscar holgazanes y patrullar:
@@ -79,16 +79,5 @@ public class PatrolState : AState
 
         IBehaviourNode rootNode = new LoopNNode(baseSelectorNode, 0);
         _bt.Root = rootNode;
-    }
-
-    private bool SlackerOnSight()
-    {
-        if ((agent as BossBehaviour).ScoldedAgent != null)
-        {
-            float newAnger = agent.GetAgentVariable("CurrentAnger") + 100 * agent.GetAgentVariable("Irritability");
-            agent.SetAgentVariable("CurrentAnger", newAnger);
-            return true;
-        }
-        return false;
     }
 }
