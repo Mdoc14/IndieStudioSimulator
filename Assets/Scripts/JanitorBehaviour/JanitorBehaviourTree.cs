@@ -18,6 +18,8 @@ public class JanitorBehaviourTree : AState
 
         Debug.Log("He entrado al BT State ");
         behaviourTree = new BehaviourTree();
+        GameObject.FindObjectOfType<LightSwitch>().LightsOut += OnLightsOff;
+        GameObject.FindObjectOfType<LightSwitch>().LightsOn += OnLightsOn;
 
         //Lista de nodos del arbol
         List<IBehaviourNode> treeNodes = new List<IBehaviourNode>();
@@ -136,6 +138,8 @@ public class JanitorBehaviourTree : AState
 
     public override void Exit()
     {
+        GameObject.FindObjectOfType<LightSwitch>().LightsOut -= OnLightsOff;
+        GameObject.FindObjectOfType<LightSwitch>().LightsOn -= OnLightsOn;
     }
 
     public override void FixedUpdate()
@@ -153,4 +157,13 @@ public class JanitorBehaviourTree : AState
         }
     }
 
+    private void OnLightsOff()
+    {
+        (agent as JanitorBehaviour).ToggleFlashlight(true);
+    }
+
+    private void OnLightsOn()
+    {
+        (agent as JanitorBehaviour).ToggleFlashlight(false);
+    }
 }

@@ -22,6 +22,8 @@ public class JanitorWalkState : AState
     public override void Enter()
     {
         janitorBehaviour = agent.GetAgentGameObject().GetComponent<JanitorBehaviour>();
+        GameObject.FindObjectOfType<LightSwitch>().LightsOut += OnLightsOff;
+        GameObject.FindObjectOfType<LightSwitch>().LightsOn += OnLightsOn;
 
         if (janitorBehaviour.HaveToRest())
         {
@@ -56,6 +58,8 @@ public class JanitorWalkState : AState
 
     public override void Exit()
     {
+        GameObject.FindObjectOfType<LightSwitch>().LightsOut -= OnLightsOff;
+        GameObject.FindObjectOfType<LightSwitch>().LightsOn -= OnLightsOn;
     }
 
     public override void FixedUpdate()
@@ -80,5 +84,15 @@ public class JanitorWalkState : AState
         isOnObjectiveRoom = true;
         isWalking = false;
         destinationRoom.GetComponent<Room>().OnColliderTriggered -= IsOnObjective;
+    }
+
+    private void OnLightsOff()
+    {
+        (agent as JanitorBehaviour).ToggleFlashlight(true);
+    }
+
+    private void OnLightsOn()
+    {
+        (agent as JanitorBehaviour).ToggleFlashlight(false);
     }
 }

@@ -26,6 +26,5 @@ public class Trashcan : AInteractable
         transform.position -= positionOffset;
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - rotationOffset);
         Lying = false;
-        GetComponent<Chair>().selected = false;
     }
 }

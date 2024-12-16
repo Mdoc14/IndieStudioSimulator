@@ -19,6 +19,9 @@ public class JanitorBehaviour : AgentBehaviour
     //Controladores del sistema de comportamiento
     StateMachine stateMachine;
 
+    //Linterna de hombro para cuando se apaga la luz:
+    [SerializeField] private Light flashlight;
+
     private void Start()
     {
         //Inicializar las variables del conserje
@@ -93,5 +96,12 @@ public class JanitorBehaviour : AgentBehaviour
         { 
             room.SetActive(value);
         }
+    }
+
+    public void ToggleFlashlight(bool on)
+    {
+        flashlight.enabled = on;
+        if(on) flashlight.transform.parent.GetComponent<Renderer>().materials[2].EnableKeyword("_EMISSION");
+        else flashlight.transform.parent.GetComponent<Renderer>().materials[2].DisableKeyword("_EMISSION");
     }
 }

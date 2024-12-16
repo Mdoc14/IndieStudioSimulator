@@ -2,6 +2,7 @@ using CharactersBehaviour;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class LightSwitch : AInteractable 
@@ -11,7 +12,7 @@ public class LightSwitch : AInteractable
     public event Action LightsOn;
     public float lightsOutProbability = 0.1f;
     public float checkInterval = 20.0f; //Tiempo que determina cada cuanto es posible que se apaguen las luces
-    private bool isOn = true;
+    public bool IsOn { get; private set; } = true;
 
     void Start()
     {
@@ -26,7 +27,7 @@ public class LightSwitch : AInteractable
         RenderSettings.reflectionIntensity = 0.4f;
         DynamicGI.UpdateEnvironment();
         LightsOut?.Invoke();
-        isOn = false;
+        IsOn = false;
     }
 
     public override void Repair()
@@ -36,7 +37,7 @@ public class LightSwitch : AInteractable
         RenderSettings.reflectionIntensity = 1.4f;
         DynamicGI.UpdateEnvironment();
         Debug.Log("¡Luz arreglada!");
-        isOn = true;
+        IsOn = true;
         LightsOn?.Invoke();
     }
 
@@ -47,7 +48,7 @@ public class LightSwitch : AInteractable
 
             //Genera un número aleatorio para determinar si las luces se apagan
             float randomValue = UnityEngine.Random.Range(0f, 1f);
-            if (randomValue <= lightsOutProbability && isOn)
+            if (randomValue <= lightsOutProbability && IsOn)
             {
                 //Apaga las luces si el número está dentro de la probabilidad
                 Interact();

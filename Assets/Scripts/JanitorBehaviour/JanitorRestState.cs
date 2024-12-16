@@ -18,6 +18,8 @@ public class JanitorRestState : AState
 
     public override void Enter()
     {
+        GameObject.FindObjectOfType<LightSwitch>().LightsOut += OnLightsOff;
+        GameObject.FindObjectOfType<LightSwitch>().LightsOn += OnLightsOn;
         //El conserje debe estar en su oficina para poder dormir
         navMeshAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         navMeshAgent.isStopped = false;
@@ -32,6 +34,7 @@ public class JanitorRestState : AState
 
     public override void Exit()
     {
+        if(!GameObject.FindObjectOfType<LightSwitch>().IsOn) (agent as JanitorBehaviour).ToggleFlashlight(true);
     }
 
     public override void FixedUpdate()
@@ -50,6 +53,9 @@ public class JanitorRestState : AState
             isOnChair = true;
             agent.SetBark("Sleep");
             agent.SetAnimation("Idle");
+            GameObject.FindObjectOfType<LightSwitch>().LightsOut -= OnLightsOff;
+            GameObject.FindObjectOfType<LightSwitch>().LightsOn -= OnLightsOn;
+            (agent as JanitorBehaviour).ToggleFlashlight(false);
             //navMeshAgent.isStopped = true;
         }
 
@@ -64,5 +70,15 @@ public class JanitorRestState : AState
                 context.State = new JanitorWalkState(context, agent, agent.GetAgentGameObject().GetComponent<JanitorBehaviour>().GetOfficeRooms());
             }
         }
+    }
+
+    private void OnLightsOff()
+    {
+        (agent as JanitorBehaviour).ToggleFlashlight(true);
+    }
+
+    private void OnLightsOn()
+    {
+        (agent as JanitorBehaviour).ToggleFlashlight(false);
     }
 }
