@@ -24,7 +24,7 @@ namespace CharactersBehaviour
         public override void Enter()
         {
             base.Enter();
-            numberWanders = Random.Range(5, 8);
+            numberWanders = Random.Range(3, 5);
             timer = 0f;
             _agentNavMesh = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         }
@@ -42,7 +42,7 @@ namespace CharactersBehaviour
 
             if (timer <= 0f)
             {
-                timeBetweenWanders = Random.Range(2f, 10f);
+                timeBetweenWanders = Random.Range(2f, 4f);
                 timer = timeBetweenWanders;
                 Vector3 newDestination = Wander(agent.GetAgentGameObject().transform.position, wanderDistance);
                 _agentNavMesh.SetDestination(newDestination);

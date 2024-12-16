@@ -21,7 +21,7 @@ public class SleepAction : ASimpleAction
         base.Enter();
         _catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
         _reached = false;
-        _timeSleeping = Random.Range(180, 360); //Está un tiempo aleatorio durmiendo
+        _timeSleeping = Random.Range(60, 120); //Está un tiempo aleatorio durmiendo
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _catBed = _catBehaviour.CatBed;
         _navAgent.SetDestination(_catBed.transform.position);
@@ -55,7 +55,7 @@ public class SleepAction : ASimpleAction
         else //Si la ha alcanzado el tiempo comienza a descontarse
         {
             _timeSleeping -= Time.deltaTime;
-            agent.SetAgentVariable(_catBehaviour.Tiredness, agent.GetAgentVariable(_catBehaviour.Tiredness) - Time.deltaTime);
+            agent.SetAgentVariable(_catBehaviour.Tiredness, agent.GetAgentVariable(_catBehaviour.Tiredness) - Time.deltaTime, 0, 100);
 
             if (_timeSleeping <= 0)
             {

@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EatAction : ASimpleAction
+internal class InteractAction : ASimpleAction
 {
     CatBehaviour _catBehaviour;
     NavMeshAgent _navAgent;
-    GameObject _catBowl;
+    IInteractable _interactable;
     bool _reached;
-    float _timeEating;
+    float _timePlaying;
 
-    public EatAction(IAgent agent) : base(agent)
+    public InteractAction(IAgent agent) : base(agent)
     {
     }
 
@@ -21,12 +21,11 @@ public class EatAction : ASimpleAction
         base.Enter();
         _catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
-        _timeEating = Random.Range(10f, 30f);
-        _catBowl = _catBehaviour.CatBowls[Random.Range(0, _catBehaviour.CatBowls.Count)];
+        _timePlaying = Random.Range(5f, 10f);
+        _interactable = _catBehaviour.CurrentObjetive.GetComponent<IInteractable>();
         _reached = false;
-        _navAgent.SetDestination(_catBowl.transform.position);
-        agent.SetBark("Eat");
-        Debug.Log("Gato: va a comer");
+        _navAgent.SetDestination(_catBehaviour.CurrentObjetive.transform.position);
+        Debug.Log("Gato: va a jugar");
     }
 
     public override void Exit()
@@ -48,14 +47,13 @@ public class EatAction : ASimpleAction
         }
         else
         {
-            _timeEating -= Time.deltaTime;
-            agent.SetAgentVariable(_catBehaviour.Tiredness, agent.GetAgentVariable(_catBehaviour.Tiredness) - Time.deltaTime * 0.05f, 0, 100);
+            _timePlaying -= Time.deltaTime;
 
-            if (_timeEating <= 0)
+            if (_timePlaying <= 0)
             {
-                agent.SetAgentVariable(_catBehaviour.TimeWithoutEating, 0f);
+                _interactable.Interact();
                 finished = true;
-                Debug.Log("Gato: termina de comer");
+                Debug.Log("Gato: termina de jugar");
             }
         }
     }

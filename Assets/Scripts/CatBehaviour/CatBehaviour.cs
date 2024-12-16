@@ -13,6 +13,16 @@ public class CatBehaviour : AgentBehaviour
 
     [SerializeField] Chair _catLitterBox;
 
+    GameObject _currentObjetive = null;
+    public GameObject CurrentObjetive
+    {
+        get { return _currentObjetive; }
+        set
+        {
+            _currentObjetive = value;
+        }
+    }
+
     UtilitySystem us;
     public UtilitySystem US { get { return us; } }
 
@@ -23,7 +33,7 @@ public class CatBehaviour : AgentBehaviour
     UtilityBasedAction eatUAction;
     UtilityBasedAction sleepUAction;
     UtilityBasedAction playUAction;
-    UtilityBasedAction bePet;
+    UtilityBasedAction bePetUAction;
 
     string _boredom = "boredom";
     string _tiredness = "tiredness";
@@ -40,6 +50,7 @@ public class CatBehaviour : AgentBehaviour
     public string TimeWithoutSocializing { get { return _timeWithoutSocializing; } }
 
     StateMachine sm = new StateMachine();
+    public StateMachine SM { get { return sm; } }
 
     // Start is called before the first frame update
     void Start()
@@ -53,10 +64,12 @@ public class CatBehaviour : AgentBehaviour
         agentVariables[_timeWithoutEating] = 0f;
         agentVariables[_timeWithoutSocializing] = 0f;
 
+        InitializePlayUAction();
+        InitializeSleepUAction();
         InitializeGoBathUAction();
         InitializePurgeUAction();
         InitializeEatUAction();
-        InitializeSleepUAction();
+        //InitializeBePetUAction();
 
         us = new UtilitySystem(new List<UtilityBasedAction>(utilityActions));
         sm.State = new WanderingState(sm, this);
@@ -76,14 +89,14 @@ public class CatBehaviour : AgentBehaviour
 
     void InitializeGoBathUAction()
     {
-        IDecisionFactor goBathNecessityFactor = new LeafFactor(this, _timeWithoutBath, 0, float.MaxValue, (150 / float.MaxValue));
+        IDecisionFactor goBathNecessityFactor = new LeafFactor(this, _timeWithoutBath, 0, 150, 0.6f);
         goBathUAction = new UtilityBasedAction(new UseLitterBoxAction(this), goBathNecessityFactor);
         utilityActions.Add(goBathUAction);
     }
 
     void InitializePurgeUAction()
     {
-        IDecisionFactor purgeNecessityFactor = new LeafFactor(this, _timeWithoutPurging, 0, float.MaxValue, (120 / float.MaxValue));
+        IDecisionFactor purgeNecessityFactor = new LeafFactor(this, _timeWithoutPurging, 0, 120, 0.7f);
         purgeUAction = new UtilityBasedAction(new PurgeAction(this), purgeNecessityFactor);
         utilityActions.Add(purgeUAction);
     }
@@ -92,22 +105,43 @@ public class CatBehaviour : AgentBehaviour
     {
         List<LeafFactor> leafFactors = new List<LeafFactor>();
 
-        LeafFactor eatDesireFactor = new LeafFactor(this, _timeWithoutEating, 0, float.MaxValue, (180 / float.MaxValue), 0.6f);
-        LeafFactor energyNecessityFactor = new LeafFactor(this, _tiredness, 0, float.MaxValue, (360 / float.MaxValue), 0.4f);
+        LeafFactor eatDesireFactor = new LeafFactor(this, _timeWithoutEating, 0, 180, 0, 0.6f);
+        LeafFactor energyNecessityFactor = new LeafFactor(this, _tiredness, 0, 100, 0, 0.4f);
 
         leafFactors.Add(eatDesireFactor);
         leafFactors.Add(energyNecessityFactor);
 
-        IDecisionFactor hungerFactor = new FusionFactor(new List<LeafFactor>(leafFactors), (180 / float.MaxValue));
-
+        IDecisionFactor hungerFactor = new FusionFactor(new List<LeafFactor>(leafFactors), 0.8f);
         eatUAction = new UtilityBasedAction(new EatAction(this), hungerFactor);
         utilityActions.Add(eatUAction);
     }
 
     void InitializeSleepUAction()
     {
-        IDecisionFactor energyNecessityFactor = new LeafFactor(this, _tiredness, 0, float.MaxValue, (360 / float.MaxValue));
+        IDecisionFactor energyNecessityFactor = new LeafFactor(this, _tiredness, 0, 100, 0.9f, 1);
         sleepUAction = new UtilityBasedAction(new SleepAction(this), energyNecessityFactor);
         utilityActions.Add(sleepUAction);
+    }
+
+    void InitializePlayUAction()
+    {
+        List<LeafFactor> leafFactors = new List<LeafFactor>();
+
+        LeafFactor playDesireEnergyFactor = new LeafFactor(this, _tiredness, 0, 100, 0, 0.4f, (x) => (100 - x));
+        LeafFactor playDesireBoredomFactor = new LeafFactor(this, _boredom, 0, 100, 0, 0.6f);
+
+        leafFactors.Add(playDesireEnergyFactor);
+        leafFactors.Add(playDesireBoredomFactor);
+
+        IDecisionFactor playFactor = new FusionFactor(new List<LeafFactor>(leafFactors), 0.5f);
+        playUAction = new UtilityBasedAction(new PlayAction(this), playFactor);
+        utilityActions.Add(playUAction);
+    }
+
+    void InitializeBePetUAction()
+    {
+        IDecisionFactor socializeNecessityFactor = new LeafFactor(this, _timeWithoutSocializing, 0, 360);
+        //bePetUAction = new UtilityBasedAction(new SocializeAction(this), socializeNecessityFactor);
+        utilityActions.Add(bePetUAction);
     }
 }
