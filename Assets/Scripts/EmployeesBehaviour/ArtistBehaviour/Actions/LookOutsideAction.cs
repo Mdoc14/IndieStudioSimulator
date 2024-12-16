@@ -6,22 +6,20 @@ using UnityEngine;
 public class LookOutsideAction : ASimpleAction
 {
     private float _lookOutsideTime;
-    private EmployeeBehaviour _employeeBehaviour;
     GameObject _lookOutsidePos;
-    public LookOutsideAction(IAgent agent, GameObject smokePos) : base(agent) { _lookOutsidePos = smokePos; }
+    public LookOutsideAction(IAgent agent, GameObject lookOutsidePos) : base(agent) { _lookOutsidePos = lookOutsidePos; }
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Programador está fumando...");
+        Debug.Log("Artista esta mirando por la ventana...");
         agent.GetAgentGameObject().transform.rotation = _lookOutsidePos.transform.rotation;
-        _lookOutsideTime = Random.Range(10, 50);
-        _employeeBehaviour = agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>();
-        agent.SetBark("Smoke");
-        agent.SetAnimation("Smoke");
+        _lookOutsideTime = Random.Range(10, 30);
+        agent.SetBark("Look");
+        agent.SetAnimation("Looking");
     }
     public override void Exit()
     {
-        Debug.Log("Programador ha terminado de fumar");
+        Debug.Log("Artista ha terminado de mirar por la ventana");
     }
     public override void FixedUpdate()
     {
@@ -30,11 +28,11 @@ public class LookOutsideAction : ASimpleAction
     {
         _lookOutsideTime -= Time.deltaTime;
 
-        if (agent.GetAgentVariable(_employeeBehaviour.Stress) >= 0f)
+        if (agent.GetAgentVariable((agent as EmployeeBehaviour).Stress) >= 0f)
         {
-            agent.SetAgentVariable(_employeeBehaviour.Stress, agent.GetAgentVariable(_employeeBehaviour.Stress) - Time.deltaTime);
+            agent.SetAgentVariable((agent as EmployeeBehaviour).Stress, agent.GetAgentVariable((agent as EmployeeBehaviour).Stress) - Time.deltaTime);
         }
-        else { agent.SetAgentVariable(_employeeBehaviour.Stress, 0f); }
+        else { agent.SetAgentVariable((agent as EmployeeBehaviour).Stress, 0f); }
 
         if (_lookOutsideTime <= 0)
         {

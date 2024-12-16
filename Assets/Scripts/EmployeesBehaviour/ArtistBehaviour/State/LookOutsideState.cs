@@ -11,18 +11,18 @@ public class LookOutsideState : AState
 
     public override void Enter()
     {
-        Debug.Log("PROGRAMADOR ENTRANDO EN ESTADO DE FUMAR...");
+        Debug.Log("PROGRAMADOR ENTRANDO EN ESTADO DE MIRAR POR LA VENTANA...");
 
         SelectLookOutsidePos();
         List<IAction> actions = new List<IAction>();
         actions.Add(new GoToPositionAction(agent, _lookOutsidePos.transform.position));
-        actions.Add(new SmokingAction(agent, _lookOutsidePos));
+        actions.Add(new LookOutsideAction(agent, _lookOutsidePos));
         _lookOutsideAction = new CompositeAction(actions);
     }
 
     public override void Exit()
     {
-        Debug.Log("PROGRAMADOR HA SALIDO DE ESTADO DE FUMAR");
+        Debug.Log("ARTISTA HA SALIDO DE ESTADO DE MIRAR POR LA VENTANA");
         _lookOutsidePos.GetComponent<SmokePos>().IsSelected = false;
     }
 

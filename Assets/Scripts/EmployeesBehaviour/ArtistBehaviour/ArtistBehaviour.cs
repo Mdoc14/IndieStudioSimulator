@@ -92,7 +92,7 @@ public class ArtistBehaviour : EmployeeBehaviour
 
         Action action = () => { this.SetAgentVariable(this.GetAgentGameObject().GetComponent<EmployeeBehaviour>().TimeWithoutBath, 0); };
 
-        ASimpleAction bathroomAction = new ChangeStateAction(_workerFSM, this, new BathroomState(_workerFSM, this, new ProgrammerWorkState(_workerFSM, this), action));
+        ASimpleAction bathroomAction = new ChangeStateAction(_workerFSM, this, new BathroomState(_workerFSM, this, new ArtistWorkState(_workerFSM, this), action));
 
         goBathAction = new UtilityBasedAction(bathroomAction, goBathNecessityFactor);
         utilityActions.Add(goBathAction);
