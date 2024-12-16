@@ -8,6 +8,7 @@ public class ReportIncidenceState : AState
 {
     AState nextState;
     CompositeAction _incidenceAction;
+    List<IAction> actions = new List<IAction>();
 
     public ReportIncidenceState(StateMachine sm, IAgent agent, AState nextState = null) : base(sm, agent)
     {
@@ -16,8 +17,13 @@ public class ReportIncidenceState : AState
 
     public override void Enter()
     {
+        context.PreviousStates.Push(this);
         //El estado de ir al baño se divide en tres acciones: ir al baño, comprobar si hay un retrete libre y usarlo
-        List<IAction> actions = new List<IAction>();
+        if(actions.Count > 0)
+        {
+            _incidenceAction.CurrentAction.Enter();
+            return;
+        }
         actions.Add(new LookIncidenceAction(agent));
         actions.Add(new GoToPositionAction(agent, GameObject.FindWithTag("IncidenceChair").transform.position));
         actions.Add(new WaitingMaintenanceAction(agent));
@@ -51,8 +57,9 @@ public class ReportIncidenceState : AState
     {
         return () =>
         {
-            if (!GameObject.FindWithTag("MaintenanceChair").GetComponent<Chair>().IsOccupied())
+            if (State_AtenderIncidencia.incidenceTaken)
             {
+                State_AtenderIncidencia.incidenceTaken = false;
                 return true;
             }
             return false;

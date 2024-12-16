@@ -33,6 +33,7 @@ namespace CharactersBehaviour
         public override void Exit()
         {
             (agent as MaintenanceBehaviour).OnIncidence -= OnIncidence;
+            agent.GetComputer().SetScreensContent(ScreenContent.Off);
             Debug.Log("Saliendo del estado TrabajarOficina");
         }
 

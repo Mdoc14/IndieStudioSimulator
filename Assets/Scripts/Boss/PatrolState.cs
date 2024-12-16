@@ -16,9 +16,12 @@ public class PatrolState : AState
     {
         Debug.Log("ENTRANDO EN ESTADO DE PATRULLAR");
         context.PreviousStates.Push(this);
-        _goToStartingPos = new GoToPositionAction(agent, agent.GetAgentGameObject().GetComponent<BossBehaviour>().GetFirstWaypoint().position);
-        _goToStartingPos.Enter();
-        _patrolTime = UnityEngine.Random.Range(10, 60);
+        if (_goToStartingPos == null) //Si es la primera vez que entra en el estado se inicializa todo
+        {
+            _goToStartingPos = new GoToPositionAction(agent, agent.GetAgentGameObject().GetComponent<BossBehaviour>().GetFirstWaypoint().position);
+            _goToStartingPos.Enter();
+            _patrolTime = UnityEngine.Random.Range(10, 60);
+        }
         InitializeTree();
     }
 

@@ -4,9 +4,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightSwitch : AInteractable {
+public class LightSwitch : AInteractable 
+{
     // Start is called before the first frame update
     public event Action LightsOut;
+    public event Action LightsOn;
     public float lightsOutProbability = 0.1f;
     public float checkInterval = 20.0f; //Tiempo que determina cada cuanto es posible que se apaguen las luces
     private bool isOn = true;
@@ -27,7 +29,7 @@ public class LightSwitch : AInteractable {
         isOn = false;
     }
 
-    public void Repair()
+    public override void Repair()
     {
         ResetInteractable();
         RenderSettings.ambientIntensity = 1.0f;
@@ -35,6 +37,7 @@ public class LightSwitch : AInteractable {
         DynamicGI.UpdateEnvironment();
         Debug.Log("¡Luz arreglada!");
         isOn = true;
+        LightsOn?.Invoke();
     }
 
     IEnumerator LightsGoOut() {

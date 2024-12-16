@@ -22,6 +22,7 @@ public class BossBehaviour : AgentBehaviour
         agentVariables.Add("CurrentAnger", Random.Range(0, 100));
         agentVariables.Add("Speed", GetComponent<NavMeshAgent>().speed);
         _bossMachine.State = new BossWorkState(_bossMachine, this);
+        GameObject.FindObjectOfType<LightSwitch>().LightsOut += OnLightsOut;
     }
 
     void Update()
@@ -54,4 +55,9 @@ public class BossBehaviour : AgentBehaviour
     }
 
     public IAgent ScoldedAgent { get { return _agentToScold; } set { if(_agentToScold == null || value == null) _agentToScold = value; } }
+
+    private void OnLightsOut()
+    {
+        _bossMachine.State = new WaitForLightState(_bossMachine, this);
+    }
 }

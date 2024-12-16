@@ -8,6 +8,7 @@ namespace CharactersBehaviour
     public class State_AtenderIncidencia : AState
     {
         private CompositeAction _incidenceAction;
+        public static bool incidenceTaken = false;
     
         public State_AtenderIncidencia(StateMachine FSM2, IAgent agent) : base(FSM2, agent) { }
 
@@ -21,7 +22,7 @@ namespace CharactersBehaviour
 
         public override void Exit()
         {
-
+            incidenceTaken = true;
         }
 
         public override void Update()

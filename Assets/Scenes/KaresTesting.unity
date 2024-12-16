@@ -342,6 +342,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Maintenance
       objectReference: {fileID: 0}
+    - target: {fileID: 5695494442324046886, guid: e36c72406f8186440886c7c6cc0e0c2b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8104394301050645620, guid: e36c72406f8186440886c7c6cc0e0c2b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.16
@@ -1763,6 +1767,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Janitor
       objectReference: {fileID: 0}
+    - target: {fileID: 1920899201876118962, guid: b5554a044e0d8884394cbfb68253230a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7624389996429897548, guid: b5554a044e0d8884394cbfb68253230a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.59082407
@@ -3061,8 +3069,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 860317822}
-  - {fileID: 590621408}
   - {fileID: 7106188822844719948}
+  - {fileID: 590621408}
   - {fileID: 8487078586294416154}
   - {fileID: 464346553}
   - {fileID: 487735304}

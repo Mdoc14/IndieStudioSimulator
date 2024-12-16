@@ -10,6 +10,13 @@ public class Computer : AInteractable
     [SerializeField] private Screen[] screens;
     public bool broken { get; private set; } = false;
     public event Action OnBreak;
+    private ScreenContent prevContent = ScreenContent.Off;
+
+    private void Start()
+    {
+        GameObject.FindObjectOfType<LightSwitch>().LightsOut += OnLightsOut;
+        GameObject.FindObjectOfType<LightSwitch>().LightsOn += OnLightsOn;
+    }
 
     public override void Interact()
     {
@@ -29,9 +36,22 @@ public class Computer : AInteractable
 
     public void SetScreensContent(ScreenContent state)
     {
+        prevContent = state;
         foreach(Screen screen in screens)
         {
             screen.SetScreenVideo(state);
         }
     }    
+
+    private void OnLightsOut()
+    {
+        ScreenContent c = prevContent; //Se guarda porque SetScreensContent sobreescribe prevContent
+        SetScreensContent(ScreenContent.Off);
+        prevContent = c;
+    }
+
+    private void OnLightsOn()
+    {
+        SetScreensContent(prevContent);
+    }
 }

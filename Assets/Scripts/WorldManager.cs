@@ -65,7 +65,7 @@ public class WorldManager : MonoBehaviour
 
     public void ChangeSimulationSpeed(bool add)
     {
-        if ((Time.timeScale == 0.25f && !add) || (Time.timeScale == 64 && add)) return;
+        if ((Time.timeScale == 0.25f && !add) || (Time.timeScale == 16 && add)) return;
         if (add) Time.timeScale *= 2;
         else Time.timeScale /= 2;
         MainMenuManager.Instance.SetSpeedText(Time.timeScale.ToString());
