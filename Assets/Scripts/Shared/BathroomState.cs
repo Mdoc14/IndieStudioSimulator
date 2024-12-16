@@ -37,7 +37,11 @@ public class BathroomState : AState
 
     public override void Exit()
     {
-
+        if (agent.GetCurrentChair() != null)
+        {
+            agent.GetCurrentChair().selected = false;
+            agent.SetCurrentChair(null);
+        }
     }
 
     public override void FixedUpdate()

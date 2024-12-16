@@ -12,6 +12,8 @@ public class BossBehaviour : AgentBehaviour
     private List<int[]> _adjacencyList = new List<int[]>() { new int[] { 3, 1 }, new int[] { 0, 2 }, new int[] { 1, 3 }, new int[] { 2, 0 } };
     private int _currentWayPoint;
     private IAgent _agentToScold = null;
+    [SerializeField] private Transform headTransform;
+    private bool patrolling = false;
 
     void Awake()
     {
@@ -28,6 +30,17 @@ public class BossBehaviour : AgentBehaviour
     void Update()
     {
         _bossMachine.UpdateBehaviour();
+        if (patrolling)
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(headTransform.position, headTransform.up, out hit, 1, 1 << 8))
+            {
+                if (hit.transform.GetComponent<EmployeeBehaviour>().isSlacking)
+                {
+                    if (_agentToScold == null) _agentToScold = hit.transform.GetComponent<EmployeeBehaviour>();
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -59,5 +72,10 @@ public class BossBehaviour : AgentBehaviour
     private void OnLightsOut()
     {
         _bossMachine.State = new WaitForLightState(_bossMachine, this);
+    }
+
+    public void SetPatrolling(bool p)
+    {
+        patrolling = p;
     }
 }

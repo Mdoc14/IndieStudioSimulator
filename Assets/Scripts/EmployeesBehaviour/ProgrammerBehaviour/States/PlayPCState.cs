@@ -12,6 +12,8 @@ public class PlayPCState : AState
     public override void Enter()
     {
         Debug.Log("PROGRAMADOR ENTRANDO EN ESTADO DE JUGAR...");
+        (agent as EmployeeBehaviour).isSlacking = true;
+
         List<IAction> actions = new List<IAction>();
         if (!agent.GetChair().IsOccupied())
         {
