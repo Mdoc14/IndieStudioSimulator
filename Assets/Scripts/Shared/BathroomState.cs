@@ -1,14 +1,17 @@
 using CharactersBehaviour;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BathroomState : AState
 {
-    public BathroomState(StateMachine sm, IAgent agent, AState nextState) : base(sm, agent) 
+    public BathroomState(StateMachine sm, IAgent agent, AState nextState, Action action = null) : base(sm, agent) 
     {
         this.nextState = nextState;
+        _action = action;
     }
+    Action _action;
     AState nextState;
     List<IAction> actions = new List<IAction>();
     CompositeAction _bathroomAction;
@@ -27,7 +30,7 @@ public class BathroomState : AState
         }
         actions.Add(new GoToPositionAction(agent, _currentWaitingLine.transform.position));
         actions.Add(new WaitingBathroomAction(agent, _currentWaitingLine.GetComponent<BathroomWaitingLine>()));
-        actions.Add(new UseBathroomAction(agent, context));
+        actions.Add(new UseBathroomAction(agent, context, _action));
         _bathroomAction = new CompositeAction(actions);
     }
 

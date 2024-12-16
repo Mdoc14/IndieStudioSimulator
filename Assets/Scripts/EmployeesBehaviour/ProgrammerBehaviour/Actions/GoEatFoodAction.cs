@@ -4,15 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WaitForFoodAction : ASimpleAction
+public class GoEatFoodAction : ASimpleAction
 {
     private NavMeshAgent _navAgent;
+    GameObject _breakRoom;
 
-    public WaitForFoodAction(IAgent agent) : base(agent) { }
+    public GoEatFoodAction(IAgent agent) : base(agent) { }
 
     public override void Enter()
     {
         base.Enter();
+        _breakRoom = GameObject.Find("");
+        _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
+        _navAgent.SetDestination(_breakRoom.transform.position);
         agent.SetBark("Walk");
         agent.SetAnimation("Walk");
     }
