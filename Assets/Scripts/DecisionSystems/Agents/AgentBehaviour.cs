@@ -28,6 +28,21 @@ namespace CharactersBehaviour
             agentVariables[name] = value;
         }
 
+        public void SetAgentVariable(string name, float value, float minValue, float maxValue)
+        {
+            if (value <= minValue)
+            {
+                agentVariables[name] = minValue;
+            }else if (minValue < value && value < maxValue)
+            {
+                agentVariables[name] = value;
+            }
+            else
+            {
+                agentVariables[name] = maxValue;
+            }
+        }
+
         public Chair GetChair() //La silla del puesto de trabajo del agente
         {
             return _chair;

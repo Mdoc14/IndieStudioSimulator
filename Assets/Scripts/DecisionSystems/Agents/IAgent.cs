@@ -10,6 +10,7 @@ namespace CharactersBehaviour
         public GameObject GetAgentGameObject();
         public float GetAgentVariable(string name);
         public void SetAgentVariable(string name, float value);
+        public void SetAgentVariable(string name, float value, float minValue, float maxValue);
         public Chair GetChair();
         public Computer GetComputer();
         public void SetCurrentChair(Chair bath);
