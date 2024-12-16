@@ -10,7 +10,7 @@ public class ProgrammerBehaviour : EmployeeBehaviour
     UtilityBasedAction _playPCAction;
     UtilityBasedAction _smokeAction;
 
-    void Start()
+    protected override void Start()
     {
         base.Start();
         _workerFSM.State = new ProgrammerWorkState(_workerFSM, this);

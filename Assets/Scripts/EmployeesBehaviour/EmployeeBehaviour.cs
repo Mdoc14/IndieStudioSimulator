@@ -39,7 +39,7 @@ public class EmployeeBehaviour : AgentBehaviour
     protected StateMachine _workerFSM = new StateMachine();
     ////////////////////////////////////////
     
-    protected void Start()
+    protected virtual void Start()
     {
         agentVariables[_motivation] = Random.Range(0.8f, 1f);
         agentVariables[_stress] = Random.Range(0f, 0.2f);
