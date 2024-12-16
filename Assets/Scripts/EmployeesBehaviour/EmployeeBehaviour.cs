@@ -30,6 +30,8 @@ public class EmployeeBehaviour : AgentBehaviour
     public string TimeWithoutConsuming { get { return _timeWithoutConsuming; } }
 
     GameObject _currentWaitingLine;
+
+    public bool isSlacking = false;
     ////////////////////////////////////////
 
 

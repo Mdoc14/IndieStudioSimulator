@@ -15,6 +15,7 @@ public class PatrolState : AState
     public override void Enter()
     {
         Debug.Log("ENTRANDO EN ESTADO DE PATRULLAR");
+        (agent as BossBehaviour).SetPatrolling(true);
         context.PreviousStates.Push(this);
         if (_goToStartingPos == null) //Si es la primera vez que entra en el estado se inicializa todo
         {
@@ -29,6 +30,7 @@ public class PatrolState : AState
     {
         Debug.Log("ESTADO DE PATRULLA FINALIZADO");
         agent.GetAgentGameObject().GetComponent<NavMeshAgent>().speed = agent.GetAgentVariable("Speed");
+        (agent as BossBehaviour).SetPatrolling(false);
     }
 
     public override void FixedUpdate()
