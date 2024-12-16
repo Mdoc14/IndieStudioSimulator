@@ -89,7 +89,7 @@ public class PlayState : AState
     public override void Update()
     {
         agent.SetAgentVariable(_catBehaviour.Boredom, agent.GetAgentVariable(_catBehaviour.Boredom) - Time.deltaTime, 0, 100);
-        agent.SetAgentVariable(_catBehaviour.Tiredness, agent.GetAgentVariable(_catBehaviour.Tiredness) + Time.deltaTime, 0, 100);
+        agent.SetAgentVariable(_catBehaviour.Tiredness, agent.GetAgentVariable(_catBehaviour.Tiredness) + Time.deltaTime * 0.8f, 0, 100);
 
         if (!_playAction.Finished)
         {
