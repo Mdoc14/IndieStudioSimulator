@@ -1,4 +1,5 @@
 using CharactersBehaviour;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class ProgrammerBehaviour : EmployeeBehaviour
     protected override void Start()
     {
         base.Start();
+        InitializeGoBathAction();
         InitializePlayPCAction();
         InitializeSmokeAction();
         InitializeGoEatAction();
@@ -77,7 +79,24 @@ public class ProgrammerBehaviour : EmployeeBehaviour
         _smokeAction = new UtilityBasedAction(smokeAction, smokeNecessityFactor);
         utilityActions.Add(_smokeAction);
     }
+    protected override void InitializeGoBathAction()
+    {
+        List<LeafFactor> leafFactors = new List<LeafFactor>();
+        LeafFactor goBathFactor = new LeafFactor(this, _timeWithoutBath, 0, 120f, 0, 0.6f);
+        LeafFactor motivationFactor = new LeafFactor(this, _motivation, 0, 100f, 0, 0.4f, (x) => (100 - x));
 
+        leafFactors.Add(goBathFactor);
+        leafFactors.Add(motivationFactor);
+
+        IDecisionFactor goBathNecessityFactor = new FusionFactor(new List<LeafFactor>(leafFactors), 0.70f);
+
+        Action action = () => { this.SetAgentVariable(this.GetAgentGameObject().GetComponent<EmployeeBehaviour>().TimeWithoutBath, 0); };
+
+        ASimpleAction bathroomAction = new ChangeStateAction(_workerFSM, this, new BathroomState(_workerFSM, this, new ProgrammerWorkState(_workerFSM, this), action));
+
+        goBathAction = new UtilityBasedAction(bathroomAction, goBathNecessityFactor);
+        utilityActions.Add(goBathAction);
+    }
     public override void SetState(string stateName) 
     {
         if (stateName.Equals("WORK")) _workerFSM.State = new ProgrammerWorkState(_workerFSM, this);

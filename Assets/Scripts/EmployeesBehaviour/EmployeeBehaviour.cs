@@ -53,8 +53,6 @@ public class EmployeeBehaviour : AgentBehaviour
         agentVariables[_timeWithoutBath] = 0;
         agentVariables[_timeWithoutConsuming] = 0;
 
-        InitializeGoBathAction();
-
         WorldManager.Instance.OnNotifyEmployeesStart += MeetingStarted;
     }
 
@@ -100,24 +98,7 @@ public class EmployeeBehaviour : AgentBehaviour
 
         _workerFSM.State = new MeetingState(_workerFSM, this, (AState)_workerFSM.State);
     }
-    protected void InitializeGoBathAction()
-    {
-        List<LeafFactor> leafFactors = new List<LeafFactor>();
-        LeafFactor goBathFactor = new LeafFactor(this, _timeWithoutBath, 0, 120f, 0, 0.6f);
-        LeafFactor motivationFactor = new LeafFactor(this, _motivation, 0, 100f, 0, 0.4f,(x)=>(100-x));
-
-        leafFactors.Add(goBathFactor);
-        leafFactors.Add(motivationFactor);
-
-        IDecisionFactor goBathNecessityFactor = new FusionFactor(new List<LeafFactor>(leafFactors), 0.70f);
-
-        Action action = () => { this.SetAgentVariable(this.GetAgentGameObject().GetComponent<EmployeeBehaviour>().TimeWithoutBath, 0); };
-
-        ASimpleAction bathroomAction = new ChangeStateAction(_workerFSM,this, new BathroomState(_workerFSM, this, new ProgrammerWorkState(_workerFSM, this), action));
-
-        goBathAction = new UtilityBasedAction(bathroomAction, goBathNecessityFactor);
-        utilityActions.Add(goBathAction);
-    }
+    protected virtual void InitializeGoBathAction(){}
 
     public StateMachine GetContext()
     {
