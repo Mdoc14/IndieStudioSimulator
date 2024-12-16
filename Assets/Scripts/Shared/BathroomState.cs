@@ -23,11 +23,12 @@ public class BathroomState : AState
         Debug.Log("HE ENTRADO EN EL ESTADO DE IR AL BAÑO");
         context.PreviousStates.Push(this);
         SelectBathroom();
-        if (actions.Count > 0)
+        if (actions.Count > 0 && !_bathroomAction.Finished && actions[0].Finished)
         {
             _bathroomAction.CurrentAction.Enter();
             return; //Si ya está inicializado el estado que no se cree la lista de nuevo
         }
+        actions.Clear();
         actions.Add(new GoToPositionAction(agent, _currentWaitingLine.transform.position));
         actions.Add(new WaitingBathroomAction(agent, _currentWaitingLine.GetComponent<BathroomWaitingLine>()));
         actions.Add(new UseBathroomAction(agent, context, _action));
