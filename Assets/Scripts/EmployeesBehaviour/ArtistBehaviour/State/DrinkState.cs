@@ -1,42 +1,44 @@
 using CharactersBehaviour;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
-public class EatState : AState
+public class DrinkState : AState
 {
-    public EatState(StateMachine sm, IAgent agent) : base(sm, agent) { }
-    CompositeAction _eatAction;
+    public DrinkState(StateMachine sm, IAgent agent) : base(sm, agent) { _stateMachine = sm; }
+    CompositeAction _drinkAction;
     EmployeeBehaviour _employeeBehaviour;
-    bool _alreadySubscribed;
+    StateMachine _stateMachine;
 
     public override void Enter()
     {
-        Debug.Log("PROGRAMADOR ENTRANDO EN ESTADO DE COMER...");
+        Debug.Log("TRABAJADOR ENTRANDO EN ESTADO DE BEBER...");
         GameObject vendingMachine = GameObject.Find("VendingMachine");
         List<IAction> actions = new List<IAction>();
         actions.Add(new GoToPositionAction(agent, vendingMachine.transform.position));
-        actions.Add(new TakeFoodAction(agent, vendingMachine.GetComponent<VendingMachineManager>()));
-        actions.Add(new ProgrammerEatingAction(agent, context));
+        actions.Add(new TakeDrinkAction(agent, vendingMachine.GetComponent<VendingMachineManager>(), _stateMachine));
+        actions.Add(new DrinkingAction(agent, context));
         _employeeBehaviour = agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>();
-        _eatAction = new CompositeAction(actions);
+        _drinkAction = new CompositeAction(actions);
     }
 
     public override void Exit()
     {
-        Debug.Log("PROGRAMADOR HA SALIDO DE ESTADO DE COMER");
+        Debug.Log("TRABAJADOR HA SALIDO DE ESTADO DE BEBER");
     }
 
     public override void FixedUpdate()
     {
-        _eatAction?.FixedUpdate();
+        _drinkAction?.FixedUpdate();
     }
 
     public override void Update()
     {
-        _eatAction?.Update();
-        if (_eatAction.Finished)
+        _drinkAction?.Update();
+        if (_drinkAction.Finished)
         {
+            agent.SetAgentVariable((agent as EmployeeBehaviour).TimeWithoutConsuming, 0);
             WorldManager.Instance.SetWorkerActivity(false);
             context.State = new CheckEmployeeNecessitiesState(context, agent, new ProgrammerWorkState(context, agent));
         }

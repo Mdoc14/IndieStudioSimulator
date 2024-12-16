@@ -39,9 +39,8 @@ public class ProgrammerEatingAction : ASimpleAction
         if (_time <=0)
         {
             finished = true;
-            agent.SetAgentVariable(_programmerBehaviour.TimeWithoutConsuming,0);
-            agent.SetAgentVariable(_programmerBehaviour.Motivation, agent.GetAgentVariable(_programmerBehaviour.Motivation) + Random.Range(0, 0.2f));
-            _context.State = new ProgrammerWorkState(_context, agent);
+            agent.SetAgentVariable(_programmerBehaviour.TimeWithoutConsuming, 0f);
+            agent.SetAgentVariable(_programmerBehaviour.Motivation, agent.GetAgentVariable(_programmerBehaviour.Motivation) + Random.Range(0f, 20f));
         }
     }
 }
