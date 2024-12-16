@@ -8,8 +8,9 @@ public class ScoldAction : ASimpleAction
 {
     float _time;
     bool _inOffice;
+    StateMachine _context;
 
-    public ScoldAction(IAgent agent, bool inOffice) : base(agent) { _inOffice = inOffice; }
+    public ScoldAction(IAgent agent, bool inOffice, StateMachine context) : base(agent) { _inOffice = inOffice; _context = context; }
 
     public override void Enter()
     {
@@ -26,8 +27,9 @@ public class ScoldAction : ASimpleAction
 
     public override void Exit()
     {
+        ((agent as BossBehaviour).ScoldedAgent as EmployeeBehaviour).numScolds++;
         ((agent as BossBehaviour).ScoldedAgent as EmployeeBehaviour).SetState("WORK");
-        agent.GetAgentGameObject().GetComponent<BossBehaviour>().ScoldedAgent = null;
+        (agent as BossBehaviour).ScoldedAgent = null;
         if (!_inOffice)
         {
             float newAnger = agent.GetAgentVariable("CurrentAnger") + 100 * agent.GetAgentVariable("Irritability");
@@ -35,6 +37,7 @@ public class ScoldAction : ASimpleAction
         }
         else agent.SetAgentVariable("CurrentAnger", 0); //Cuando regaña a alguien en su despacho se calma
         if(agent.GetAgentGameObject().GetComponent<NavMeshAgent>().enabled) agent.GetAgentGameObject().GetComponent<NavMeshAgent>().isStopped = false;
+        if (_inOffice) _context.State = new BossWorkState(_context, agent);
     }
 
     public override void FixedUpdate()

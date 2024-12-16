@@ -16,7 +16,12 @@ public class SendToOfficeAction : ASimpleAction
     public override void Enter()
     {
         base.Enter();
-        _boss = agent.GetAgentGameObject().GetComponent<BossBehaviour>();
+        _boss = agent as BossBehaviour;
+        if (agent.GetChair().IsOccupied())
+        {
+            finished = true;
+            return;
+        }
         _navAgent = _boss.GetComponent<NavMeshAgent>();
         _navAgent.speed = agent.GetAgentVariable("Speed");
         _navAgent.SetDestination(_boss.GetChair().transform.position);

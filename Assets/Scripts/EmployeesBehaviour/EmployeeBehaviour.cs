@@ -32,6 +32,8 @@ public class EmployeeBehaviour : AgentBehaviour
     GameObject _currentWaitingLine;
 
     public bool isSlacking = false;
+
+    public int numScolds = 0;
     ////////////////////////////////////////
 
 
@@ -106,4 +108,9 @@ public class EmployeeBehaviour : AgentBehaviour
     }
 
     public virtual void SetState(string stateName) { }
+
+    public void FireEmployee(float time)
+    {
+        Destroy(this.gameObject, time);
+    }
 }

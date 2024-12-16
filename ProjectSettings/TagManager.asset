@@ -20,6 +20,8 @@ TagManager:
   - Trashcan
   - Computer
   - SmokeArea
+  - FiredPosition
+  - Elevator
   layers:
   - Default
   - TransparentFX

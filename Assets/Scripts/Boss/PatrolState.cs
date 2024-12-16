@@ -57,14 +57,14 @@ public class PatrolState : AState
         _bt = new BehaviourTree();
         //Secuencia correspondiente a regañar en la oficina:
         List<IBehaviourNode> nodes = new List<IBehaviourNode>();
-        nodes.Add(new ConditionNode(() =>  agent.GetAgentVariable("CurrentAnger") >= 100));
+        nodes.Add(new ConditionNode(SendOfficeCondition()));
         nodes.Add(new ActionNode(new SendToOfficeAction(agent), _bt));
-        nodes.Add(new ActionNode(new ScoldAction(agent, true), _bt));
+        nodes.Add(new ActionNode(new ScoldAction(agent, true, context), _bt));
         IBehaviourNode scoldOfficeSequenceNode = new SequenceNode(new List<IBehaviourNode>(nodes));
         //Selector correspondiente a regañar en el sitio:
         nodes.Clear();
         nodes.Add(scoldOfficeSequenceNode);
-        nodes.Add(new ActionNode(new ScoldAction(agent, false), _bt));
+        nodes.Add(new ActionNode(new ScoldAction(agent, false, context), _bt));
         IBehaviourNode scoldSelector = new SelectorNode(new List<IBehaviourNode>(nodes));
         //Secuencia correspondiente a comprobar si ve a algún trabajador holgazaneando:
         nodes.Clear();
@@ -79,5 +79,18 @@ public class PatrolState : AState
 
         IBehaviourNode rootNode = new LoopNNode(baseSelectorNode, 0);
         _bt.Root = rootNode;
+    }
+
+    private Func<bool> SendOfficeCondition()
+    {
+        return () =>
+        {
+            if (agent.GetAgentVariable("CurrentAnger") >= 100 || 
+                    ((agent as BossBehaviour).ScoldedAgent as EmployeeBehaviour).numScolds == 2)
+            {
+                return true;
+            }
+            return false;
+        };
     }
 }

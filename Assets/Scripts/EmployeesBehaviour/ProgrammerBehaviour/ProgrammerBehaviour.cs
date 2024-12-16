@@ -99,6 +99,11 @@ public class ProgrammerBehaviour : EmployeeBehaviour
     }
     public override void SetState(string stateName) 
     {
+        if (numScolds >= 3)
+        {
+            _workerFSM.State = new FiredState(_workerFSM, this);
+            return;
+        } 
         if (stateName.Equals("WORK")) _workerFSM.State = new ProgrammerWorkState(_workerFSM, this);
         else if (stateName.Equals("SCOLDED")) _workerFSM.State = new ScoldedState(_workerFSM, this, false);
         else if (stateName.Equals("SCOLDED_OFFICE")) _workerFSM.State = new ScoldedState(_workerFSM, this, true);
