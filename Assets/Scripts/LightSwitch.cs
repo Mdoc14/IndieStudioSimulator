@@ -18,6 +18,7 @@ public class LightSwitch : AInteractable
     private Dictionary<EmployeeBehaviour, string> _animations = new Dictionary<EmployeeBehaviour, string>();
     private Dictionary<EmployeeBehaviour, string> _barks = new Dictionary<EmployeeBehaviour, string>();
     private Dictionary<EmployeeBehaviour, bool> _navMeshAgents = new Dictionary<EmployeeBehaviour, bool>();
+    private List<string> _bossValues = new List<string>();
     private int _activeWorkers;
 
     void Start()
@@ -69,6 +70,7 @@ public class LightSwitch : AInteractable
         _barks.Clear();
         _animations.Clear();
         _navMeshAgents.Clear();
+        _bossValues.Clear();
         foreach(EmployeeBehaviour employee in GameObject.FindObjectsOfType<EmployeeBehaviour>())
         {
             _navMeshAgents.Add(employee, employee.GetComponent<NavMeshAgent>().enabled);
@@ -79,6 +81,13 @@ public class LightSwitch : AInteractable
             employee.SetBark("Wait");
             employee.SetAnimation("Idle");
         }
+        BossBehaviour boss = GameObject.FindObjectOfType<BossBehaviour>();
+        _bossValues.Add(boss.GetAnimation());
+        _bossValues.Add(boss.GetBark());
+        if (boss.GetComponent<NavMeshAgent>().enabled) boss.GetComponent<NavMeshAgent>().isStopped = true;
+        boss.enabled = false;
+        boss.SetBark("Wait");
+        boss.SetAnimation("Idle");
         _activeWorkers = WorldManager.Instance.ActiveWorkers;
         WorldManager.Instance.SetActiveWorkers(0);
     }
@@ -100,6 +109,12 @@ public class LightSwitch : AInteractable
         {
             employee.SetBark(_barks[employee]);
         }
+
+        BossBehaviour boss = GameObject.FindObjectOfType<BossBehaviour>();
+        if (boss.GetComponent<NavMeshAgent>().enabled) boss.GetComponent<NavMeshAgent>().isStopped = false;
+        boss.enabled = true;
+        boss.SetAnimation(_bossValues[0]);
+        boss.SetBark(_bossValues[1]);
 
         WorldManager.Instance.SetActiveWorkers(_activeWorkers);
     }

@@ -44,7 +44,7 @@ public class UseBathroomAction : ASimpleAction
 
     public override void Exit()
     {
-        _bath.GetComponent<BathroomInteractable>().OnBreak -= OnBreak;
+        if(_bath != null) _bath.GetComponent<BathroomInteractable>().OnBreak -= OnBreak;
     }
 
     public override void FixedUpdate()

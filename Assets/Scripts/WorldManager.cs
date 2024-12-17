@@ -48,10 +48,10 @@ public class WorldManager : MonoBehaviour
         if (_productivity <= 0 || _productivity >= 1000)
         {
             _productivityDecreaseFactor = _productivityFactor = 0;
-            _productivity = 50; //Para que no se llame múltiples veces al GameEnded()
+            _productivity = 500; //Para que no se llame múltiples veces al GameEnded()
             ForceSimulationSpeed(1);
             GameObject.FindObjectOfType<AudioListener>().enabled = false;
-            MainMenuManager.Instance.GameEnded(!(_productivity <= 0));
+            MainMenuManager.Instance.GameEnded(!(_productivity < 900));
         }
         _productivitySlider.value = _productivity;
     }

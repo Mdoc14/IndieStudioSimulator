@@ -59,7 +59,7 @@ public class BossWorkState : AState
         {
             agent.GetChair().Leave();
             float rand = Random.Range(0.0f, 1.0f);
-            if (rand < 0.1f) context.State = new BathroomState(context, agent, new BossWorkState(context, agent));
+            if (rand < 1f) context.State = new BathroomState(context, agent, new BossWorkState(context, agent));
             else if (rand < 0.35f) context.State = new BossReunionState(context, agent);
             else context.State = new PatrolState(context, agent);
         }

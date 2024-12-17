@@ -24,7 +24,6 @@ public class BossBehaviour : AgentBehaviour
         agentVariables.Add("CurrentAnger", Random.Range(0, 100));
         agentVariables.Add("Speed", GetComponent<NavMeshAgent>().speed);
         _bossMachine.State = new BossWorkState(_bossMachine, this);
-        GameObject.FindObjectOfType<LightSwitch>().LightsOut += OnLightsOut;
     }
 
     void Update()
@@ -33,8 +32,9 @@ public class BossBehaviour : AgentBehaviour
         if (patrolling)
         {
             RaycastHit hit;
-            if(Physics.Raycast(headTransform.position, headTransform.up, out hit, 3, 1 << 8))
+            if(Physics.Raycast(headTransform.position, headTransform.up, out hit, 2, 1 << 8))
             {
+                Debug.Log("AGENTE VISTO");
                 if (hit.transform.GetComponent<EmployeeBehaviour>().isSlacking)
                 {
                     if (_agentToScold == null) _agentToScold = hit.transform.GetComponent<EmployeeBehaviour>();
@@ -68,11 +68,6 @@ public class BossBehaviour : AgentBehaviour
     }
 
     public IAgent ScoldedAgent { get { return _agentToScold; } set { if(_agentToScold == null || value == null) _agentToScold = value; } }
-
-    private void OnLightsOut()
-    {
-        _bossMachine.State = new WaitForLightState(_bossMachine, this);
-    }
 
     public void SetPatrolling(bool p)
     {

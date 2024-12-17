@@ -37,9 +37,9 @@ public class BathroomState : AState
 
     public override void Exit()
     {
-        if (agent.GetCurrentBath() != null && agent.GetCurrentBath().IsOccupied())
+        if (agent.GetCurrentBath() != null)
         {
-            agent.GetCurrentBath().Leave();
+            if(agent.GetCurrentBath().IsOccupied()) agent.GetCurrentBath().Leave();
             agent.GetCurrentBath().selected = false;
         }
         agent.SetCurrentBath(null);
