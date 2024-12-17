@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8419468672512117228}
   - component: {fileID: 7430544191730355825}
   - component: {fileID: 161906247082109240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4528784618986122596}
   - component: {fileID: 5596826926393294049}
   - component: {fileID: 8881966579543216263}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JerseyNeck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1470966950485822669}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   - component: {fileID: 2825749313101094644}
   - component: {fileID: 1447266812508046560}
   - component: {fileID: 1528154260860141779}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8879104534297222143}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HandBone.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +324,7 @@ GameObject:
   - component: {fileID: 4046673525908281344}
   - component: {fileID: 7121948413209206510}
   - component: {fileID: 6938130391209986373}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 8701788300230920097}
   - component: {fileID: 8544534387436605664}
   - component: {fileID: 4980869274098213775}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 1357584848431695582}
   - component: {fileID: 6187989052395249730}
   - component: {fileID: 1683550203647587858}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   - component: {fileID: 6248237372240637297}
   - component: {fileID: 5405382860855602685}
   - component: {fileID: 9152522888941586533}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 4951915024840261818}
   - component: {fileID: 46356873147405450}
   - component: {fileID: 6558366006288885768}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -754,7 +754,8 @@ GameObject:
   - component: {fileID: 4211399600315896998}
   - component: {fileID: 4353800629763127845}
   - component: {fileID: 2775833793680697069}
-  m_Layer: 0
+  - component: {fileID: 4833913658407798866}
+  m_Layer: 8
   m_Name: Programmer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -787,11 +788,11 @@ NavMeshAgent:
   m_GameObject: {fileID: 6436108895264245328}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.27
+  m_Radius: 0.06
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 5000
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -818,6 +819,7 @@ MonoBehaviour:
   male: 1
   SmokePos: {fileID: 0}
   isSlacking: 0
+  numScolds: 0
   working: 0
 --- !u!114 &2775833793680697069
 MonoBehaviour:
@@ -832,6 +834,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ribbon: {fileID: 6231069290109847103}
+--- !u!136 &4833913658407798866
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6436108895264245328}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.26
+  m_Height: 1.94
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!1 &7175053735756269289
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,7 +867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7555133583290522707}
   - component: {fileID: 1636967428845117243}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DefaultCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -895,7 +920,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6010579293873264282}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HandBone.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -927,7 +952,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8743134839462170721}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BodyBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -963,7 +988,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3170787982557670140}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1002,7 +1027,7 @@ GameObject:
   - component: {fileID: 3418426070159117990}
   - component: {fileID: 7458792722358141941}
   - component: {fileID: 409521072061647110}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1085,7 +1110,7 @@ GameObject:
   - component: {fileID: 4895582344898213775}
   - component: {fileID: 7803252070913184443}
   - component: {fileID: 3925003041951721651}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Glasses
   m_TagString: Untagged
   m_Icon: {fileID: 0}

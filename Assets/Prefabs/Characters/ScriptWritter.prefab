@@ -452,11 +452,11 @@ NavMeshAgent:
   m_GameObject: {fileID: 3847654209130951087}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.27
+  m_Radius: 0.06
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 5000
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -490,6 +490,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d521f51408a857e48b9cbf54809a2ae0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _chair: {fileID: 0}
+  _computer: {fileID: 0}
+  currentIncidence: {fileID: 0}
+  male: 1
+  SmokePos: {fileID: 0}
+  isSlacking: 0
+  numScolds: 0
+  working: 0
 --- !u!1 &5086157605227412661
 GameObject:
   m_ObjectHideFlags: 0

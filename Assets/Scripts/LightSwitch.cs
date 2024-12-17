@@ -74,7 +74,7 @@ public class LightSwitch : AInteractable
             _navMeshAgents.Add(employee, employee.GetComponent<NavMeshAgent>().enabled);
             _animations.Add(employee, employee.GetAnimation());
             _barks.Add(employee, employee.GetBark());
-            employee.GetComponent<NavMeshAgent>().enabled = false;
+            if(employee.GetComponent<NavMeshAgent>().enabled) employee.GetComponent<NavMeshAgent>().isStopped = true;
             employee.enabled = false;
             employee.SetBark("Wait");
             employee.SetAnimation("Idle");
@@ -87,7 +87,7 @@ public class LightSwitch : AInteractable
     {
         foreach (EmployeeBehaviour employee in _navMeshAgents.Keys)
         {
-            employee.GetComponent<NavMeshAgent>().enabled = _navMeshAgents[employee];
+            if (employee.GetComponent<NavMeshAgent>().enabled) employee.GetComponent<NavMeshAgent>().isStopped = false;
             employee.enabled = true;
         }
 

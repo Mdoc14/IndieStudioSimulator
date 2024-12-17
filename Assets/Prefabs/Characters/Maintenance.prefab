@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1392094673873011690}
   - component: {fileID: 116052708907983179}
   - component: {fileID: 5993199189381735489}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6348682289482836981}
   - component: {fileID: 6218822906514701492}
   - component: {fileID: 7333655190028029915}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6056792408971503032}
   - component: {fileID: 5172210654994768421}
   - component: {fileID: 2514924364544394604}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3796558781724631193}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 3370365196361786462}
   - component: {fileID: 2263929743811355241}
   - component: {fileID: 8151447742797677025}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -389,7 +389,7 @@ GameObject:
   - component: {fileID: 571656687202333344}
   - component: {fileID: 3804490287055317172}
   - component: {fileID: 3885729656972487815}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6620590772729329579}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HandBone.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5188361493984178183}
   - component: {fileID: 7922394048445995732}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DefaultCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -556,7 +556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8336203285240773326}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HandBone.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6452568018787908661}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BodyBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -624,7 +624,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 925802413954647720}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HeadBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,7 +663,7 @@ GameObject:
   - component: {fileID: -2606797935819989897}
   - component: {fileID: 548941542257509448}
   - component: {fileID: 6286732675041727874}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Maintenance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -700,7 +700,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 5000
   m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -751,7 +751,7 @@ GameObject:
   - component: {fileID: 1128515486147863282}
   - component: {fileID: 5141719666174406561}
   - component: {fileID: 2699647959252837714}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -834,7 +834,7 @@ GameObject:
   - component: {fileID: 3607073819646454410}
   - component: {fileID: 8447026653994699798}
   - component: {fileID: 4000552444913867334}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -917,7 +917,7 @@ GameObject:
   - component: {fileID: 8534260220055191845}
   - component: {fileID: 7771591930987823529}
   - component: {fileID: 6907872766358512689}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1000,7 @@ GameObject:
   - component: {fileID: 2631862638791574208}
   - component: {fileID: 2017160507945289816}
   - component: {fileID: 2693802831441830746}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Vest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1135,6 +1135,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 242ef751c68ee6d47a9f54571fe6d4fd, type: 3}
       propertyPath: m_Name
       value: Lazzo
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 242ef751c68ee6d47a9f54571fe6d4fd, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
