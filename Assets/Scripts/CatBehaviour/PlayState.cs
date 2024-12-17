@@ -59,7 +59,7 @@ public class PlayState : AState
         {
             agent.SetBark("BiteWires");
 
-            _playAction = new InteractAction(agent);
+            _playAction = new InteractAction(agent, "Bite");
             _playAction.Enter();
         }
         else
@@ -68,8 +68,8 @@ public class PlayState : AState
 
             List<IAction> actions = new List<IAction>()
             {
-                new InteractAction(agent),
-                //new RunAwayAction(agent)
+                new InteractAction(agent, "ThrowTrashcan"),
+                new RunAwayAction(agent)
             };
 
             CompositeAction throwTrashCanCompositeAction = new CompositeAction(actions);

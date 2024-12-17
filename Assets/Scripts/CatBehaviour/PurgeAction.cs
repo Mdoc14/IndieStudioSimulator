@@ -17,8 +17,9 @@ public class PurgeAction : ASimpleAction
     {
         base.Enter();
         _catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
-        _timePurging = Random.Range(5f, 10f);
+        _timePurging = 2.083f;
         agent.SetBark("Vomit");
+        agent.SetAnimation("Purge");
         Debug.Log("Gato: se está purgando");
     }
 

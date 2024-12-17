@@ -26,7 +26,7 @@ public class UseLitterBoxAction : ASimpleAction
         _bath = agent.GetCurrentChair();
         _navAgent.SetDestination(_bath.transform.position);
         agent.SetBark("Bathroom");
-        //agent.SetAnimation("Walk");
+        agent.SetAnimation("Walk");
         Debug.Log("Gato: ha ido a hacer sus necesidades");
     }
 
@@ -48,7 +48,7 @@ public class UseLitterBoxAction : ASimpleAction
             {
                 _reached = true;
                 _bath.Sit(agent.GetAgentGameObject());
-                //agent.SetAnimation("Idle");
+                agent.SetAnimation("Bath");
             } 
         }
         else //Si lo ha alcanzado el tiempo comienza a descontarse

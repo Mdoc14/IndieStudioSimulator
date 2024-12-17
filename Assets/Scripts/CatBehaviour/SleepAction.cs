@@ -26,7 +26,7 @@ public class SleepAction : ASimpleAction
         _catBed = _catBehaviour.CatBed;
         _navAgent.SetDestination(_catBed.transform.position);
         agent.SetBark("Sleep");
-        //agent.SetAnimation("Walk");
+        agent.SetAnimation("Walk");
 
         Debug.Log("Gato: va a dormir");
     }
@@ -49,7 +49,7 @@ public class SleepAction : ASimpleAction
             {
                 _reached = true;
                 _catBed.Sit(agent.GetAgentGameObject());
-                //agent.SetAnimation("Idle");
+                agent.SetAnimation("Sleep");
             } 
         }
         else //Si la ha alcanzado el tiempo comienza a descontarse

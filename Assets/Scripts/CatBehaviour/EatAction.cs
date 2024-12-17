@@ -26,6 +26,7 @@ public class EatAction : ASimpleAction
         _reached = false;
         _navAgent.SetDestination(_catBowl.transform.position);
         agent.SetBark("Eat");
+        agent.SetAnimation("Walk");
         Debug.Log("Gato: va a comer");
     }
 
@@ -44,6 +45,7 @@ public class EatAction : ASimpleAction
             if (!_navAgent.pathPending && _navAgent.remainingDistance <= _navAgent.stoppingDistance)
             {
                 _reached = true;
+                agent.SetAnimation("Eat");
             }
         }
         else

@@ -5,29 +5,27 @@ using UnityEngine.AI;
 
 namespace CharactersBehaviour
 {
-    public class WanderAction : ASimpleAction
+    public class RunAwayAction : ASimpleAction
     {
-        float wanderDistance = 15f;
+        float runDistance = 30f;
 
         NavMeshAgent _navAgent;
 
-        int currentWander = 0;
-        int numberWanders;
-
-        float timer;
-        float timeBetweenWanders;
         bool _reached = false;
 
-        public WanderAction(IAgent agent) : base(agent)
+        public RunAwayAction(IAgent agent) : base(agent)
         {
         }
 
         public override void Enter()
         {
             base.Enter();
-            numberWanders = Random.Range(3, 5);
-            timer = 0f;
+            _reached = false;
             _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
+            agent.SetAnimation("Walk");
+            _navAgent.speed = 7f;
+            Vector3 newDestination = Wander(agent.GetAgentGameObject().transform.position, runDistance);
+            _navAgent.SetDestination(newDestination);
         }
 
         public override void Exit()
@@ -41,23 +39,9 @@ namespace CharactersBehaviour
                 if (!_navAgent.pathPending && _navAgent.remainingDistance <= _navAgent.stoppingDistance)
                 {
                     _reached = true;
+                    _navAgent.speed = 3.5f;
                     agent.SetAnimation("Idle");
-                }
-            }
-            else
-            {
-                timer -= Time.deltaTime;
-
-                if (timer <= 0)
-                {
-                    if (currentWander >= numberWanders) { finished = true; return; }
-                    _reached = false;
-                    agent.SetAnimation("Walk");
-                    timeBetweenWanders = Random.Range(2f, 4f);
-                    timer = timeBetweenWanders;
-                    Vector3 newDestination = Wander(agent.GetAgentGameObject().transform.position, wanderDistance);
-                    _navAgent.SetDestination(newDestination);
-                    currentWander++;
+                    finished = true;
                 }
             }
         }

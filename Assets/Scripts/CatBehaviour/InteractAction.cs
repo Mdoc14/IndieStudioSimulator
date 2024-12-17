@@ -11,17 +11,20 @@ internal class InteractAction : ASimpleAction
     IInteractable _interactable;
     bool _reached;
     float _timePlaying;
+    string _type;
 
-    public InteractAction(IAgent agent) : base(agent)
+    public InteractAction(IAgent agent, string animationType) : base(agent)
     {
+        _type = animationType;
     }
 
     public override void Enter()
     {
         base.Enter();
+        agent.SetAnimation("Walk");
         _catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
-        _timePlaying = Random.Range(5f, 10f);
+        _timePlaying = Random.Range(1.5f, 2f);
         _interactable = _catBehaviour.CurrentObjetive.GetComponent<IInteractable>();
         _reached = false;
         _navAgent.SetDestination(_catBehaviour.CurrentObjetive.transform.position);
@@ -42,6 +45,7 @@ internal class InteractAction : ASimpleAction
         {
             if (!_navAgent.pathPending && _navAgent.remainingDistance <= _navAgent.stoppingDistance)
             {
+                agent.SetAnimation(_type);
                 _reached = true;
             }
         }
