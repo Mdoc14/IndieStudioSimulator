@@ -87,7 +87,7 @@ public class JanitorBehaviour : AgentBehaviour
 
     public void CalculateRestTime() 
     {
-        agentVariables[restTime] = (agentVariables[trashCleaned] == 0)? 10 : agentVariables[trashCleaned] * 10;
+        agentVariables[restTime] = (agentVariables[trashCleaned] == 0)? 10 : agentVariables[trashCleaned] * 3;
 
     }
 
