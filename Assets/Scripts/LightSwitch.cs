@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class LightSwitch : AInteractable 
 {
@@ -13,6 +14,11 @@ public class LightSwitch : AInteractable
     public float lightsOutProbability = 0.1f;
     public float checkInterval = 20.0f; //Tiempo que determina cada cuanto es posible que se apaguen las luces
     public bool IsOn { get; private set; } = true;
+
+    private Dictionary<EmployeeBehaviour, string> _animations = new Dictionary<EmployeeBehaviour, string>();
+    private Dictionary<EmployeeBehaviour, string> _barks = new Dictionary<EmployeeBehaviour, string>();
+    private Dictionary<EmployeeBehaviour, bool> _navMeshAgents = new Dictionary<EmployeeBehaviour, bool>();
+    private int _activeWorkers;
 
     void Start()
     {
@@ -28,6 +34,7 @@ public class LightSwitch : AInteractable
         DynamicGI.UpdateEnvironment();
         LightsOut?.Invoke();
         IsOn = false;
+        StopEmployeeActivity();
     }
 
     public override void Repair()
@@ -39,6 +46,7 @@ public class LightSwitch : AInteractable
         Debug.Log("¡Luz arreglada!");
         IsOn = true;
         LightsOn?.Invoke();
+        RestoreEmployeeActivity();
     }
 
     IEnumerator LightsGoOut() {
@@ -54,5 +62,45 @@ public class LightSwitch : AInteractable
                 Interact();
             }
         }
+    }
+
+    private void StopEmployeeActivity()
+    {
+        _barks.Clear();
+        _animations.Clear();
+        _navMeshAgents.Clear();
+        foreach(EmployeeBehaviour employee in GameObject.FindObjectsOfType<EmployeeBehaviour>())
+        {
+            _navMeshAgents.Add(employee, employee.GetComponent<NavMeshAgent>().enabled);
+            _animations.Add(employee, employee.GetAnimation());
+            _barks.Add(employee, employee.GetBark());
+            employee.GetComponent<NavMeshAgent>().enabled = false;
+            employee.enabled = false;
+            employee.SetBark("Wait");
+            employee.SetAnimation("Idle");
+        }
+        _activeWorkers = WorldManager.Instance.ActiveWorkers;
+        WorldManager.Instance.SetActiveWorkers(0);
+    }
+
+    private void RestoreEmployeeActivity()
+    {
+        foreach (EmployeeBehaviour employee in _navMeshAgents.Keys)
+        {
+            employee.GetComponent<NavMeshAgent>().enabled = _navMeshAgents[employee];
+            employee.enabled = true;
+        }
+
+        foreach (EmployeeBehaviour employee in _animations.Keys)
+        {
+            employee.SetAnimation(_animations[employee]);
+        }
+
+        foreach (EmployeeBehaviour employee in _barks.Keys)
+        {
+            employee.SetBark(_barks[employee]);
+        }
+
+        WorldManager.Instance.SetActiveWorkers(_activeWorkers);
     }
 }

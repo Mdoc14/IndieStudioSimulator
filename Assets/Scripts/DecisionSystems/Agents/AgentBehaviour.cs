@@ -12,6 +12,8 @@ namespace CharactersBehaviour
         private Chair _currentChair;
         public AInteractable currentIncidence;
         public bool male = true;
+        private string _currentBark;
+        private string _currentAnimation;
 
         public GameObject GetAgentGameObject()
         {
@@ -63,16 +65,31 @@ namespace CharactersBehaviour
             return _currentChair;
         }
 
+        public string GetBark()
+        {
+            return _currentBark;
+        }
+
         public void SetBark(string name)
         {
             Sprite bark = null;
             if(BarkManager.Instance != null) bark = BarkManager.Instance.GetBark(name);
-            if (bark != null) transform.GetComponentInChildren<SpriteRenderer>().sprite = bark;
+            if (bark != null)
+            {
+                transform.GetComponentInChildren<SpriteRenderer>().sprite = bark;
+                _currentBark = name;
+            }
+        }
+
+        public string GetAnimation()
+        {
+            return _currentAnimation;
         }
 
         public void SetAnimation(string triggerName)
         {
             transform.GetComponentInChildren<Animator>().SetTrigger(triggerName);
+            _currentAnimation = triggerName;
         }
     }
 }

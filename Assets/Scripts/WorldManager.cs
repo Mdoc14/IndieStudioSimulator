@@ -15,7 +15,7 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private float _productivityFactor = 0.2f; //La productividad aumenta cada segundo * número de trabajadores trabajando
     [SerializeField] private float _productivityDecreaseFactor = 1; //La productividad baja cada segundo
     private Slider _productivitySlider;
-    private float _activeWorkers = 0;
+    public int ActiveWorkers { get; private set; } = 0;
     private float _productivity = 500; //0 -> bancarrota; 1000 -> éxito total, se van de vacaciones
     //Manejo de la basura:
     [SerializeField] private GameObject _trashPrefab;
@@ -41,7 +41,7 @@ public class WorldManager : MonoBehaviour
     private void Update()
     {
         _productivity -= _productivityDecreaseFactor * Time.deltaTime;
-        _productivity += _activeWorkers * _productivityFactor * Time.deltaTime;
+        _productivity += ActiveWorkers * _productivityFactor * Time.deltaTime;
         if (_productivity <= 0 || _productivity >= 1000)
         {
             _productivityDecreaseFactor = _productivityFactor = 0;
@@ -60,7 +60,12 @@ public class WorldManager : MonoBehaviour
 
     public void SetWorkerActivity(bool active)
     {
-        _activeWorkers += active? 1 : -1;
+        ActiveWorkers += active? 1 : -1;
+    }
+
+    public void SetActiveWorkers(int num)
+    {
+        ActiveWorkers = num;
     }
 
     public void ChangeSimulationSpeed(bool add)

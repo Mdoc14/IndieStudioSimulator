@@ -15,8 +15,7 @@ public class MeetingState : AState
 
     public override void Enter()
     {
-        Debug.Log("PROGRAMADOR ENTRANDO EN ESTADO DE TRABAJO...");
-
+        Debug.Log("PROGRAMADOR ENTRANDO EN REUNIÓN...");
         WorldManager.Instance.OnNotifyEmployeesEnd += EndMeeting;
         List <IAction> actions = new List<IAction>();
         actions.Add(new AssignReunionChairAction(agent));
@@ -29,7 +28,7 @@ public class MeetingState : AState
     {
         WorldManager.Instance.OnNotifyEmployeesEnd -= EndMeeting;
         _onlyOnce = false;
-        Debug.Log("PROGRAMADOR HA SALIDO DE ESTADO DE TRABAJO");
+        Debug.Log("PROGRAMADOR HA SALIDO DE LA REUNIÓN");
     }
 
     public override void FixedUpdate()
@@ -39,7 +38,7 @@ public class MeetingState : AState
 
     public override void Update()
     {
-        _workAction.Update();
+        if(!_workAction.Finished) _workAction?.Update();
         if (_onlyOnce && _workAction.Finished) 
         {
             agent.SetBark("Listen");
@@ -54,6 +53,7 @@ public class MeetingState : AState
         if (agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>().GetReunionChair().GetComponent<Chair>().IsOccupied())
         {
             agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>().GetReunionChair().GetComponent<Chair>().Leave();
+            agent.SetCurrentChair(null);
         }
         agent.SetAgentVariable(agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>().Motivation, 100f);
         context.State = nextState;

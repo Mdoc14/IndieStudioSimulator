@@ -15,7 +15,9 @@ namespace CharactersBehaviour
         public Computer GetComputer();
         public void SetCurrentChair(Chair bath);
         public Chair GetCurrentChair();
+        public string GetBark();
         public void SetBark(string name);
+        public string GetAnimation();
         public void SetAnimation(string triggerName);
     }
 }

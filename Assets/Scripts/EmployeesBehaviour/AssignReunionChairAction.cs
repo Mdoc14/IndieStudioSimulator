@@ -11,6 +11,7 @@ public class AssignReunionChairAction : ASimpleAction
     public override void Enter()
     {
         base.Enter();
+        if (agent.GetCurrentChair() != null) return;
         try
         {
             foreach (GameObject obj in GameObject.FindGameObjectsWithTag("ReunionChair"))
@@ -18,6 +19,7 @@ public class AssignReunionChairAction : ASimpleAction
                 if (!obj.GetComponent<Chair>().selected)
                 {
                     agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>().SetReunionChair(obj);
+                    agent.SetCurrentChair(obj.GetComponent<Chair>());
                     obj.GetComponent<Chair>().selected = true;
                     return;
                 }
