@@ -24,6 +24,7 @@ namespace CharactersBehaviour
             _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
             agent.SetAnimation("Walk");
             _navAgent.speed = 7f;
+            agent.SetAnimationSpeed(2f);
             Vector3 newDestination = Wander(agent.GetAgentGameObject().transform.position, runDistance);
             _navAgent.SetDestination(newDestination);
         }
@@ -40,6 +41,7 @@ namespace CharactersBehaviour
                 {
                     _reached = true;
                     _navAgent.speed = 3.5f;
+                    agent.SetAnimationSpeed(1f);
                     agent.SetAnimation("Idle");
                     finished = true;
                 }

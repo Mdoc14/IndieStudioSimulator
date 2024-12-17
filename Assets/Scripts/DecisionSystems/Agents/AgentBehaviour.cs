@@ -102,5 +102,10 @@ namespace CharactersBehaviour
             transform.GetComponentInChildren<Animator>().SetTrigger(triggerName);
             _currentAnimation = triggerName;
         }
+
+        public void SetAnimationSpeed(float speed)
+        {
+            transform.GetComponentInChildren<Animator>().speed = speed;
+        }
     }
 }

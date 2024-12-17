@@ -22,5 +22,6 @@ namespace CharactersBehaviour
         public void SetBark(string name);
         public string GetAnimation();
         public void SetAnimation(string triggerName);
+        public void SetAnimationSpeed(float speed);
     }
 }
