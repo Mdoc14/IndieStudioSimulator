@@ -26,11 +26,19 @@ public class UseBathroomAction : ASimpleAction
         _reached = false;
         _time = UnityEngine.Random.Range(3, 20); //Est� un tiempo aleatorio usando el ba�o
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
-        _bath = agent.GetCurrentChair();
+        _bath = agent.GetCurrentBath();
+        if(_bath == null)
+        {
+            finished = true;
+            return;
+        }
         agent.SetBark("Bathroom");
         agent.SetAnimation("Walk");
-        _bath.GetComponent<BathroomInteractable>().OnBreak += OnBreak;
-        if (_bath.GetComponent<BathroomInteractable>().broken) OnBreak();
+        if (_bath.GetComponent<BathroomInteractable>() != null)
+        {
+            _bath.GetComponent<BathroomInteractable>().OnBreak += OnBreak;
+            if (_bath.GetComponent<BathroomInteractable>().broken) OnBreak();
+        }
         if(_navAgent.enabled) _navAgent.SetDestination(_bath.transform.position);
     }
 

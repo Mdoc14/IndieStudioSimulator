@@ -14,7 +14,7 @@ public class BathroomWaitingLine : MonoBehaviour
         {
             if (!bath.IsOccupied() && !bath.selected)
             {
-                agent.SetCurrentChair(bath);
+                agent.SetCurrentBath(bath);
                 bath.selected = true;
                 return bath;
             }

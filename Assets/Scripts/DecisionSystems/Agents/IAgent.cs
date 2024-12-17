@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CharactersBehaviour
@@ -15,6 +16,8 @@ namespace CharactersBehaviour
         public Computer GetComputer();
         public void SetCurrentChair(Chair bath);
         public Chair GetCurrentChair();
+        public void SetCurrentBath(Chair bath);
+        public Chair GetCurrentBath();
         public string GetBark();
         public void SetBark(string name);
         public string GetAnimation();

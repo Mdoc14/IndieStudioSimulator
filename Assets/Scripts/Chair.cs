@@ -35,7 +35,7 @@ public class Chair : MonoBehaviour
 
     public void Leave(bool maintainSelected = false)
     {
-        _agent.GetComponent<NavMeshAgent>().enabled = true;
+        if(_agent != null) _agent.GetComponent<NavMeshAgent>().enabled = true;
         _agent = null;
         _occupied = false;
         if(!maintainSelected) selected = false;

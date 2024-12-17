@@ -10,6 +10,7 @@ namespace CharactersBehaviour
         [SerializeField] private Chair _chair;
         [SerializeField] private Computer _computer;
         private Chair _currentChair;
+        private Chair _currentBath;
         public AInteractable currentIncidence;
         public bool male = true;
         private string _currentBark;
@@ -63,6 +64,16 @@ namespace CharactersBehaviour
         public Chair GetCurrentChair()
         {
             return _currentChair;
+        }
+
+        public void SetCurrentBath(Chair chair)
+        {
+            _currentBath = chair;
+        }
+
+        public Chair GetCurrentBath()
+        {
+            return _currentBath;
         }
 
         public string GetBark()

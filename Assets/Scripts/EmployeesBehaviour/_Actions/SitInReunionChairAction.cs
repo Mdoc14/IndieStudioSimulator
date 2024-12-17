@@ -16,6 +16,8 @@ public class SitInReunionChairAction : ASimpleAction
         base.Enter();
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
         _navAgent.enabled = true;
+        if (agent.GetChair().IsOccupied()) agent.GetChair().Leave();
+        if (agent.GetCurrentChair() != null && agent.GetCurrentChair().IsOccupied()) agent.GetCurrentChair().Leave();
         if (_reunionChair == null) _reunionChair = agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>().GetReunionChair().GetComponent<Chair>();
         if (_reunionChair.IsOccupied()) _reunionChair.Leave();
         _navAgent.SetDestination(_reunionChair.transform.position);

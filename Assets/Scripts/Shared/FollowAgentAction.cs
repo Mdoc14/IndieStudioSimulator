@@ -22,7 +22,7 @@ public class FollowAgentAction : ASimpleAction
         _prevStoppingDistance = _navAgent.stoppingDistance;
         _navAgent.stoppingDistance = 1.5f;
         if (agent.GetChair().IsOccupied()) agent.GetChair().Leave();
-        if (agent.GetCurrentChair().IsOccupied())
+        if (agent.GetCurrentChair() != null && agent.GetCurrentChair().IsOccupied())
         {
             agent.GetCurrentChair().Leave();
             agent.SetCurrentChair(null);

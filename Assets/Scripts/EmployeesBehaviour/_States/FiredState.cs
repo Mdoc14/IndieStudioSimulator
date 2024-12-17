@@ -6,6 +6,7 @@ public class FiredState : AState
 {
     ASimpleAction _firedAction;
     bool _reached = false;
+    float _firedTimer = 1;
     public FiredState(StateMachine sm, IAgent agent) : base(sm, agent)
     {
     }
@@ -39,8 +40,9 @@ public class FiredState : AState
                 agent.SetBark("Scolded");
                 agent.SetAnimation("Idle");
                 GameObject.FindWithTag("Elevator").GetComponent<Animator>().SetTrigger("Close");
-                (agent as EmployeeBehaviour).FireEmployee(1);
             }
+            _firedTimer -= Time.deltaTime;
+            if (_firedTimer <= 0) agent.GetAgentGameObject().SetActive(false);
         }
     }
 }

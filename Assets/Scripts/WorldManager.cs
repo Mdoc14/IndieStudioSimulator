@@ -51,11 +51,6 @@ public class WorldManager : MonoBehaviour
             MainMenuManager.Instance.GameEnded(_productivity >= 1000);
         }
         _productivitySlider.value = _productivity;
-
-
-        //Lo siguiente sólo está aquí para probar el jefe, HAY QUE ELIMINARLO MÁS ADELANTE
-        DecreaseWorkerInReunion();
-        AddWorkerToReunion();
     }
 
     public void SetWorkerActivity(bool active)
