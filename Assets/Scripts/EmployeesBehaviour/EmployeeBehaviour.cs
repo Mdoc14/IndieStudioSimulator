@@ -72,6 +72,17 @@ public class EmployeeBehaviour : AgentBehaviour
         WorldManager.Instance.OnNotifyEmployeesStart -= MeetingStarted;
     }
 
+    private void OnEnable()
+    {
+        if(GetComputer().broken)
+        {
+            currentIncidence = GetComputer();
+            if(this is ProgrammerBehaviour) _workerFSM.State = new ReportIncidenceState(_workerFSM, this, new ProgrammerWorkState(_workerFSM, this));
+            if(this is ArtistBehaviour) _workerFSM.State = new ReportIncidenceState(_workerFSM, this, new ArtistWorkState(_workerFSM, this));
+            if(this is ScriptWritterBehaviour) _workerFSM.State = new ReportIncidenceState(_workerFSM, this, new ScriptWritterWorkState(_workerFSM, this));
+        }
+    }
+
     protected virtual void FixedUpdate()
     {
         _workerFSM.FixedUpdateBehaviour();

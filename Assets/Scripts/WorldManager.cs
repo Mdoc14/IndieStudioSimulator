@@ -57,6 +57,7 @@ public class WorldManager : MonoBehaviour
     public void SetWorkerActivity(bool active)
     {
         ActiveWorkers += active? 1 : -1;
+        Debug.Log("TRABAJADORES ACTIVOS: " + ActiveWorkers);
     }
 
     public void SetActiveWorkers(int num)
