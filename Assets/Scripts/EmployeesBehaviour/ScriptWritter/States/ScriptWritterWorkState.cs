@@ -3,28 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArtistWorkState : AState
+public class ScriptWritterWorkState : AState
 {
-    public ArtistWorkState(StateMachine sm, IAgent agent) : base(sm, agent) { }
+    public ScriptWritterWorkState(StateMachine sm, IAgent agent) : base(sm, agent) { }
     CompositeAction _workAction;
     bool _alreadySubscribed;
 
     public override void Enter()
     {
-        Debug.Log("ARTISTA ENTRANDO EN ESTADO DE TRABAJO...");
+        Debug.Log("GUIONISTA ENTRANDO EN ESTADO DE TRABAJO...");
         List<IAction> actions = new List<IAction>();
         if (!agent.GetChair().IsOccupied())
         {
             actions.Add(new GoToDeskAction(agent));
         }
-        actions.Add(new DrawingAction(agent, context));
+        actions.Add(new WrittingAction(agent, context));
         _workAction = new CompositeAction(actions);
         (agent as EmployeeBehaviour).working = true;
     }
 
     public override void Exit()
     {
-        Debug.Log("ARTISTA HA SALIDO DE ESTADO DE TRABAJO");
+        Debug.Log("GUIONISTA HA SALIDO DE ESTADO DE TRABAJO");
         (agent as EmployeeBehaviour).working = false;
         _alreadySubscribed = false;
     }
@@ -47,7 +47,7 @@ public class ArtistWorkState : AState
         {
 
             WorldManager.Instance.SetWorkerActivity(false);
-            context.State = new CheckEmployeeNecessitiesState(context, agent, new ArtistWorkState(context, agent));
+            context.State = new CheckEmployeeNecessitiesState(context, agent, new ScriptWritterWorkState(context, agent));
         }
     }
 }

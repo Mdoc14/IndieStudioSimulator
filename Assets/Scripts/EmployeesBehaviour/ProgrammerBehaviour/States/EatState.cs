@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class EatState : AState
 {
-    public EatState(StateMachine sm, IAgent agent) : base(sm, agent) { }
+    public EatState(StateMachine sm, IAgent agent) : base(sm, agent) { _stateMachine = sm; }
     CompositeAction _eatAction;
-    EmployeeBehaviour _employeeBehaviour;
+    StateMachine _stateMachine;
     bool _alreadySubscribed;
 
     public override void Enter()
@@ -16,9 +16,8 @@ public class EatState : AState
         GameObject vendingMachine = GameObject.Find("VendingMachine");
         List<IAction> actions = new List<IAction>();
         actions.Add(new GoToPositionAction(agent, vendingMachine.transform.position));
-        actions.Add(new TakeFoodAction(agent, vendingMachine.GetComponent<VendingMachineManager>()));
+        actions.Add(new TakeFoodAction(agent, vendingMachine.GetComponent<VendingMachineManager>(), _stateMachine));
         actions.Add(new ProgrammerEatingAction(agent, context));
-        _employeeBehaviour = agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>();
         _eatAction = new CompositeAction(actions);
     }
 

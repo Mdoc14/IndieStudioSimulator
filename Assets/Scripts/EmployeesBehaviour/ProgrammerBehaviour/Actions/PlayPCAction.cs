@@ -7,18 +7,23 @@ public class PlayPCAction : ASimpleAction
 {
     private float _playTime;
     private EmployeeBehaviour _programmerBehaviour;
-    public PlayPCAction(IAgent agent) : base(agent) { }
+    StateMachine _context;
+    public PlayPCAction(IAgent agent, StateMachine sm) : base(agent) { _context = sm; }
     public override void Enter()
     {
         base.Enter();
         Debug.Log("Programador está jugando...");
         _playTime = Random.Range(10,25);
         _programmerBehaviour = agent.GetAgentGameObject().GetComponent<EmployeeBehaviour>();
+        agent.GetComputer().OnBreak += OnComputerBroken;
+        agent.GetComputer().SetScreensContent(ScreenContent.Working);
+        if (agent.GetComputer().broken) OnComputerBroken();
         agent.SetBark("PlayPC");
         agent.SetAnimation("PlayPC");
     }
     public override void Exit()
     {
+        agent.GetComputer().OnBreak -= OnComputerBroken;
     }
     public override void FixedUpdate()
     {
@@ -39,5 +44,12 @@ public class PlayPCAction : ASimpleAction
             Debug.Log("Programador ha terminado de jugar");
             finished = true;
         }
+    }
+    public void OnComputerBroken()
+    {
+        _playTime = 1000; //Se evitan transiciones indeseadas
+        (agent as AgentBehaviour).currentIncidence = agent.GetComputer();
+        Exit(); //Se hace el exit manualmente, pues al no poner finished = true en ningún momento no se va a hacer automaticamente
+        _context.State = new ReportIncidenceState(_context, agent, new ProgrammerWorkState(_context, agent));
     }
 }

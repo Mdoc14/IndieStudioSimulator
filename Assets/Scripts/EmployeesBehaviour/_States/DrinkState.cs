@@ -40,7 +40,14 @@ public class DrinkState : AState
         {
             agent.SetAgentVariable((agent as EmployeeBehaviour).TimeWithoutConsuming, 0);
             WorldManager.Instance.SetWorkerActivity(false);
-            context.State = new CheckEmployeeNecessitiesState(context, agent, new ProgrammerWorkState(context, agent));
+            if (_employeeBehaviour is ArtistBehaviour)
+            {
+                context.State = new CheckEmployeeNecessitiesState(context, agent, new ArtistWorkState(context, agent));
+            }
+            else if (_employeeBehaviour is ScriptWritterBehaviour) 
+            {
+                context.State = new CheckEmployeeNecessitiesState(context, agent, new ScriptWritterWorkState(context, agent));
+            }
         }
     }
 }

@@ -3,26 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawingAction : ASimpleAction
+public class WrittingAction : ASimpleAction
 {
-    private float _drawingTime;
+    private float _writtingTime;
     private StateMachine _context;
 
-    public DrawingAction(IAgent agent, StateMachine sm) : base(agent) { _context = sm; }
+    public WrittingAction(IAgent agent, StateMachine sm) : base(agent) { _context = sm; }
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Artista está dibujando...");
-        _drawingTime = Random.Range(10, 30);
+        Debug.Log("Guionista está escribiendo...");
+        _writtingTime = Random.Range(10, 30);
         agent.GetComputer().OnBreak += OnComputerBroken;
         agent.GetComputer().SetScreensContent(ScreenContent.Working);
         if (agent.GetComputer().broken) OnComputerBroken();
-        agent.SetBark("Draw");
-        agent.SetAnimation("Draw");
+        agent.SetBark("Write");
+        agent.SetAnimation("Write");
     }
     public override void Exit()
     {
-        Debug.Log("Artista ha terminado de dibujar");
+        Debug.Log("Guionista ha terminado de escribir");
         agent.GetComputer().OnBreak -= OnComputerBroken;
     }
     public override void FixedUpdate()
@@ -30,7 +30,7 @@ public class DrawingAction : ASimpleAction
     }
     public override void Update()
     {
-        _drawingTime -= Time.deltaTime;
+        _writtingTime -= Time.deltaTime;
 
         if (agent.GetAgentVariable((agent as EmployeeBehaviour).Motivation) >= 0f)
         {
@@ -50,17 +50,17 @@ public class DrawingAction : ASimpleAction
         }
         else { agent.SetAgentVariable((agent as EmployeeBehaviour).Stress, 100f); }
 
-        if (_drawingTime <= 0)
+        if (_writtingTime <= 0)
         {
-            Debug.Log("Artista ha terminado de dibujar");
+            Debug.Log("Guionista ha terminado de escribir");
             finished = true;
         }
     }
     public void OnComputerBroken()
     {
-        _drawingTime = 1000; //Se evitan transiciones indeseadas
+        _writtingTime = 1000; //Se evitan transiciones indeseadas
         (agent as AgentBehaviour).currentIncidence = agent.GetComputer();
         Exit(); //Se hace el exit manualmente, pues al no poner finished = true en ningún momento no se va a hacer automaticamente
-        _context.State = new ReportIncidenceState(_context, agent, new ArtistWorkState(_context, agent));
+        _context.State = new ReportIncidenceState(_context, agent, new ScriptWritterWorkState(_context, agent));
     }
 }

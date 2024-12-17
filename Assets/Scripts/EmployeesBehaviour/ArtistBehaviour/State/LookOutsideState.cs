@@ -11,7 +11,7 @@ public class LookOutsideState : AState
 
     public override void Enter()
     {
-        Debug.Log("PROGRAMADOR ENTRANDO EN ESTADO DE MIRAR POR LA VENTANA...");
+        Debug.Log("ARTISTA ENTRANDO EN ESTADO DE MIRAR POR LA VENTANA...");
 
         SelectLookOutsidePos();
         List<IAction> actions = new List<IAction>();
@@ -23,7 +23,7 @@ public class LookOutsideState : AState
     public override void Exit()
     {
         Debug.Log("ARTISTA HA SALIDO DE ESTADO DE MIRAR POR LA VENTANA");
-        _lookOutsidePos.GetComponent<SmokePos>().IsSelected = false;
+        _lookOutsidePos.GetComponent<LookOutsidePos>().IsSelected = false;
     }
 
     public override void FixedUpdate()

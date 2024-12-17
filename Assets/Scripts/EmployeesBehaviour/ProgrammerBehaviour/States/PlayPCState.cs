@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class PlayPCState : AState
 {
-    public PlayPCState(StateMachine sm, IAgent agent) : base(sm, agent) { }
+    public PlayPCState(StateMachine sm, IAgent agent) : base(sm, agent) { _machine = sm; }
     CompositeAction _playPCAction;
+    StateMachine _machine;
 
     public override void Enter()
     {
@@ -18,7 +19,7 @@ public class PlayPCState : AState
         {
             actions.Add(new GoToDeskAction(agent));
         }
-        actions.Add(new PlayPCAction(agent));
+        actions.Add(new PlayPCAction(agent, _machine));
         _playPCAction = new CompositeAction(actions);
     }
 
