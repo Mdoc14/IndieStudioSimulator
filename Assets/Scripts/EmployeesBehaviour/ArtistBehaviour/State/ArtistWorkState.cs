@@ -27,6 +27,7 @@ public class ArtistWorkState : AState
         Debug.Log("ARTISTA HA SALIDO DE ESTADO DE TRABAJO");
         (agent as EmployeeBehaviour).working = false;
         _alreadySubscribed = false;
+        agent.GetComputer().SetScreensContent(ScreenContent.Off);
     }
 
     public override void FixedUpdate()

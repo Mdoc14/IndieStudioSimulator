@@ -27,6 +27,7 @@ public class ScriptWritterWorkState : AState
         Debug.Log("GUIONISTA HA SALIDO DE ESTADO DE TRABAJO");
         (agent as EmployeeBehaviour).working = false;
         _alreadySubscribed = false;
+        agent.GetComputer().SetScreensContent(ScreenContent.Off);
     }
 
     public override void FixedUpdate()

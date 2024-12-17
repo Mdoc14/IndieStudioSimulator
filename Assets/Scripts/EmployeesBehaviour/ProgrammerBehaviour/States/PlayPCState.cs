@@ -27,6 +27,7 @@ public class PlayPCState : AState
     {
         Debug.Log("PROGRAMADOR HA SALIDO DE ESTADO DE JUGAR");
         (agent as EmployeeBehaviour).isSlacking = false;
+        agent.GetComputer().SetScreensContent(ScreenContent.Off);
     }
 
     public override void FixedUpdate()

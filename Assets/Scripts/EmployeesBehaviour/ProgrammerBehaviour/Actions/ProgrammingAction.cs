@@ -22,6 +22,7 @@ public class ProgrammingAction : ASimpleAction
         if (agent.GetComputer().broken) OnComputerBroken();
         agent.SetBark("Program");
         agent.SetAnimation("Program");
+        agent.GetComputer().SetScreensContent(ScreenContent.Working);
     }
     public override void Exit()
     {

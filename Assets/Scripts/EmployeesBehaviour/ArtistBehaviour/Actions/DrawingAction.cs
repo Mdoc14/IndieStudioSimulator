@@ -19,6 +19,7 @@ public class DrawingAction : ASimpleAction
         if (agent.GetComputer().broken) OnComputerBroken();
         agent.SetBark("Draw");
         agent.SetAnimation("Draw");
+        agent.GetComputer().SetScreensContent(ScreenContent.Working);
     }
     public override void Exit()
     {

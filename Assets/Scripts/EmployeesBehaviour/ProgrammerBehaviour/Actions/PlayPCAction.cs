@@ -20,6 +20,7 @@ public class PlayPCAction : ASimpleAction
         if (agent.GetComputer().broken) OnComputerBroken();
         agent.SetBark("PlayPC");
         agent.SetAnimation("PlayPC");
+        agent.GetComputer().SetScreensContent(ScreenContent.Slacking);
     }
     public override void Exit()
     {
