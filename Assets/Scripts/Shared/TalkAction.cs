@@ -30,7 +30,7 @@ public class TalkAction : ASimpleAction
 
     public override void Exit()
     {
-
+        GameObject.FindWithTag("MaintenanceChair").GetComponent<Chair>().OnSit -= StartTalking;
     }
 
     public override void FixedUpdate()

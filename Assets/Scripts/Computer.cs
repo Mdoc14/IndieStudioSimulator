@@ -22,7 +22,7 @@ public class Computer : AInteractable
     {
         base.Interact();
         broken = true;
-        if(FindObjectOfType<LightSwitch>().IsOn) OnBreak?.Invoke(); //Solo realiza el evento si la luz está encendida
+        if(FindObjectOfType<LightSwitch>().IsOn && !WorldManager.Instance.reunionNotified) OnBreak?.Invoke(); //Solo realiza el evento si la luz está encendida
         SetScreensContent(ScreenContent.Off);
         _smokeParticles.SetActive(true);
     }

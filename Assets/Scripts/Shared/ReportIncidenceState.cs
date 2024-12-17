@@ -17,7 +17,7 @@ public class ReportIncidenceState : AState
 
     public override void Enter()
     {
-        context.PreviousStates.Push(this);
+        //context.PreviousStates.Push(this);
         //El estado de ir al baño se divide en tres acciones: ir al baño, comprobar si hay un retrete libre y usarlo
         if(actions.Count > 0 && !_incidenceAction.Finished)
         {

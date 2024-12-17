@@ -22,6 +22,7 @@ public class WorldManager : MonoBehaviour
     [SerializeField] private GameObject _catBallPrefab;
     //Reuniones:
     private int _numWorkersReunion = 0;
+    public bool reunionNotified = false;
     public event Action OnWorkersReady;
     public event Action OnNotifyEmployeesStart;
     public event Action OnNotifyEmployeesEnd;
@@ -94,6 +95,7 @@ public class WorldManager : MonoBehaviour
     public void ReunionNotified()
     {
         OnNotifyEmployeesStart?.Invoke();
+        reunionNotified = true;
         //Falta aplicar la lógica para que los trabajadores vayan a la reunión
         //Se debería notificar a los trabajadores para que vayan a la sala de reuniones, busquen una silla y se sienten, solamente
     }
@@ -101,6 +103,7 @@ public class WorldManager : MonoBehaviour
     public void ReunionEnded()
     {
         OnNotifyEmployeesEnd?.Invoke();
+        reunionNotified = false;
         //Lógica similar a ReunionNotified
     }
 

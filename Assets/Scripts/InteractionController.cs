@@ -14,7 +14,7 @@ public class InteractionController : MonoBehaviour
     void Update()
     {
         IInteractable prevInteractable = interactableOnSight;
-        if (Physics.Raycast(transform.position + forwardOffset*transform.forward, transform.forward, out hit, maxDistance))
+        if (Physics.Raycast(transform.position + forwardOffset*transform.forward, transform.forward, out hit, maxDistance, 1 << 9))
         {
             interactableOnSight = hit.transform.GetComponent<IInteractable>();
         }

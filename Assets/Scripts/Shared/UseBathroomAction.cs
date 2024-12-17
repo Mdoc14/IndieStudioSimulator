@@ -34,17 +34,11 @@ public class UseBathroomAction : ASimpleAction
         }
         agent.SetBark("Bathroom");
         agent.SetAnimation("Walk");
-        if (_bath.GetComponent<BathroomInteractable>() != null)
-        {
-            _bath.GetComponent<BathroomInteractable>().OnBreak += OnBreak;
-            if (_bath.GetComponent<BathroomInteractable>().broken) OnBreak();
-        }
         if(_navAgent.enabled) _navAgent.SetDestination(_bath.transform.position);
     }
 
     public override void Exit()
     {
-        if(_bath != null) _bath.GetComponent<BathroomInteractable>().OnBreak -= OnBreak;
     }
 
     public override void FixedUpdate()
@@ -71,6 +65,7 @@ public class UseBathroomAction : ASimpleAction
         }
         else //Si lo ha alcanzado el tiempo comienza a descontarse
         {
+            if (_bath.GetComponent<BathroomInteractable>().broken) OnBreak();
             _time -= Time.deltaTime;
             if (_time <= 0)
             {
@@ -90,7 +85,7 @@ public class UseBathroomAction : ASimpleAction
         {
             _bath.Leave(true); //Se deja el ba�o sin quitar el select
             agent.GetAgentGameObject().transform.LookAt(_bath.transform);
-        }
-        _context.State = new ReportIncidenceState(_context, agent);
+        } 
+        _context.State = new ReportIncidenceState(_context, agent, _context.PreviousStates.Pop() as AState);
     }
 }

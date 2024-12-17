@@ -40,7 +40,7 @@ public class BathroomState : AState
         if (agent.GetCurrentBath() != null)
         {
             if(agent.GetCurrentBath().IsOccupied()) agent.GetCurrentBath().Leave();
-            agent.GetCurrentBath().selected = false;
+            if(!agent.GetCurrentBath().GetComponent<BathroomInteractable>().broken) agent.GetCurrentBath().selected = false;
         }
         agent.SetCurrentBath(null);
     }
