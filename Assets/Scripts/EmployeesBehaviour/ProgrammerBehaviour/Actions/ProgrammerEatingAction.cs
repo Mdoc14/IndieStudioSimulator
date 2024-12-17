@@ -39,6 +39,7 @@ public class ProgrammerEatingAction : ASimpleAction
         if (_time <=0)
         {
             finished = true;
+            WorldManager.Instance.GenerateTrash(agent.GetAgentGameObject().transform.position);
             agent.SetAgentVariable(_programmerBehaviour.TimeWithoutConsuming, 0f);
             agent.SetAgentVariable(_programmerBehaviour.Motivation, agent.GetAgentVariable(_programmerBehaviour.Motivation) + Random.Range(0f, 20f));
         }

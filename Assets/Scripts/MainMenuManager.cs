@@ -69,6 +69,6 @@ public class MainMenuManager : MonoBehaviour
         endMenu.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         if (!success) endText.text = "La empresa ha entrado en <color=red>bancarrota</color>";
-        else endText.text = "El último juego ha sido un éxito. La empresa concede <color=blue>vacaciones</color>";
+        else endText.text = "El juego desarrollado ha triunfado. La empresa concede <color=blue>vacaciones</color>";
     }
 }

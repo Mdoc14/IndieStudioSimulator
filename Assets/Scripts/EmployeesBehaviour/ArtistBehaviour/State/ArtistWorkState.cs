@@ -20,6 +20,7 @@ public class ArtistWorkState : AState
         actions.Add(new DrawingAction(agent, context));
         _workAction = new CompositeAction(actions);
         (agent as EmployeeBehaviour).working = true;
+        WorldManager.Instance.SetWorkerActivity(true);
     }
 
     public override void Exit()
@@ -28,6 +29,7 @@ public class ArtistWorkState : AState
         (agent as EmployeeBehaviour).working = false;
         _alreadySubscribed = false;
         agent.GetComputer().SetScreensContent(ScreenContent.Off);
+        WorldManager.Instance.SetWorkerActivity(false);
     }
 
     public override void FixedUpdate()
@@ -40,14 +42,12 @@ public class ArtistWorkState : AState
         _workAction.Update();
         if (!_alreadySubscribed && WorldManager.Instance != null)
         {
-            WorldManager.Instance.SetWorkerActivity(true);
             _alreadySubscribed = true;
         }
 
         if (_workAction.Finished)
         {
 
-            WorldManager.Instance.SetWorkerActivity(false);
             context.State = new CheckEmployeeNecessitiesState(context, agent, new ArtistWorkState(context, agent));
         }
     }

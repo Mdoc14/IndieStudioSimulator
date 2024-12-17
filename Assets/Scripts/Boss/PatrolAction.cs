@@ -19,7 +19,7 @@ public class PatrolAction : ASimpleAction
         _boss = agent.GetAgentGameObject().GetComponent<BossBehaviour>();
         _navAgent = _boss.GetComponent<NavMeshAgent>();
         _initSpeed = _navAgent.speed;
-        _navAgent.speed = 0.5f;
+        _navAgent.speed = 1f;
         _navAgent.SetDestination(_boss.GetCurrentWaypoint().position);
         agent.SetBark("Look");
         agent.SetAnimation("Patrol");

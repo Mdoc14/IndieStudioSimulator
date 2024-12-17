@@ -14,6 +14,7 @@ public class BossWorkState : AState
     public override void Enter()
     {
         Debug.Log("ENTRANDO EN ESTADO DE TRABAJO...");
+        WorldManager.Instance.SetWorkerActivity(true);
         context.PreviousStates.Push(this);
         //El jefe va a su silla y despu�s utiliza su ordenador o su tel�fono
         List<IAction> actions = new List<IAction>();
@@ -43,6 +44,7 @@ public class BossWorkState : AState
     public override void Exit()
     {
         Debug.Log("ESTADO DE TRABAJO FINALIZADO");
+        WorldManager.Instance.SetWorkerActivity(false);
     }
 
     public override void FixedUpdate()

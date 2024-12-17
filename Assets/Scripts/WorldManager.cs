@@ -28,9 +28,11 @@ public class WorldManager : MonoBehaviour
 
     void Awake()
     {
+        if (Instance == this) Destroy(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
         Instance = this;
 
-        _productivitySlider = MainMenuManager.Instance.transform.GetComponentInChildren<Slider>();
+        _productivitySlider = GameObject.Find("@MenuManager").transform.GetComponentInChildren<Slider>();
 
         foreach(GameObject c in GameObject.FindGameObjectsWithTag("ReunionChair")) 
         { 
@@ -49,7 +51,7 @@ public class WorldManager : MonoBehaviour
             _productivity = 50; //Para que no se llame múltiples veces al GameEnded()
             ForceSimulationSpeed(1);
             GameObject.FindObjectOfType<AudioListener>().enabled = false;
-            MainMenuManager.Instance.GameEnded(_productivity >= 1000);
+            MainMenuManager.Instance.GameEnded(!(_productivity <= 0));
         }
         _productivitySlider.value = _productivity;
     }
@@ -67,7 +69,7 @@ public class WorldManager : MonoBehaviour
 
     public void ChangeSimulationSpeed(bool add)
     {
-        if ((Time.timeScale == 0.25f && !add) || (Time.timeScale == 16 && add)) return;
+        if ((Time.timeScale == 0.25f && !add) || (Time.timeScale == 8 && add)) return;
         if (add) Time.timeScale *= 2;
         else Time.timeScale /= 2;
         MainMenuManager.Instance.SetSpeedText(Time.timeScale.ToString());

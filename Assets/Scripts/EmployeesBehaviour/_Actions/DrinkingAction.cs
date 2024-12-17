@@ -37,6 +37,7 @@ public class DrinkingAction : ASimpleAction
         agent.SetAgentVariable((agent as EmployeeBehaviour).Motivation, agent.GetAgentVariable((agent as EmployeeBehaviour).Motivation) + Time.deltaTime);
         if (_time <= 0)
         {
+            WorldManager.Instance.GenerateTrash(agent.GetAgentGameObject().transform.position);
             finished = true;
         }
     }

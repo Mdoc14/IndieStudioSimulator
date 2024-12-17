@@ -45,8 +45,8 @@ public class LightSwitch : AInteractable
         DynamicGI.UpdateEnvironment();
         Debug.Log("¡Luz arreglada!");
         IsOn = true;
-        LightsOn?.Invoke();
         RestoreEmployeeActivity();
+        LightsOn?.Invoke();
     }
 
     IEnumerator LightsGoOut() {

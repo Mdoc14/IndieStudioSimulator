@@ -39,7 +39,6 @@ public class DrinkState : AState
         if (_drinkAction.Finished)
         {
             agent.SetAgentVariable((agent as EmployeeBehaviour).TimeWithoutConsuming, 0);
-            WorldManager.Instance.SetWorkerActivity(false);
             if (_employeeBehaviour is ArtistBehaviour)
             {
                 context.State = new CheckEmployeeNecessitiesState(context, agent, new ArtistWorkState(context, agent));

@@ -21,7 +21,7 @@ public class PatrolState : AState
         {
             _goToStartingPos = new GoToPositionAction(agent, agent.GetAgentGameObject().GetComponent<BossBehaviour>().GetFirstWaypoint().position);
             _goToStartingPos.Enter();
-            _patrolTime = UnityEngine.Random.Range(10, 60);
+            _patrolTime = UnityEngine.Random.Range(30, 90);
         }
         InitializeTree();
     }

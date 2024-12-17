@@ -36,7 +36,6 @@ public class EatState : AState
         _eatAction?.Update();
         if (_eatAction.Finished)
         {
-            WorldManager.Instance.SetWorkerActivity(false);
             context.State = new CheckEmployeeNecessitiesState(context, agent, new ProgrammerWorkState(context, agent));
         }
     }

@@ -33,7 +33,7 @@ public class BossBehaviour : AgentBehaviour
         if (patrolling)
         {
             RaycastHit hit;
-            if(Physics.Raycast(headTransform.position, headTransform.up, out hit, 1, 1 << 8))
+            if(Physics.Raycast(headTransform.position, headTransform.up, out hit, 3, 1 << 8))
             {
                 if (hit.transform.GetComponent<EmployeeBehaviour>().isSlacking)
                 {
@@ -61,10 +61,10 @@ public class BossBehaviour : AgentBehaviour
 
     public Transform GetNextWaypoint()
     {
-        int rand = Random.Range(0, 2);
-        int index = _adjacencyList[_currentWayPoint][rand];
-        _currentWayPoint = index;
-        return _patrolWaypoints[index];
+        //int rand = Random.Range(0, 2);
+        //int index = _adjacencyList[_currentWayPoint][rand];
+        _currentWayPoint = Random.Range(0, _patrolWaypoints.Length);
+        return _patrolWaypoints[_currentWayPoint];
     }
 
     public IAgent ScoldedAgent { get { return _agentToScold; } set { if(_agentToScold == null || value == null) _agentToScold = value; } }

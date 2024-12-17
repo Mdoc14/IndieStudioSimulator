@@ -13,6 +13,7 @@ public class ProgrammerWorkState : AState
     public override void Enter()
     {
         Debug.Log("PROGRAMADOR ENTRANDO EN ESTADO DE TRABAJO...");
+        WorldManager.Instance.SetWorkerActivity(true);
         List<IAction> actions = new List<IAction>();
         if (!agent.GetChair().IsOccupied())
         {
@@ -27,6 +28,7 @@ public class ProgrammerWorkState : AState
     public override void Exit()
     {
         Debug.Log("PROGRAMADOR HA SALIDO DE ESTADO DE TRABAJO");
+        WorldManager.Instance.SetWorkerActivity(false);
         (agent as EmployeeBehaviour).working = false;
         _alreadySubscribed = false;
         agent.GetComputer().SetScreensContent(ScreenContent.Off);
@@ -42,14 +44,12 @@ public class ProgrammerWorkState : AState
         _workAction.Update();
         if (!_alreadySubscribed && WorldManager.Instance != null) 
         { 
-            WorldManager.Instance.SetWorkerActivity(true);
             _alreadySubscribed = true;
         }
 
         if (_workAction.Finished)
         {
 
-            WorldManager.Instance.SetWorkerActivity(false);
             context.State = new CheckEmployeeNecessitiesState(context, agent, new ProgrammerWorkState(context, agent));
         }
     }

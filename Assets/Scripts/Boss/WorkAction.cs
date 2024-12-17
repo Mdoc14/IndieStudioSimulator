@@ -17,7 +17,6 @@ public class WorkAction : ASimpleAction
         _workTime = Random.Range(5, agent.GetAgentVariable("MaxWorkTime"));
         agent.SetBark("BossWork");
         agent.SetAnimation("Work");
-        WorldManager.Instance.SetWorkerActivity(true);
         agent.GetComputer().OnBreak += OnComputerBroken;
         agent.GetComputer().SetScreensContent(ScreenContent.Working);
         if (agent.GetComputer().broken) OnComputerBroken();
@@ -25,7 +24,6 @@ public class WorkAction : ASimpleAction
 
     public override void Exit()
     {
-        WorldManager.Instance.SetWorkerActivity(false);
         agent.GetComputer().OnBreak -= OnComputerBroken;
         agent.GetComputer().SetScreensContent(ScreenContent.Off);
     }
