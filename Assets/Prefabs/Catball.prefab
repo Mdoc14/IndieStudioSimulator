@@ -1327,9 +1327,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3284124024062379233}
+  - component: {fileID: 1695250111180133655}
   m_Layer: 0
   m_Name: Catball
-  m_TagString: Untagged
+  m_TagString: Trash
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1352,6 +1353,27 @@ Transform:
   - {fileID: 6093729117906802716}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1695250111180133655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7279230620725920208}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.26511574, y: 0.4992612, z: 0.21463871}
+  m_Center: {x: 0.05824566, y: 0.2503694, z: 0.015045166}
 --- !u!1 &8026809731718947899
 GameObject:
   m_ObjectHideFlags: 0
