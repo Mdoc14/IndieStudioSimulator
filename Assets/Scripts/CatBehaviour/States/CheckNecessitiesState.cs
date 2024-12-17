@@ -13,7 +13,7 @@ public class CheckNecessitiesState : AState
 
     public override void Enter()
     {
-        Debug.Log("GATO: COMPROBANDO NECESIDADES");
+        Debug.Log("Gato: Ha entrado en el estado de comprobar necesidades");
         catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
         catBehaviour.US.activated = true;
     }
@@ -30,7 +30,7 @@ public class CheckNecessitiesState : AState
     {
         if (catBehaviour.US.CurrentAction == null)
         {
-            Debug.Log("GATO: NECESIDAD COMPLETADA");
+            Debug.Log("Gato: Ha salido del estado de comprobar necesidades");
             context.State = new WanderingState(context, agent);
         }
     }

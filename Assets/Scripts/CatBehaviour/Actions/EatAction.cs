@@ -27,7 +27,7 @@ public class EatAction : ASimpleAction
         _navAgent.SetDestination(_catBowl.transform.position);
         agent.SetBark("Eat");
         agent.SetAnimation("Walk");
-        Debug.Log("Gato: va a comer");
+        Debug.Log("Gato: Va a comer");
     }
 
     public override void Exit()
@@ -57,7 +57,7 @@ public class EatAction : ASimpleAction
             {
                 agent.SetAgentVariable(_catBehaviour.TimeWithoutEating, 0f);
                 finished = true;
-                Debug.Log("Gato: termina de comer");
+                Debug.Log("Gato: Termina de comer");
             }
         }
     }

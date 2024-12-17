@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class CatBehaviour : AgentBehaviour
 {
-    [SerializeField] Chair _catBed;
-    public Chair CatBed { get { return _catBed; } }
+    [SerializeField] List<GameObject> _catBeds;
+    public List<GameObject> CatBeds { get { return _catBeds; } }
 
     [SerializeField] List<GameObject> _catBowls;
     public List<GameObject> CatBowls { get { return _catBowls; } }

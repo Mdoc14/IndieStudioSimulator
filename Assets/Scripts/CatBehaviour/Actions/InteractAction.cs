@@ -28,7 +28,7 @@ internal class InteractAction : ASimpleAction
         _interactable = _catBehaviour.CurrentObjetive.GetComponent<IInteractable>();
         _reached = false;
         _navAgent.SetDestination(_catBehaviour.CurrentObjetive.transform.position);
-        Debug.Log("Gato: va a jugar");
+        Debug.Log("Gato: Va a jugar");
     }
 
     public override void Exit()
@@ -57,7 +57,7 @@ internal class InteractAction : ASimpleAction
             {
                 _interactable.Interact();
                 finished = true;
-                Debug.Log("Gato: termina de jugar");
+                Debug.Log("Gato: Termina de jugar");
             }
         }
     }

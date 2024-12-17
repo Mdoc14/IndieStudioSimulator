@@ -23,7 +23,7 @@ public class PlayState : AState
 
     public override void Enter()
     {
-        Debug.Log("GATO: HE COMENZADO A JUGAR");
+        Debug.Log("Gato: Ha entrado en el estado de jugar");
         _catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
         _us = _catBehaviour.US;
         //_sociabilityFactor = _us.GetLeafFactor(_catBehaviour.TimeWithoutSocializing);
@@ -57,6 +57,7 @@ public class PlayState : AState
 
         if (selectedTagToPlayWith.Equals("Computer"))
         {
+            Debug.Log("Gato: Va a jugar a morder cables");
             agent.SetBark("BiteWires");
 
             _playAction = new InteractAction(agent, "Bite");
@@ -64,6 +65,7 @@ public class PlayState : AState
         }
         else
         {
+            Debug.Log("Gato: Va a jugar a tirar el cubo de basura");
             agent.SetBark("ThrowTrash");
 
             List<IAction> actions = new List<IAction>()
@@ -97,7 +99,7 @@ public class PlayState : AState
         }
         else
         {
-            Debug.Log("GATO: HE TERMINADO DE JUGAR");
+            Debug.Log("Gato: Ha salido del estado de jugar");
             context.State = new WanderingState(context, agent);
         }
     }

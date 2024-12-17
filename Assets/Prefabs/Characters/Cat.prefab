@@ -2092,7 +2092,14 @@ MonoBehaviour:
   _computer: {fileID: 0}
   currentIncidence: {fileID: 0}
   male: 1
-  _catBed: {fileID: 0}
+  _catBeds:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _catBowls:
   - {fileID: 0}
   - {fileID: 0}
@@ -2105,7 +2112,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9138405613747561606}
   m_Enabled: 1
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: 0
   m_Radius: 0.4
   m_Speed: 3.5
   m_Acceleration: 8

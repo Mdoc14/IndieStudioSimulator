@@ -12,8 +12,8 @@ public class SleepAction : ASimpleAction
     CatBehaviour _catBehaviour;
     Chair _catBed;
 
-    public SleepAction(IAgent agent) : base(agent) 
-    { 
+    public SleepAction(IAgent agent) : base(agent)
+    {
     }
 
     public override void Enter()
@@ -23,12 +23,12 @@ public class SleepAction : ASimpleAction
         _reached = false;
         _timeSleeping = Random.Range(60, 120); //Está un tiempo aleatorio durmiendo
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
-        _catBed = _catBehaviour.CatBed;
+        _catBed = _catBehaviour.CatBeds[Random.Range(0, _catBehaviour.CatBeds.Count)].GetComponent<Chair>();
         _navAgent.SetDestination(_catBed.transform.position);
         agent.SetBark("Sleep");
         agent.SetAnimation("Walk");
 
-        Debug.Log("Gato: va a dormir");
+        Debug.Log("Gato: Va a dormir");
     }
 
     public override void Exit()
@@ -50,7 +50,7 @@ public class SleepAction : ASimpleAction
                 _reached = true;
                 _catBed.Sit(agent.GetAgentGameObject());
                 agent.SetAnimation("Sleep");
-            } 
+            }
         }
         else //Si la ha alcanzado el tiempo comienza a descontarse
         {
@@ -62,7 +62,7 @@ public class SleepAction : ASimpleAction
                 _catBed.Leave();
                 finished = true;
 
-                Debug.Log("Gato: ha terminado de dormir");
+                Debug.Log("Gato: Ha terminado de dormir");
             }
         }
     }

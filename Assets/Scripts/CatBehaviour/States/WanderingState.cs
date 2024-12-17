@@ -14,7 +14,7 @@ public class WanderingState : AState
 
     public override void Enter()
     {
-        Debug.Log("GATO: HE COMENZADO A DEAMBULAR");
+        Debug.Log("Gato: Ha entrado en el estado de deambular");
         agent.SetBark("Walk");
         catBehaviour = agent.GetAgentGameObject().GetComponent<CatBehaviour>();
         wanderAction = new WanderAction(agent);
@@ -40,7 +40,7 @@ public class WanderingState : AState
         }
         else
         {
-            Debug.Log("GATO: HE TERMINADO DE DEAMBULAR");
+            Debug.Log("Gato: Ha salido del estado de deambular");
             context.State = new CheckNecessitiesState(context, agent);
         }
     }

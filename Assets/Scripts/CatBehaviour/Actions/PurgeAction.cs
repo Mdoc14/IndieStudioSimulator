@@ -20,7 +20,7 @@ public class PurgeAction : ASimpleAction
         _timePurging = 2.083f;
         agent.SetBark("Vomit");
         agent.SetAnimation("Purge");
-        Debug.Log("Gato: se está purgando");
+        Debug.Log("Gato: Se está purgando");
     }
 
     public override void Exit()
@@ -39,7 +39,7 @@ public class PurgeAction : ASimpleAction
             agent.SetAgentVariable(_catBehaviour.TimeWithoutPurging, 0f);
             WorldManager.Instance.GenerateTrash(agent.GetAgentGameObject().transform.position, true);
             finished = true;
-            Debug.Log("Gato: ha terminado de purgarse");
+            Debug.Log("Gato: Ha terminado de purgarse");
         }
     }
 }

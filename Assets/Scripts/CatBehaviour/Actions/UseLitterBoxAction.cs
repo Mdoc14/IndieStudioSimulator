@@ -27,7 +27,7 @@ public class UseLitterBoxAction : ASimpleAction
         _navAgent.SetDestination(_bath.transform.position);
         agent.SetBark("Bathroom");
         agent.SetAnimation("Walk");
-        Debug.Log("Gato: ha ido a hacer sus necesidades");
+        Debug.Log("Gato: Ha ido a hacer sus necesidades");
     }
 
     public override void Exit()
@@ -60,7 +60,7 @@ public class UseLitterBoxAction : ASimpleAction
                 _bath.gameObject.GetComponent<CatBoxManager>().SetDirty();
                 agent.SetAgentVariable(_catBehaviour.TimeWithoutBath, 0f);
                 finished = true;
-                Debug.Log("Gato: ha terminado de hacer sus necesidades");
+                Debug.Log("Gato: Ha terminado de hacer sus necesidades");
             }
         }
     }

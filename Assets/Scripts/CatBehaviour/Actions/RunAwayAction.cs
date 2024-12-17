@@ -20,6 +20,7 @@ namespace CharactersBehaviour
         public override void Enter()
         {
             base.Enter();
+            Debug.Log("Gato: Sale corriendo del susto");
             _reached = false;
             _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
             agent.SetAnimation("Walk");

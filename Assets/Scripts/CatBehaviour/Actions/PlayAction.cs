@@ -13,6 +13,7 @@ class PlayAction : ASimpleAction
     public override void Enter()
     {
         base.Enter();
+        Debug.Log("Gato: Le apetece jugar");
         _sm = agent.GetAgentGameObject().GetComponent<CatBehaviour>().SM;
         _sm.State = new PlayState(_sm, agent);
         finished = true;

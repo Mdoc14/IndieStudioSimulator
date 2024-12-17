@@ -122,17 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &363758961 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1905314555979745750, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-  m_PrefabInstance: {fileID: 2054177926}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3b769acaca2bbd46987d28d7db72430, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &462956789
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AgentTypeID: -1372625422
+  m_AgentTypeID: 0
   m_CollectObjects: 1
   m_Size: {x: 20.550205, y: 0.4539771, z: 28.002424}
   m_Center: {x: 1.082058, y: -2.7730124, z: 0.19759274}
@@ -379,7 +368,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.016666668
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: bc93d0ef1e371a14fa108588838db0ba, type: 2}
   m_BuildHeightMesh: 0
@@ -687,6 +676,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 574e00c5b3557a742a48a69a5b5ff099, type: 3}
+--- !u!1 &1617053299 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2515879279067237368, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+  m_PrefabInstance: {fileID: 2054177926}
+  m_PrefabAsset: {fileID: 0}
 --- !u!850595691 &1650794712
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -827,85 +821,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 63435816541680215, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
-      objectReference: {fileID: 0}
-    - target: {fileID: 231552006325433249, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Trashcan
-      objectReference: {fileID: 0}
-    - target: {fileID: 408136640411970310, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Trashcan
-      objectReference: {fileID: 0}
-    - target: {fileID: 690265259210098965, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Trashcan
-      objectReference: {fileID: 0}
-    - target: {fileID: 741667160494447267, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
-      objectReference: {fileID: 0}
-    - target: {fileID: 2011972327459883782, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
-      objectReference: {fileID: 0}
-    - target: {fileID: 2664275601201386956, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
-      objectReference: {fileID: 0}
-    - target: {fileID: 3343917627314214891, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
-      objectReference: {fileID: 0}
-    - target: {fileID: 3668272480654813530, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
-      objectReference: {fileID: 0}
-    - target: {fileID: 4621493664334073087, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Trashcan
-      objectReference: {fileID: 0}
-    - target: {fileID: 4672522652383617052, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Trashcan
-      objectReference: {fileID: 0}
-    - target: {fileID: 4693745969791381954, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
-      objectReference: {fileID: 0}
-    - target: {fileID: 5062594309901924183, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Trashcan
-      objectReference: {fileID: 0}
-    - target: {fileID: 5200120814813079533, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Trashcan
-      objectReference: {fileID: 0}
-    - target: {fileID: 5472644233886190080, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Trashcan
-      objectReference: {fileID: 0}
-    - target: {fileID: 5609956550587872842, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
-      objectReference: {fileID: 0}
     - target: {fileID: 6388217807971900638, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
       propertyPath: m_Name
       value: Map
-      objectReference: {fileID: 0}
-    - target: {fileID: 6685629319999842144, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
-      objectReference: {fileID: 0}
-    - target: {fileID: 7677490645966503414, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Trashcan
-      objectReference: {fileID: 0}
-    - target: {fileID: 8014960045616398990, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
       objectReference: {fileID: 0}
     - target: {fileID: 8065673924172821472, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -946,22 +864,6 @@ PrefabInstance:
     - target: {fileID: 8065673924172821472, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8304215821044908500, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Trashcan
-      objectReference: {fileID: 0}
-    - target: {fileID: 8306387133194559294, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8627839830686745014, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
-      objectReference: {fileID: 0}
-    - target: {fileID: 8784977851075252061, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
-      propertyPath: m_TagString
-      value: Computer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1043,6 +945,36 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+--- !u!1 &2054177927 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4860856718465113324, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+  m_PrefabInstance: {fileID: 2054177926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2054177928 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5897293457277034644, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+  m_PrefabInstance: {fileID: 2054177926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2054177929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8059218221514126820, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+  m_PrefabInstance: {fileID: 2054177926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2054177930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5463293800397976589, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+  m_PrefabInstance: {fileID: 2054177926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2054177931 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6042813918312335044, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+  m_PrefabInstance: {fileID: 2054177926}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2054177932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3976277358217143590, guid: e180799f02470bc47a54a0a91d8ae52c, type: 3}
+  m_PrefabInstance: {fileID: 2054177926}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2125446299
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1317,13 +1249,37 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8745743223678085467, guid: c0c76a0573a0cbb49a11f3d297521766, type: 3}
-      propertyPath: _catBed
-      value: 
-      objectReference: {fileID: 363758961}
-    - target: {fileID: 8745743223678085467, guid: c0c76a0573a0cbb49a11f3d297521766, type: 3}
       propertyPath: _catLitterBox
       value: 
       objectReference: {fileID: 1869097217}
+    - target: {fileID: 8745743223678085467, guid: c0c76a0573a0cbb49a11f3d297521766, type: 3}
+      propertyPath: _catBeds.Array.data[0]
+      value: 
+      objectReference: {fileID: 1617053299}
+    - target: {fileID: 8745743223678085467, guid: c0c76a0573a0cbb49a11f3d297521766, type: 3}
+      propertyPath: _catBeds.Array.data[1]
+      value: 
+      objectReference: {fileID: 2054177932}
+    - target: {fileID: 8745743223678085467, guid: c0c76a0573a0cbb49a11f3d297521766, type: 3}
+      propertyPath: _catBeds.Array.data[2]
+      value: 
+      objectReference: {fileID: 2054177931}
+    - target: {fileID: 8745743223678085467, guid: c0c76a0573a0cbb49a11f3d297521766, type: 3}
+      propertyPath: _catBeds.Array.data[3]
+      value: 
+      objectReference: {fileID: 2054177930}
+    - target: {fileID: 8745743223678085467, guid: c0c76a0573a0cbb49a11f3d297521766, type: 3}
+      propertyPath: _catBeds.Array.data[4]
+      value: 
+      objectReference: {fileID: 2054177929}
+    - target: {fileID: 8745743223678085467, guid: c0c76a0573a0cbb49a11f3d297521766, type: 3}
+      propertyPath: _catBeds.Array.data[5]
+      value: 
+      objectReference: {fileID: 2054177928}
+    - target: {fileID: 8745743223678085467, guid: c0c76a0573a0cbb49a11f3d297521766, type: 3}
+      propertyPath: _catBeds.Array.data[6]
+      value: 
+      objectReference: {fileID: 2054177927}
     - target: {fileID: 8745743223678085467, guid: c0c76a0573a0cbb49a11f3d297521766, type: 3}
       propertyPath: _catBowls.Array.data[0]
       value: 
