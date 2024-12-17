@@ -37,7 +37,7 @@ public class PurgeAction : ASimpleAction
         if (_timePurging <= 0)
         {
             agent.SetAgentVariable(_catBehaviour.TimeWithoutPurging, 0f);
-            WorldManager.Instance.GenerateTrash(agent.GetAgentGameObject().transform.position);
+            WorldManager.Instance.GenerateTrash(agent.GetAgentGameObject().transform.position, true);
             finished = true;
             Debug.Log("Gato: ha terminado de purgarse");
         }

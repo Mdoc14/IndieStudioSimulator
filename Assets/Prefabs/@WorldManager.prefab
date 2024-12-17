@@ -46,6 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _productivityFactor: 0.2
   _productivityDecreaseFactor: 1
-  _productivitySlider: {fileID: 0}
-  _timeSpeed: 1
   _trashPrefab: {fileID: 249484301588445142, guid: 7042c685c999a5140ab318427032b0ba, type: 3}
+  _catBallPrefab: {fileID: 919132149155446097, guid: 8a5bb653522fe9e4684b8bbc13bfdd1c, type: 3}

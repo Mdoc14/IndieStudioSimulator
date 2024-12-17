@@ -19,6 +19,7 @@ public class WorldManager : MonoBehaviour
     private float _productivity = 500; //0 -> bancarrota; 1000 -> éxito total, se van de vacaciones
     //Manejo de la basura:
     [SerializeField] private GameObject _trashPrefab;
+    [SerializeField] private GameObject _catBallPrefab;
     //Reuniones:
     private int _numWorkersReunion = 0;
     public event Action OnWorkersReady;
@@ -77,11 +78,12 @@ public class WorldManager : MonoBehaviour
         MainMenuManager.Instance.SetSpeedText(Time.timeScale.ToString());
     }
 
-    public void GenerateTrash(Vector3 position) //Instancia basura dada una posición
+    public void GenerateTrash(Vector3 position, bool isCatPurging = false) //Instancia basura dada una posición
     {
         NavMeshHit navHit;
         NavMesh.SamplePosition(position, out navHit, 20, 1);
-        GameObject.Instantiate(_trashPrefab, navHit.position, Quaternion.identity);
+        if (isCatPurging) GameObject.Instantiate(_catBallPrefab, navHit.position, Quaternion.identity);
+        else GameObject.Instantiate(_trashPrefab, navHit.position, Quaternion.identity);
     }
 
     #region REUNIONES
