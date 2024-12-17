@@ -47,7 +47,7 @@ public class Room : MonoBehaviour
     public void DeleteTrash()
     {
         GameObject trashGO = trash[0];
-        Destroy(trashGO);
+        //Destroy(trashGO, 10);
         trash.RemoveAt(0);
     }
 

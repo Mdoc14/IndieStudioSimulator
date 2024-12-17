@@ -11,7 +11,7 @@ public class LookIncidenceAction : ASimpleAction
     {
         base.Enter();
         agent.SetBark("Checking");
-        agent.SetAnimation("Look");
+        agent.SetAnimation("Looking");
     }
 
     public override void Exit()

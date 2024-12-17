@@ -8,6 +8,7 @@ public class AInteractable : MonoBehaviour, IInteractable
     [SerializeField] private TextMeshPro displayText;
     [SerializeField] private string textInfo;
     [SerializeField] private GameObject outline;
+    public bool solved = false;
 
     protected virtual void Awake()
     {
@@ -24,7 +25,10 @@ public class AInteractable : MonoBehaviour, IInteractable
         Debug.Log("Se ha interactuado");
     }
 
-    public virtual void Repair() { }
+    public virtual void Repair() 
+    {
+        solved = true;
+    }
 
     public void HoverEnter()
     {

@@ -40,6 +40,7 @@ public class LightSwitch : AInteractable
 
     public override void Repair()
     {
+        base.Repair();
         ResetInteractable();
         RenderSettings.ambientIntensity = 1.0f;
         RenderSettings.reflectionIntensity = 1.4f;

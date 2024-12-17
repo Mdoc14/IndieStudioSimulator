@@ -24,6 +24,12 @@ public class ReportIncidenceState : AState
             _incidenceAction.CurrentAction.Enter();
             return;
         }
+        if((agent as AgentBehaviour).currentIncidence.solved)
+        {
+            (agent as AgentBehaviour).currentIncidence.solved = false;
+            (agent as AgentBehaviour).currentIncidence = null;
+            return;
+        } 
         actions.Add(new LookIncidenceAction(agent));
         actions.Add(new GoToPositionAction(agent, GameObject.FindWithTag("IncidenceChair").transform.position));
         actions.Add(new WaitingMaintenanceAction(agent));
@@ -46,7 +52,7 @@ public class ReportIncidenceState : AState
     public override void Update()
     {
         _incidenceAction?.Update();
-        if (_incidenceAction.Finished)
+        if (_incidenceAction == null || _incidenceAction.Finished)
         {
             if (nextState != null) context.State = nextState;
             else context.State = context.PreviousStates.Pop();
@@ -70,8 +76,10 @@ public class ReportIncidenceState : AState
     {
         return () =>
         {
-            if (GameObject.FindObjectOfType<MaintenanceBehaviour>().GetCurrentIncidence() == null)
+            if ((agent as AgentBehaviour).currentIncidence.solved)
             {
+                (agent as AgentBehaviour).currentIncidence.solved = false;
+                (agent as AgentBehaviour).currentIncidence = null;
                 return true;
             }
             return false;

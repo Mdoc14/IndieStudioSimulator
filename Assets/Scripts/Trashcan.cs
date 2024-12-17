@@ -22,6 +22,7 @@ public class Trashcan : AInteractable
     public override void Repair()
     {
         if (!Lying) return;
+        base.Repair();
         base.ResetInteractable();
         transform.position -= positionOffset;
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles - rotationOffset);

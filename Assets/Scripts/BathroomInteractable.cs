@@ -19,6 +19,7 @@ public class BathroomInteractable : AInteractable
     
     public override void Repair()
     {
+        base.Repair();
         base.ResetInteractable();
         broken = false;
         _waterParticles.SetActive(false);
