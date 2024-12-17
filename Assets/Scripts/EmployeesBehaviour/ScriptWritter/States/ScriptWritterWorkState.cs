@@ -13,6 +13,8 @@ public class ScriptWritterWorkState : AState
     {
         Debug.Log("GUIONISTA ENTRANDO EN ESTADO DE TRABAJO...");
         WorldManager.Instance.SetWorkerActivity(true);
+        context.PreviousStates.Push(this);
+        if ((agent as AgentBehaviour).currentIncidence != null) context.State = new ReportIncidenceState(context, agent);
         List<IAction> actions = new List<IAction>();
         if (!agent.GetChair().IsOccupied())
         {

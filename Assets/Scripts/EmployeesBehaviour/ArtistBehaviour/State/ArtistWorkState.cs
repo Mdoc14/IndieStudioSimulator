@@ -12,6 +12,9 @@ public class ArtistWorkState : AState
     public override void Enter()
     {
         Debug.Log("ARTISTA ENTRANDO EN ESTADO DE TRABAJO...");
+        WorldManager.Instance.SetWorkerActivity(true);
+        context.PreviousStates.Push(this);
+        if ((agent as AgentBehaviour).currentIncidence != null) context.State = new ReportIncidenceState(context, agent);
         List<IAction> actions = new List<IAction>();
         if (!agent.GetChair().IsOccupied())
         {
@@ -20,7 +23,6 @@ public class ArtistWorkState : AState
         actions.Add(new DrawingAction(agent, context));
         _workAction = new CompositeAction(actions);
         (agent as EmployeeBehaviour).working = true;
-        WorldManager.Instance.SetWorkerActivity(true);
     }
 
     public override void Exit()

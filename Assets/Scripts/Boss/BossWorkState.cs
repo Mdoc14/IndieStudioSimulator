@@ -16,6 +16,7 @@ public class BossWorkState : AState
         Debug.Log("ENTRANDO EN ESTADO DE TRABAJO...");
         WorldManager.Instance.SetWorkerActivity(true);
         context.PreviousStates.Push(this);
+        if ((agent as AgentBehaviour).currentIncidence != null) context.State = new ReportIncidenceState(context, agent);
         //El jefe va a su silla y despu�s utiliza su ordenador o su tel�fono
         List<IAction> actions = new List<IAction>();
         if (!agent.GetChair().IsOccupied()) actions.Add(new GoToDeskAction(agent));

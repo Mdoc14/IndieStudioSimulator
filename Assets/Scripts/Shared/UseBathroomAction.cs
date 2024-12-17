@@ -85,7 +85,12 @@ public class UseBathroomAction : ASimpleAction
         {
             _bath.Leave(true); //Se deja el ba�o sin quitar el select
             agent.GetAgentGameObject().transform.LookAt(_bath.transform);
-        } 
-        _context.State = new ReportIncidenceState(_context, agent, _context.PreviousStates.Pop() as AState);
+        }
+        AState nextState = null;
+        if (agent is BossBehaviour) nextState = new BathroomState(_context, agent, new BossWorkState(_context, agent));
+        else if (agent is ProgrammerBehaviour) nextState = new BathroomState(_context, agent, new ProgrammerWorkState(_context, agent));
+        else if (agent is ArtistBehaviour) nextState = new BathroomState(_context, agent, new ArtistWorkState(_context, agent));
+        else if (agent is ScriptWritterBehaviour) nextState = new BathroomState(_context, agent, new ScriptWritterWorkState(_context, agent));
+        _context.State = new ReportIncidenceState(_context, agent, nextState);
     }
 }

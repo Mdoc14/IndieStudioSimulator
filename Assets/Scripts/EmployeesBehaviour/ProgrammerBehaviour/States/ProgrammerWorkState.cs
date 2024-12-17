@@ -14,6 +14,8 @@ public class ProgrammerWorkState : AState
     {
         Debug.Log("PROGRAMADOR ENTRANDO EN ESTADO DE TRABAJO...");
         WorldManager.Instance.SetWorkerActivity(true);
+        context.PreviousStates.Push(this);
+        if ((agent as AgentBehaviour).currentIncidence != null) context.State = new ReportIncidenceState(context, agent);
         List<IAction> actions = new List<IAction>();
         if (!agent.GetChair().IsOccupied())
         {
