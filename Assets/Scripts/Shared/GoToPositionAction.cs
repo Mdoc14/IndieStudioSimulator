@@ -17,6 +17,7 @@ public class GoToPositionAction : ASimpleAction
         if (agent.GetChair().IsOccupied()) agent.GetChair().Leave();
         if (agent.GetCurrentChair() != null && agent.GetCurrentChair().IsOccupied()) agent.GetCurrentChair().Leave();
         _navAgent = agent.GetAgentGameObject().GetComponent<NavMeshAgent>();
+        //_navAgent.enabled = true;
         _navAgent.SetDestination(_destination);
         agent.SetBark("Walk");
         agent.SetAnimation("Walk");

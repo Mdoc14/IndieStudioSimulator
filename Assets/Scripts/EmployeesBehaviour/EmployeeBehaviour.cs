@@ -67,7 +67,7 @@ public class EmployeeBehaviour : AgentBehaviour
         workerUS.UpdateBehaviour();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         WorldManager.Instance.OnNotifyEmployeesStart -= MeetingStarted;
     }
@@ -104,7 +104,9 @@ public class EmployeeBehaviour : AgentBehaviour
             }
         }
 
-        _workerFSM.State = new MeetingState(_workerFSM, this, new ProgrammerWorkState(_workerFSM, this));
+        if(this is ProgrammerBehaviour) _workerFSM.State = new MeetingState(_workerFSM, this, new ProgrammerWorkState(_workerFSM, this));
+        if(this is ArtistBehaviour) _workerFSM.State = new MeetingState(_workerFSM, this, new ArtistWorkState(_workerFSM, this));
+        if(this is ScriptWritterBehaviour) _workerFSM.State = new MeetingState(_workerFSM, this, new ScriptWritterWorkState(_workerFSM, this));
     }
     protected virtual void InitializeGoBathAction(){}
 
@@ -114,4 +116,9 @@ public class EmployeeBehaviour : AgentBehaviour
     }
 
     public virtual void SetState(string stateName) { }
+
+    public void FireEmployee(float time)
+    {
+        Destroy(this.gameObject, time);
+    }
 }

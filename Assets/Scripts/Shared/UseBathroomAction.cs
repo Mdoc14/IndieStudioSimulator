@@ -44,7 +44,7 @@ public class UseBathroomAction : ASimpleAction
 
     public override void Exit()
     {
- 
+        _bath.GetComponent<BathroomInteractable>().OnBreak -= OnBreak;
     }
 
     public override void FixedUpdate()
@@ -54,6 +54,12 @@ public class UseBathroomAction : ASimpleAction
 
     public override void Update()
     {
+        if (!_navAgent.enabled && !_reached)
+        {
+            finished = true;
+            return;
+        }
+
         if (!_reached)  //Si no ha llegado a �l comprueba si est� lo suficientemente cerca para usarlo
         {
             if (!_navAgent.pathPending && _navAgent.remainingDistance <= _navAgent.stoppingDistance)
@@ -68,9 +74,8 @@ public class UseBathroomAction : ASimpleAction
             _time -= Time.deltaTime;
             if (_time <= 0)
             {
-                _bath.GetComponent<BathroomInteractable>().OnBreak -= OnBreak;
                 _bath.Leave();
-                agent.SetCurrentChair(null);
+                agent.SetCurrentBath(null);
                 _action?.Invoke();
                 finished = true;
             }
