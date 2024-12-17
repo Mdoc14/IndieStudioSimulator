@@ -7,6 +7,7 @@ public class TalkAction : ASimpleAction
     Func<bool> _condition;
     Action _action;
     bool _initialized = false;
+    bool inPlace = false;
 
     public TalkAction(IAgent agent, Func<bool> condition, Action action = null) : base(agent) { _condition = condition; _action = action; }
 
@@ -22,7 +23,6 @@ public class TalkAction : ASimpleAction
         {
             agent.SetAnimation("Talk");
             agent.SetBark("Report");
-            GameObject.FindWithTag("MaintenanceChair").GetComponent<Chair>().OnSit += StartTalking;
         }
         if(_action != null) _action();
         _initialized = true;
@@ -30,7 +30,7 @@ public class TalkAction : ASimpleAction
 
     public override void Exit()
     {
-        GameObject.FindWithTag("MaintenanceChair").GetComponent<Chair>().OnSit -= StartTalking;
+
     }
 
     public override void FixedUpdate()
@@ -40,15 +40,21 @@ public class TalkAction : ASimpleAction
 
     public override void Update()
     {
+        if(GameObject.FindWithTag("MaintenanceChair").GetComponent<Chair>().IsOccupied() && !inPlace)
+        {
+            inPlace = true;
+            agent.SetAnimation("Talk");
+            agent.SetBark("Report");
+        }
+        else if(!GameObject.FindWithTag("MaintenanceChair").GetComponent<Chair>().IsOccupied() && inPlace)
+        {
+            inPlace = false;
+            agent.SetAnimation("Idle");
+            agent.SetBark("Wait");
+        }
         if (_condition())
         {
             finished = true;
         }
-    }
-
-    private void StartTalking()
-    {
-        agent.SetAnimation("Talk");
-        agent.SetBark("Report");
     }
 }

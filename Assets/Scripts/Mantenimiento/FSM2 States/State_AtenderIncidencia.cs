@@ -22,7 +22,7 @@ namespace CharactersBehaviour
 
         public override void Exit()
         {
-            incidenceTaken = true;
+            
         }
 
         public override void Update()
@@ -30,6 +30,7 @@ namespace CharactersBehaviour
             _incidenceAction?.Update();
             if (_incidenceAction.Finished)
             {
+                incidenceTaken = true;
                 context.State = new State_ExaminarIncidencia(context, agent);
             }
         }
