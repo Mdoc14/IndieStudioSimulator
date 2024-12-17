@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a42d5be0837d144f8838b646cdd9324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _productivityFactor: 0.2
+  _productivityFactor: 0.3
   _productivityDecreaseFactor: 1
   _trashPrefab: {fileID: 249484301588445142, guid: 7042c685c999a5140ab318427032b0ba, type: 3}
   _catBallPrefab: {fileID: 7279230620725920208, guid: 758024259b8db714296374c08a60cfa3, type: 3}
+  reunionNotified: 0
